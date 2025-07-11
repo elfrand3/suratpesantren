@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/adminpengaturan', function () {
         return view('admin.pengaturan');
     });
-    
+
     // Template management routes
     Route::post('/upload/template/surat', [ControllerAdmin::class, 'storeTemplate'])->name('upload.template.surat');
 
@@ -51,7 +51,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/templates/{id}/toggle', [ControllerAdmin::class, 'toggleTemplateStatus'])->name('admin.template.toggle');
     Route::get('/templates/{id}/download', [ControllerAdmin::class, 'downloadTemplate'])->name('admin.template.download');
     Route::get('/templates/get/list', [ControllerAdmin::class, 'getTemplatesList'])->name('admin.templates.list');
-    
+
     Route::post('/admin/santri', [ControllerAdmin::class, 'storeSantri'])->name('admin.santri.store');
     Route::get('/admindatasantri', [ControllerAdmin::class, 'getSantriList'])->name('admin.santri.list');
     Route::get('/admin/santri/{id}', [ControllerAdmin::class, 'detailSantri'])->name('admin.santri.detail');
@@ -80,7 +80,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pengasuhdatasantri', function () {
         return view('pengasuh.datasantri');
     });
-    
+
     Route::get('/pengasuhdaftarsantri', function () {
         return view('pengasuh.datasurat');
     });
@@ -89,18 +89,6 @@ Route::middleware(['auth'])->group(function(){
     });
 });
 
-// sekolah routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/Sekolah', function () {
-        return view('sekolah.dasbordsekolah');
-    });
-    Route::get('/sekolahdatasurat', function () {
-        return view('sekolah.datasurat');
-    });
-    Route::get('/sekolahpengaturan', function () {
-        return view('sekolah.pengaturan');
-    });
-});
 
 // Logout route
 Route::post('/logout', [SesiController::class, 'logoutAkun'])->name('logout');

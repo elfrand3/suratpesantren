@@ -18,73 +18,73 @@
             border: none !important;
             box-shadow: none !important;
         }
-        
+
         .tox .tox-edit-area {
             border: none !important;
         }
-        
+
         .tox .tox-edit-area__iframe {
             background: transparent !important;
         }
-        
+
         #isiSurat {
             transition: height 0.3s ease;
         }
-        
+
         /* Ensure content area has proper padding */
         .tox .tox-edit-area__iframe {
             padding: 10px !important;
         }
-        
+
         /* Remove resize handle */
         .tox .tox-statusbar__resize-handle {
             display: none !important;
         }
-        
+
         /* Hide status bar to remove resize functionality */
         .tox .tox-statusbar {
             display: none !important;
         }
-        
+
         /* Ensure proper border styling */
         #isiSurat:focus-within {
             border-color: #3b82f6 !important;
             box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1) !important;
         }
-        
+
         /* Smooth transitions for height changes */
         .tox .tox-edit-area {
             transition: height 0.3s ease !important;
         }
-        
+
         /* Layout improvements */
         .form-section {
             transition: all 0.3s ease;
         }
-        
+
         .form-section:hover {
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-        
+
         /* Responsive improvements */
         @media (max-width: 1024px) {
             .lg\:grid-cols-3 {
                 grid-template-columns: 1fr;
             }
-            
+
             .lg\:col-span-1,
             .lg\:col-span-2 {
                 grid-column: span 1;
             }
         }
-        
+
         /* Section headers */
         .section-header {
             border-bottom: 2px solid #e5e7eb;
             padding-bottom: 0.5rem;
             margin-bottom: 1rem;
         }
-        
+
         /* Field grouping */
         .field-group {
             background: #f9fafb;
@@ -93,43 +93,43 @@
             padding: 1rem;
             margin-bottom: 1rem;
         }
-        
+
         /* Diagnosa field animation */
         #diagnosaField {
             transition: all 0.3s ease;
             overflow: hidden;
         }
-        
+
         #diagnosaField.hidden {
             max-height: 0;
             opacity: 0;
             margin: 0;
             padding: 0;
         }
-        
+
         #diagnosaField:not(.hidden) {
             max-height: 100px;
             opacity: 1;
         }
-        
+
         /* Info area styling */
         #infoArea {
             transition: all 0.3s ease;
             overflow: hidden;
         }
-        
+
         #infoArea.hidden {
             max-height: 0;
             opacity: 0;
             margin: 0;
             padding: 0;
         }
-        
+
         #infoArea:not(.hidden) {
             max-height: 200px;
             opacity: 1;
         }
-        
+
         #infoArea .bg-blue-50 {
             border-left: 4px solid #3b82f6;
         }
@@ -155,29 +155,6 @@
                         <div class="lg:col-span-1 space-y-6">
                             <div class="space-y-4">
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Template Surat</label>
-                                    <select id="templateSurat" name="template_surat" onchange="loadTemplateFromDropdown()" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="">Pilih Template</option>
-                                        <option value="izin-pulang">Template Izin Pulang</option>
-                                        <option value="sakit">Template Sakit</option>
-                                        <option value="rekomendasi">Template Rekomendasi</option>
-                                    </select>
-                                    <p class="text-xs text-gray-500 mt-1">
-                                        <i class="fas fa-info-circle mr-1"></i>
-                                        <strong>Pemilihan Template:</strong> Pilih template untuk memuat format surat secara otomatis ke dalam editor
-                                    </p>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Template Database</label>
-                                    <select id="templateDatabase" name="template_database" onchange="loadDatabaseTemplate()" class="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="">Pilih Template dari Database</option>
-                                    </select>
-                                    <p class="text-xs text-gray-500 mt-1">
-                                        <i class="fas fa-database mr-1"></i>
-                                        <strong>Template Database:</strong> Template yang telah diupload dan disimpan di database
-                                    </p>
-                                </div>
-                                <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Surat</label>
                                     <select id="jenisSurat" name="jenis_surat" onchange="loadTemplate()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                         <option value="">Pilih Jenis Surat</option>
@@ -193,19 +170,19 @@
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Surat</label>
                                         <input type="text" id="nomorSurat" name="nomor_surat" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="001/SURAT/2024">
                                     </div>
-                                    
+
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <div class="flex-1">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Surat</label>
                                         <input type="date" id="tanggalSurat" name="tanggal_surat" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    </div>                                
+                                    </div>
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <div class="flex-1">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Tanggal Kembali</label>
                                         <input type="date" id="tanggalKembali" name="tanggal_kembali" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">NIS</label>
@@ -240,7 +217,7 @@
                         <div class="lg:col-span-2">
                             <div class="bg-white p-4 rounded-lg border border-gray-200 mb-6">
                                 <h3 class="text-lg font-semibold text-blue-700 mb-4 flex items-center section-header">
-                                    <i class="fas fa-file-alt text-blue-600 mr-2"></i> Isi Surat
+                                    <i class="fas fa-file-alt text-blue-600 mr-2"></i> Tampilan Surat
                                 </h3>
                                 <div class="w-full min-h-[400px] max-h-[600px] border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 bg-white relative">
                                     <div id="loadingIndicator" class="hidden absolute inset-0 bg-white bg-opacity-75 flex items-center justify-center z-10">
@@ -253,44 +230,17 @@
                                 </div>
                                 <textarea name="content" id="isiSuratHidden" class="hidden"></textarea>
                             </div>
-                            <!-- (3) Pengaturan Surat - Kanan Tengah -->
-                            <div class="bg-gray-50 p-4 rounded-lg border border-gray-200 mb-6">
-                                <h3 class="text-lg font-semibold text-blue-700 mb-4 flex items-center section-header">
-                                    <i class="fas fa-cog text-blue-600 mr-2"></i> Pengaturan Surat
-                                </h3>
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Lampiran</label>
-                                        <input type="file" name="file_surat" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                    </div>
-                                    <div>
-                                        
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                                        <select name="status" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                            <option value="" disabled selected hidden>Pilih</option>
-                                            <option value="Menunggu Persetujuan">Menunggu Persetujuan</option>
-                                            <option value="Di setujui">Di setujui</option>
-                                            <option value="Di tolak">Di tolak</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- (4) Aksi Surat - Kanan Bawah -->
                             <div class="bg-white p-4 rounded-lg border border-gray-200">
                                 <h3 class="text-lg font-semibold text-blue-700 mb-4 flex items-center section-header">
                                     <i class="fas fa-tasks text-blue-600 mr-2"></i> Aksi Surat
                                 </h3>
                                 <div class="flex justify-end space-x-3">
-                                    <button type="button" onclick="fillTemplatePlaceholders()" class="px-6 py-2 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors">
-                                        <i class="fas fa-magic mr-2"></i> Isi Otomatis
+                                    <button type="button" onclick="" class="px-6 py-2 bg-yellow-600 text-white rounded-md hover:bg-purple-700 transition-colors">
+                                        <i class="fas fa-arrow-left mr-2"></i> Kembali
                                     </button>
                                     <button type="button" onclick="previewSurat()" class="px-6 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors">
                                         <i class="fas fa-eye mr-2"></i> Preview
-                                    </button>
-                                    <button type="button" onclick="simpanDraft()" class="px-6 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50 transition-colors">
-                                        Simpan Draft
                                     </button>
                                     <button type="button" onclick="printSurat()" class="px-6 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
                                         <i class="fas fa-print mr-2"></i> Cetak
@@ -315,7 +265,7 @@
                 <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
             </div>
             <div class="flex items-center space-x-6 mb-6">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                      alt="Admin" class="h-20 w-20 rounded-full">
                 <div>
                     <h4 class="text-xl font-semibold text-gray-800">Administrator</h4>
@@ -386,7 +336,7 @@
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK], 
+        Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK],
         memberikan izin kepada:
     </p>
 </div>
@@ -422,15 +372,15 @@
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        <strong>DENGAN INI DIIZINKAN PULANG</strong> ke rumah untuk mendapatkan perawatan medis 
-        dan istirahat yang diperlukan. Santri diharapkan kembali ke pondok pesantren 
+        <strong>DENGAN INI DIIZINKAN PULANG</strong> ke rumah untuk mendapatkan perawatan medis
+        dan istirahat yang diperlukan. Santri diharapkan kembali ke pondok pesantren
         pada tanggal [TANGGAL_KEMBALI] dalam keadaan sehat dan siap mengikuti kegiatan pembelajaran.
     </p>
 </div>
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        <strong>Keterangan:</strong> Surat ini dikeluarkan berdasarkan kondisi kesehatan santri 
+        <strong>Keterangan:</strong> Surat ini dikeluarkan berdasarkan kondisi kesehatan santri
         yang memerlukan perawatan di rumah dan pengawasan keluarga.
     </p>
 </div>
@@ -450,7 +400,7 @@
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK], 
+        Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK],
         menerangkan bahwa:
     </p>
 </div>
@@ -482,7 +432,7 @@
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        Benar-benar sedang dalam keadaan sakit dan tidak dapat mengikuti kegiatan 
+        Benar-benar sedang dalam keadaan sakit dan tidak dapat mengikuti kegiatan
         pembelajaran di pondok pesantren.
     </p>
 </div>
@@ -502,7 +452,7 @@
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK], 
+        Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK],
         memberikan rekomendasi kepada:
     </p>
 </div>
@@ -530,15 +480,15 @@
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        Adalah santri yang telah menempuh pendidikan di pondok pesantren kami 
-        dengan prestasi akademik dan akhlak yang baik. Santri tersebut memiliki 
+        Adalah santri yang telah menempuh pendidikan di pondok pesantren kami
+        dengan prestasi akademik dan akhlak yang baik. Santri tersebut memiliki
         kemampuan dan karakter yang layak untuk [TUJUAN_REKOMENDASI].
     </p>
 </div>
 
 <div style="margin-bottom: 20px;">
     <p style="text-align: justify; line-height: 1.6;">
-        Oleh karena itu, kami merekomendasikan santri tersebut untuk [TUJUAN_REKOMENDASI] 
+        Oleh karena itu, kami merekomendasikan santri tersebut untuk [TUJUAN_REKOMENDASI]
         dan berharap dapat diterima dengan baik.
     </p>
 </div>
@@ -558,7 +508,7 @@
 
             <div style="margin-bottom: 20px;">
                 <p style="text-align: justify; line-height: 1.6;">
-                    Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK], 
+                    Yang bertanda tangan di bawah ini, Kepala Pondok Pesantren [NAMA_PONDOK],
                     memberikan izin kepada:
                 </p>
             </div>
@@ -590,15 +540,15 @@
 
             <div style="margin-bottom: 20px;">
                 <p style="text-align: justify; line-height: 1.6;">
-                    <strong>DENGAN INI DIIZINKAN PULANG</strong> ke rumah untuk mendapatkan perawatan medis 
-                    dan istirahat yang diperlukan. Santri diharapkan kembali ke pondok pesantren 
+                    <strong>DENGAN INI DIIZINKAN PULANG</strong> ke rumah untuk mendapatkan perawatan medis
+                    dan istirahat yang diperlukan. Santri diharapkan kembali ke pondok pesantren
                     pada tanggal [TANGGAL_KEMBALI] dalam keadaan sehat dan siap mengikuti kegiatan pembelajaran.
                 </p>
             </div>
 
             <div style="margin-bottom: 20px;">
                 <p style="text-align: justify; line-height: 1.6;">
-                    <strong>Keterangan:</strong> Surat ini dikeluarkan berdasarkan kondisi kesehatan santri 
+                    <strong>Keterangan:</strong> Surat ini dikeluarkan berdasarkan kondisi kesehatan santri
                     yang memerlukan perawatan di rumah dan pengawasan keluarga.
                 </p>
             </div>
@@ -614,9 +564,9 @@
         function loadTemplate() {
             const jenisSurat = document.getElementById('jenisSurat').value;
             const templateSurat = document.getElementById('templateSurat').value;
-            
+
             console.log('loadTemplate called - jenisSurat:', jenisSurat, 'templateSurat:', templateSurat);
-            
+
             // If jenis surat is selected, automatically select the corresponding template
             if (jenisSurat && !templateSurat) {
                 const templateMap = {
@@ -626,39 +576,39 @@
                     'keterangan': 'izin-pulang', // Use izin-pulang template for keterangan
                     'undangan': 'izin-pulang'    // Use izin-pulang template for undangan
                 };
-                
+
                 if (templateMap[jenisSurat]) {
                     document.getElementById('templateSurat').value = templateMap[jenisSurat];
                     showNotification(`Template ${templateMap[jenisSurat]} otomatis dipilih untuk ${jenisSurat}`, 'info');
                 }
             }
-            
+
             // If template is selected first, filter jenis surat options
             if (templateSurat && !jenisSurat) {
                 filterJenisSuratOptions(templateSurat);
             }
-            
+
             // Auto-fill form fields based on jenis surat
             if (jenisSurat) {
                 fillAlasanOtomatis(jenisSurat);
                 fillTanggalKembaliOtomatis(jenisSurat);
             }
-            
+
             // Show special information based on combination
             const finalTemplate = templateSurat || (jenisSurat ? templateMap[jenisSurat] : '');
             showSpecialInfo(finalTemplate, jenisSurat);
-            
+
             // Handle alasan field state based on combination
             handleAlasanFieldState(finalTemplate, jenisSurat);
-            
+
             // Load template content based on jenis surat or template selection
             let templateContent = '';
             let templateName = '';
-            
+
             const selectedTemplate = templateSurat || (jenisSurat ? templateMap[jenisSurat] : '');
-            
+
             console.log('Selected template:', selectedTemplate);
-            
+
             switch(selectedTemplate) {
                 case 'izin-pulang':
                     templateContent = getIzinPulangTemplate();
@@ -676,7 +626,7 @@
                     console.log('No template selected, returning');
                     return; // Don't load anything if no template selected
             }
-            
+
             // Load template into TinyMCE editor
             if (templateContent) {
                 console.log('Loading template content into TinyMCE');
@@ -690,7 +640,7 @@
                             hideLoadingIndicator();
                         }, 100);
                         showNotification(`${templateName} berhasil dimuat! Silakan isi data yang diperlukan.`, 'success');
-                        
+
                         // Scroll to the editor to show the loaded content
                         const editorElement = document.getElementById('isiSurat');
                         if (editorElement) {
@@ -711,7 +661,7 @@
                 console.error('TinyMCE is not loaded');
                 return;
             }
-            
+
             const editor = tinymce.get('isiSurat');
             if (editor && editor.initialized) {
                 callback();
@@ -742,15 +692,15 @@
         function loadTemplateFromDropdown() {
             const templateSurat = document.getElementById('templateSurat').value;
             console.log('Template dropdown changed to:', templateSurat);
-            
+
             if (templateSurat) {
                 // Show loading indicator
                 showLoadingIndicator();
                 showNotification('Memuat template...', 'info');
-                
+
                 let templateContent = '';
                 let templateName = '';
-                
+
                 switch(templateSurat) {
                     case 'izin-pulang':
                         templateContent = getIzinPulangTemplate();
@@ -768,7 +718,7 @@
                         hideLoadingIndicator();
                         return;
                 }
-                
+
                 // Load template into TinyMCE editor
                 if (templateContent) {
                     console.log('Loading template content into TinyMCE from dropdown');
@@ -781,7 +731,7 @@
                                 hideLoadingIndicator();
                             }, 100);
                             showNotification(`${templateName} berhasil dimuat! Silakan isi data yang diperlukan.`, 'success');
-                            
+
                             // Scroll to the editor to show the loaded content
                             const editorElement = document.getElementById('isiSurat');
                             if (editorElement) {
@@ -806,13 +756,13 @@
             const alasanField = document.getElementById('alasan');
             const templateSurat = document.getElementById('templateSurat').value;
             let alasanText = '';
-            
+
             // Skip auto-fill alasan for template sakit + jenis surat izin pulang
             if (templateSurat === 'sakit' && jenisSurat === 'izin-pulang') {
                 alasanField.value = '';
                 return;
             }
-            
+
             // Array of reasons for each type
             const alasanList = {
                 'izin-pulang': [
@@ -846,13 +796,13 @@
                     'Untuk menghadiri acara khusus keluarga'
                 ]
             };
-            
+
             if (alasanList[jenisSurat]) {
                 // Randomly select one reason from the list
                 const randomIndex = Math.floor(Math.random() * alasanList[jenisSurat].length);
                 alasanText = alasanList[jenisSurat][randomIndex];
             }
-            
+
             if (alasanText) {
                 alasanField.value = alasanText;
                 showNotification('Alasan berhasil diisi otomatis!', 'success');
@@ -862,11 +812,11 @@
         // Auto-fill tanggal kembali based on jenis surat
         function fillTanggalKembaliOtomatis(jenisSurat) {
             const tanggalKembaliField = document.getElementById('tanggalKembali');
-            
+
             // Calculate return date based on letter type
             const today = new Date();
             let returnDate = new Date();
-            
+
             switch(jenisSurat) {
                 case 'izin-pulang':
                     returnDate.setDate(today.getDate() + 7); // 7 days from today
@@ -886,7 +836,7 @@
                 default:
                     returnDate.setDate(today.getDate() + 7); // Default 7 days
             }
-            
+
             // Format date to YYYY-MM-DD for input field
             const formattedDate = returnDate.toISOString().split('T')[0];
             tanggalKembaliField.value = formattedDate;
@@ -897,21 +847,21 @@
         function filterJenisSuratOptions(templateSurat) {
             const jenisSuratSelect = document.getElementById('jenisSurat');
             const currentValue = jenisSuratSelect.value;
-            
+
             // Store all original options
             if (!jenisSuratSelect.originalOptions) {
                 jenisSuratSelect.originalOptions = Array.from(jenisSuratSelect.options);
             }
-            
+
             // Clear current options
             jenisSuratSelect.innerHTML = '';
-            
+
             // Add default option
             const defaultOption = document.createElement('option');
             defaultOption.value = '';
             defaultOption.textContent = 'Pilih Jenis Surat';
             jenisSuratSelect.appendChild(defaultOption);
-            
+
             // Show all options regardless of template selection
             const availableOptions = [
                 { value: 'izin-pulang', text: 'Surat Izin Pulang' },
@@ -920,7 +870,7 @@
                 { value: 'keterangan', text: 'Surat Keterangan' },
                 { value: 'undangan', text: 'Surat Undangan' }
             ];
-            
+
             // Add all options
             availableOptions.forEach(option => {
                 const optionElement = document.createElement('option');
@@ -928,14 +878,14 @@
                 optionElement.textContent = option.text;
                 jenisSuratSelect.appendChild(optionElement);
             });
-            
+
             // Restore current value if it's still available
             if (currentValue && availableOptions.some(opt => opt.value === currentValue)) {
                 jenisSuratSelect.value = currentValue;
             } else {
                 jenisSuratSelect.value = '';
             }
-            
+
             // Show notification
             if (templateSurat) {
                 const templateNames = {
@@ -953,16 +903,16 @@
         // Reset jenis surat options to show all options
         function resetJenisSuratOptions() {
             const jenisSuratSelect = document.getElementById('jenisSurat');
-            
+
             // Clear current options
             jenisSuratSelect.innerHTML = '';
-            
+
             // Add default option
             const defaultOption = document.createElement('option');
             defaultOption.value = '';
             defaultOption.textContent = 'Pilih Jenis Surat';
             jenisSuratSelect.appendChild(defaultOption);
-            
+
             // Add all original options
             const allOptions = [
                 { value: 'izin-pulang', text: 'Surat Izin Pulang' },
@@ -971,14 +921,14 @@
                 { value: 'keterangan', text: 'Surat Keterangan' },
                 { value: 'undangan', text: 'Surat Undangan' }
             ];
-            
+
             allOptions.forEach(option => {
                 const optionElement = document.createElement('option');
                 optionElement.value = option.value;
                 optionElement.textContent = option.text;
                 jenisSuratSelect.appendChild(optionElement);
             });
-            
+
             showNotification(`Semua jenis surat tersedia`, 'info');
         }
 
@@ -986,24 +936,24 @@
         function resetTemplate() {
             // Clear template selection
             document.getElementById('templateSurat').value = '';
-            
+
             // Reset jenis surat options to show all
             resetJenisSuratOptions();
-            
+
             // Clear editor content
             tinymce.get('isiSurat').setContent('');
-            
+
             // Clear form fields
             document.getElementById('diagnosa').value = '';
             document.getElementById('alasan').value = '';
             document.getElementById('tanggalKembali').value = '';
-            
+
             // Hide special info area
             showSpecialInfo('', '');
-            
+
             // Enable alasan field
             handleAlasanFieldState('', '');
-            
+
             showNotification('Template berhasil direset!', 'success');
         }
 
@@ -1032,11 +982,11 @@
                 'Otitis media dengan nyeri telinga',
                 'Faringitis dengan nyeri tenggorokan'
             ];
-            
+
             // Randomly select one diagnosa
             const randomIndex = Math.floor(Math.random() * diagnosaList.length);
             const diagnosaText = diagnosaList[randomIndex];
-            
+
             diagnosaField.value = diagnosaText;
             showNotification('Diagnosa berhasil diisi otomatis!', 'success');
         }
@@ -1051,31 +1001,31 @@
             const diagnosa = document.getElementById('diagnosa').value;
             const jenisSurat = document.getElementById('jenisSurat').value;
             const templateSurat = document.getElementById('templateSurat').value;
-            
+
             if (!nomorSurat || !tanggalSurat) {
                 showNotification('Mohon isi Nomor Surat dan Tanggal Surat terlebih dahulu!', 'error');
                 return;
             }
-            
+
             // Validate tanggal kembali
             if (tanggalKembali && tanggalSurat) {
                 const suratDate = new Date(tanggalSurat);
                 const kembaliDate = new Date(tanggalKembali);
-                
+
                 if (kembaliDate <= suratDate) {
                     showNotification('Tanggal kembali harus lebih besar dari tanggal surat!', 'error');
                     return;
                 }
             }
-            
+
             // Validate diagnosa for sakit letter
             if (jenisSurat === 'sakit' && !diagnosa.trim()) {
                 showNotification('Mohon isi diagnosa untuk surat sakit!', 'error');
                 return;
             }
-            
+
             let content = tinymce.get('isiSurat').getContent();
-            
+
             // Replace placeholders with form data
             content = content.replace(/\[NOMOR_SURAT\]/g, nomorSurat);
             content = content.replace(/\[TANGGAL_SURAT\]/g, formatDate(tanggalSurat));
@@ -1088,13 +1038,13 @@
             content = content.replace(/\[TEMPAT\]/g, 'Pondok Pesantren');
             content = content.replace(/\[NAMA_KEPALA_PONDOK\]/g, 'K.H. Ahmad Dahlan');
             content = content.replace(/\[NAMA_PONDOK\]/g, 'Pondok Pesantren Al-Hikmah');
-            
+
             // Set current date for other date fields
             const today = new Date();
             const todayFormatted = formatDate(today.toISOString().split('T')[0]);
             content = content.replace(/\[TANGGAL_IZIN\]/g, todayFormatted);
             content = content.replace(/\[TANGGAL_SAKIT\]/g, todayFormatted);
-            
+
             tinymce.get('isiSurat').setContent(content);
             setTimeout(function() {
                 resizeEditor();
@@ -1155,8 +1105,8 @@
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification px-6 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full opacity-0 pointer-events-auto ${
-                type === 'success' ? 'bg-green-500 text-white' : 
-                type === 'error' ? 'bg-red-500 text-white' : 
+                type === 'success' ? 'bg-green-500 text-white' :
+                type === 'error' ? 'bg-red-500 text-white' :
                 type === 'warning' ? 'bg-yellow-500 text-white' :
                 'bg-blue-500 text-white'
             }`;
@@ -1183,18 +1133,18 @@
             const jenisSurat = document.getElementById('jenisSurat').value;
             const templateSurat = document.getElementById('templateSurat').value;
             const diagnosa = document.getElementById('diagnosa').value.trim();
-            
+
             if (!content.trim()) {
                 showNotification('Isi surat masih kosong!', 'error');
                 return;
             }
-            
+
             // Validate diagnosa for sakit letter
             if (jenisSurat === 'sakit' && !diagnosa) {
                 showNotification('Diagnosa wajib diisi untuk surat sakit!', 'error');
                 return;
             }
-            
+
             // Create preview window
             const previewWindow = window.open('', '_blank', 'width=800,height=600');
             previewWindow.document.write(`
@@ -1232,18 +1182,18 @@
             const jenisSurat = document.getElementById('jenisSurat').value;
             const templateSurat = document.getElementById('templateSurat').value;
             const diagnosa = document.getElementById('diagnosa').value.trim();
-            
+
             if (!content.trim()) {
                 showNotification('Isi surat masih kosong!', 'error');
                 return;
             }
-            
+
             // Validate diagnosa for sakit letter
             if (jenisSurat === 'sakit' && !diagnosa) {
                 showNotification('Diagnosa wajib diisi untuk surat sakit!', 'error');
                 return;
             }
-            
+
             // Create print window
             const printWindow = window.open('', '_blank', 'width=800,height=600');
             printWindow.document.write(`
@@ -1253,7 +1203,7 @@
                     <title>Cetak Surat</title>
                     <style>
                         body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
-                        @media print { 
+                        @media print {
                             body { margin: 20px; }
                             .no-print { display: none; }
                         }
@@ -1273,7 +1223,7 @@
                 </html>
             `);
             printWindow.document.close();
-            
+
             // Auto-print after a short delay
             setTimeout(() => {
                 printWindow.print();
@@ -1292,29 +1242,29 @@
             const jenisSurat = document.getElementById('jenisSurat').value;
             const templateSurat = document.getElementById('templateSurat').value;
             const content = tinymce.get('isiSurat').getContent();
-            
+
             // Basic validation
             if (!jenisSurat) {
                 showNotification('Pilih jenis surat terlebih dahulu!', 'error');
                 return;
             }
-            
+
             if (!templateSurat) {
                 showNotification('Pilih template surat terlebih dahulu!', 'error');
                 return;
             }
-            
+
             if (!content.trim()) {
                 showNotification('Isi surat masih kosong!', 'error');
                 return;
             }
-            
+
             // Validate diagnosa for sakit letter
             if (jenisSurat === 'sakit' && !diagnosa) {
                 showNotification('Diagnosa wajib diisi untuk surat sakit!', 'error');
                 return;
             }
-            
+
             // Generate nomor surat if empty
             let finalNomorSurat = nomorSurat;
             if (!finalNomorSurat) {
@@ -1325,13 +1275,13 @@
                 const randomNum = Math.floor(Math.random() * 999) + 1;
                 finalNomorSurat = `${String(randomNum).padStart(3, '0')}/SURAT/${year}`;
             }
-            
+
             // Set tanggal surat to today if empty
             let finalTanggalSurat = tanggalSurat;
             if (!finalTanggalSurat) {
                 finalTanggalSurat = new Date().toISOString().split('T')[0];
             }
-            
+
             // Prepare letter data
             const letterData = {
                 nomorSurat: finalNomorSurat,
@@ -1348,13 +1298,13 @@
                 createdAt: new Date().toISOString(),
                 perihal: generatePerihal(jenisSurat, alasan, diagnosa)
             };
-            
+
             // Save to localStorage (simulating database storage)
             saveDraftToStorage(letterData);
-            
+
             // Show success notification
             showNotification('Draft surat berhasil disimpan!', 'success');
-            
+
             // Optionally redirect to letter list
             setTimeout(() => {
                 if (confirm('Draft berhasil disimpan! Apakah Anda ingin melihat daftar surat?')) {
@@ -1362,7 +1312,7 @@
                 }
             }, 1000);
         }
-        
+
         // Helper function to generate perihal based on letter type and content
         function generatePerihal(jenisSurat, alasan, diagnosa) {
             const jenisSuratMap = {
@@ -1372,33 +1322,33 @@
                 'keterangan': 'Surat Keterangan',
                 'undangan': 'Surat Undangan'
             };
-            
+
             let perihal = jenisSuratMap[jenisSurat] || 'Surat';
-            
+
             if (alasan) {
                 perihal += ` - ${alasan.substring(0, 50)}${alasan.length > 50 ? '...' : ''}`;
             } else if (diagnosa) {
                 perihal += ` - ${diagnosa.substring(0, 50)}${diagnosa.length > 50 ? '...' : ''}`;
             }
-            
+
             return perihal;
         }
-        
+
         // Save draft to localStorage (simulating database)
         function saveDraftToStorage(letterData) {
             try {
                 // Get existing drafts
                 let drafts = JSON.parse(localStorage.getItem('letterDrafts') || '[]');
-                
+
                 // Add new draft
                 drafts.push(letterData);
-                
+
                 // Save back to localStorage
                 localStorage.setItem('letterDrafts', JSON.stringify(drafts));
-                
+
                 console.log('Draft saved:', letterData);
                 console.log('Total drafts:', drafts.length);
-                
+
             } catch (error) {
                 console.error('Error saving draft:', error);
                 showNotification('Gagal menyimpan draft!', 'error');
@@ -1415,7 +1365,7 @@
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('profileDropdown');
             const profileButton = event.target.closest('button[onclick="toggleProfileDropdown()"]');
-            
+
             if (!profileButton && !dropdown.contains(event.target)) {
                 dropdown.classList.add('hidden');
             }
@@ -1432,22 +1382,22 @@
             const modalOverlay = document.createElement('div');
             modalOverlay.id = 'logoutModalOverlay';
             modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]';
-            
+
             // Create modal content
             const modalContent = document.createElement('div');
             modalContent.className = 'bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0';
             modalContent.innerHTML = `
                 <div class=\"text-center\">\n                    <div class=\"mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-6\">\n                        <i class=\"fas fa-sign-out-alt text-2xl text-red-600\"></i>\n                    </div>\n                    <h3 class=\"text-xl font-bold text-gray-900 mb-4\">Konfirmasi Keluar</h3>\n                    <p class=\"text-gray-600 mb-8\">Apakah Anda yakin ingin keluar dari sistem? Semua data yang belum disimpan akan hilang.</p>\n                    <div class=\"flex space-x-4\">\n                        <button onclick=\"cancelLogout()\" class=\"flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium\">\n                            Batal\n                        </button>\n                        <button onclick=\"confirmLogout()\" class=\"flex-1 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium\">\n                            <i class=\"fas fa-sign-out-alt mr-2\"></i>Keluar\n                        </button>\n                    </div>\n                </div>\n            `;
-            
+
             modalOverlay.appendChild(modalContent);
             document.body.appendChild(modalOverlay);
-            
+
             // Animate modal in
             setTimeout(() => {
                 modalContent.classList.remove('scale-95', 'opacity-0');
                 modalContent.classList.add('scale-100', 'opacity-100');
             }, 100);
-            
+
             // Close dropdown if open
             document.getElementById('profileDropdown').classList.add('hidden');
         }
@@ -1456,11 +1406,11 @@
         function cancelLogout() {
             const modalOverlay = document.getElementById('logoutModalOverlay');
             const modalContent = modalOverlay.querySelector('div');
-            
+
             // Animate modal out
             modalContent.classList.remove('scale-100', 'opacity-100');
             modalContent.classList.add('scale-95', 'opacity-0');
-            
+
             setTimeout(() => {
                 document.body.removeChild(modalOverlay);
             }, 300);
@@ -1470,26 +1420,26 @@
         function confirmLogout() {
             const modalOverlay = document.getElementById('logoutModalOverlay');
             const modalContent = modalOverlay.querySelector('div');
-            
+
             // Show loading state
             modalContent.innerHTML = `
                 <div class=\"text-center\">\n                    <div class=\"mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-6\">\n                        <i class=\"fas fa-spinner fa-spin text-2xl text-blue-600\"></i>\n                    </div>\n                    <h3 class=\"text-xl font-bold text-gray-900 mb-4\">Memproses...</h3>\n                    <p class=\"text-gray-600\">Sedang keluar dari sistem...</p>\n                </div>\n            `;
-            
+
             // Show notification if function exists
             if (typeof showNotification === 'function') {
                 showNotification('Sedang keluar dari sistem...', 'info');
             }
-            
+
             setTimeout(() => {
                 // Clear login data
                 localStorage.removeItem('loginData');
                 sessionStorage.removeItem('loginData');
-                
+
                 // Show success notification if function exists
                 if (typeof showNotification === 'function') {
                     showNotification('Berhasil keluar dari sistem!', 'success');
                 }
-                
+
                 // Redirect to logout page with role parameter
                 setTimeout(() => {
                     window.location.href = '/logout?role=admin';
@@ -1592,11 +1542,11 @@
             // Initialize filter based on current template selection
             const templateSurat = document.getElementById('templateSurat').value;
             const jenisSurat = document.getElementById('jenisSurat').value;
-            
+
             if (templateSurat) {
                 filterJenisSuratOptions(templateSurat);
             }
-            
+
             // Show special info if both template and jenis surat are selected
             if (templateSurat && jenisSurat) {
                 showSpecialInfo(templateSurat, jenisSurat);
@@ -1607,17 +1557,17 @@
         function validateForm() {
             const jenisSurat = document.getElementById('jenisSurat').value;
             const templateSurat = document.getElementById('templateSurat').value;
-            
+
             if (!jenisSurat) {
                 showNotification('Pilih jenis surat terlebih dahulu!', 'error');
                 return false;
             }
-            
+
             if (!templateSurat) {
                 showNotification('Pilih template surat terlebih dahulu!', 'error');
                 return false;
             }
-            
+
             // Validate diagnosa for sakit letter
             if (jenisSurat === 'sakit') {
                 const diagnosa = document.getElementById('diagnosa').value.trim();
@@ -1626,7 +1576,7 @@
                     return false;
                 }
             }
-            
+
             return true;
         }
 
@@ -1634,10 +1584,10 @@
         function showSpecialInfo(templateSurat, jenisSurat) {
             const infoArea = document.getElementById('infoArea');
             const infoText = document.getElementById('infoText');
-            
+
             // Hide info area by default
             infoArea.classList.add('hidden');
-            
+
             // Show information based on jenis surat
             if (jenisSurat === 'izin-pulang') {
                 infoText.innerHTML = `
@@ -1704,52 +1654,52 @@
             const namaSantri = document.getElementById('nama_santri').value.trim();
             const perihal = document.querySelector('input[name="perihal"]').value.trim();
             const status = document.querySelector('select[name="status"]').value;
-            
+
             // Basic validation
             if (!nomorSurat) {
                 showNotification('Nomor surat harus diisi!', 'error');
                 return false;
             }
-            
+
             if (!jenisSurat) {
                 showNotification('Jenis surat harus dipilih!', 'error');
                 return false;
             }
-            
+
             if (!tanggalSurat) {
                 showNotification('Tanggal surat harus diisi!', 'error');
                 return false;
             }
-            
+
             if (!nis) {
                 showNotification('NIS harus diisi!', 'error');
                 return false;
             }
-            
+
             if (!namaSantri) {
                 showNotification('Nama santri harus diisi!', 'error');
                 return false;
             }
-            
+
             if (!perihal) {
                 showNotification('Perihal surat harus diisi!', 'error');
                 return false;
             }
-            
+
             if (!status) {
                 showNotification('Status surat harus dipilih!', 'error');
                 return false;
             }
-            
+
             // Get content from TinyMCE
             const content = tinymce.get('isiSurat').getContent();
             document.getElementById('isiSuratHidden').value = content;
-            
+
             if (!content || content.trim() === '') {
                 showNotification('Isi surat harus diisi!', 'error');
                 return false;
             }
-            
+
             // Validate diagnosa for sakit letter
             if (jenisSurat === 'sakit') {
                 const diagnosa = document.getElementById('diagnosa').value.trim();
@@ -1758,7 +1708,7 @@
                     return false;
                 }
             }
-            
+
             return true;
         }
 
@@ -1798,7 +1748,7 @@
                 showNotification('Pilih jenis surat terlebih dahulu!', 'error');
                 return;
             }
-            
+
             fetch('{{ route("admin.surat.generate-nomor") }}', {
                 method: 'POST',
                 headers: {
@@ -1831,9 +1781,9 @@
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'} text-white`;
             notification.textContent = message;
-            
+
             document.body.appendChild(notification);
-            
+
             // Remove notification after 3 seconds
             setTimeout(() => {
                 notification.remove();
@@ -1847,11 +1797,11 @@
                 e.preventDefault();
                 return false;
             }
-            
+
             // Save TinyMCE content to hidden textarea
             const isiSurat = tinymce.get('isiSurat').getContent();
             document.getElementById('isiSuratHidden').value = isiSurat;
-            
+
             // Show loading notification
             showNotification('Menyimpan surat...', 'info');
         });
@@ -1870,7 +1820,7 @@
                     if (data.success) {
                         const select = document.getElementById('templateDatabase');
                         select.innerHTML = '<option value="">Pilih Template dari Database</option>';
-                        
+
                         data.templates.forEach(template => {
                             const option = document.createElement('option');
                             option.value = template.id;
@@ -1897,7 +1847,7 @@
             if (contentHtml) {
                 showLoadingIndicator();
                 showNotification('Memuat template dari database...', 'info');
-                
+
                 ensureTinyMCEReady(() => {
                     const editor = tinymce.get('isiSurat');
                     if (editor) {
@@ -1907,7 +1857,7 @@
                             hideLoadingIndicator();
                         }, 100);
                         showNotification('Template database berhasil dimuat!', 'success');
-                        
+
                         // Scroll to the editor to show the loaded content
                         const editorElement = document.getElementById('isiSurat');
                         if (editorElement) {
@@ -1926,7 +1876,7 @@
                         if (data.success && data.content_html) {
                             showLoadingIndicator();
                             showNotification('Memuat template dari database...', 'info');
-                            
+
                             ensureTinyMCEReady(() => {
                                 const editor = tinymce.get('isiSurat');
                                 if (editor) {
@@ -1936,7 +1886,7 @@
                                         hideLoadingIndicator();
                                     }, 100);
                                     showNotification('Template database berhasil dimuat!', 'success');
-                                    
+
                                     // Scroll to the editor to show the loaded content
                                     const editorElement = document.getElementById('isiSurat');
                                     if (editorElement) {
@@ -1962,15 +1912,15 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Load database templates
             loadDatabaseTemplates();
-            
+
             // Initialize filter based on current template selection
             const templateSurat = document.getElementById('templateSurat').value;
             const jenisSurat = document.getElementById('jenisSurat').value;
-            
+
             if (templateSurat) {
                 filterJenisSuratOptions(templateSurat);
             }
-            
+
             // Show special info if both template and jenis surat are selected
             if (templateSurat && jenisSurat) {
                 showSpecialInfo(templateSurat, jenisSurat);

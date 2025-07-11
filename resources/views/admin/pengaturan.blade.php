@@ -123,7 +123,7 @@
                 <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
             </div>
             <div class="flex items-center space-x-6 mb-6">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                      alt="Admin" class="h-20 w-20 rounded-full">
                 <div>
                     <h4 class="text-xl font-semibold text-gray-800">Administrator</h4>
@@ -177,7 +177,7 @@
         document.addEventListener('click', function(event) {
             const dropdown = document.getElementById('profileDropdown');
             const profileButton = event.target.closest('button[onclick="toggleProfileDropdown()"]');
-            
+
             if (!profileButton && !dropdown.contains(event.target)) {
                 dropdown.classList.add('hidden');
             }
@@ -194,7 +194,7 @@
             const modalOverlay = document.createElement('div');
             modalOverlay.id = 'logoutModalOverlay';
             modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[9999]';
-            
+
             // Create modal content
             const modalContent = document.createElement('div');
             modalContent.className = 'bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0';
@@ -215,16 +215,16 @@
                     </div>
                 </div>
             `;
-            
+
             modalOverlay.appendChild(modalContent);
             document.body.appendChild(modalOverlay);
-            
+
             // Animate modal in
             setTimeout(() => {
                 modalContent.classList.remove('scale-95', 'opacity-0');
                 modalContent.classList.add('scale-100', 'opacity-100');
             }, 100);
-            
+
             // Close dropdown if open
             document.getElementById('profileDropdown').classList.add('hidden');
         }
@@ -233,11 +233,11 @@
         function cancelLogout() {
             const modalOverlay = document.getElementById('logoutModalOverlay');
             const modalContent = modalOverlay.querySelector('div');
-            
+
             // Animate modal out
             modalContent.classList.remove('scale-100', 'opacity-100');
             modalContent.classList.add('scale-95', 'opacity-0');
-            
+
             setTimeout(() => {
                 document.body.removeChild(modalOverlay);
             }, 300);
@@ -247,7 +247,7 @@
         function confirmLogout() {
             const modalOverlay = document.getElementById('logoutModalOverlay');
             const modalContent = modalOverlay.querySelector('div');
-            
+
             // Show loading state
             modalContent.innerHTML = `
                 <div class="text-center">
@@ -258,18 +258,18 @@
                     <p class="text-gray-600">Sedang keluar dari sistem...</p>
                 </div>
             `;
-            
+
             // Show notification
             showNotification('Sedang keluar dari sistem...', 'info');
-            
+
             setTimeout(() => {
                 // Clear login data
                 localStorage.removeItem('loginData');
                 sessionStorage.removeItem('loginData');
-                
+
                 // Show success notification
                 showNotification('Berhasil keluar dari sistem!', 'success');
-                
+
                 // Redirect to logout page with role parameter
                 setTimeout(() => {
                     window.location.href = '/logout?role=admin';
@@ -357,29 +357,29 @@
                 container.className = 'fixed top-20 right-8 z-[9999] flex flex-col items-end space-y-3 w-full max-w-xs sm:max-w-sm pointer-events-none';
                 document.body.appendChild(container);
             }
-            
+
             // Remove existing notifications
             const existingNotifications = container.querySelectorAll('.notification');
             existingNotifications.forEach(notification => notification.remove());
-            
+
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification px-6 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full opacity-0 ${
-                type === 'success' ? 'bg-green-500 text-white' : 
-                type === 'error' ? 'bg-red-500 text-white' : 
+                type === 'success' ? 'bg-green-500 text-white' :
+                type === 'error' ? 'bg-red-500 text-white' :
                 type === 'warning' ? 'bg-yellow-500 text-white' :
                 'bg-blue-500 text-white'
             }`;
             notification.textContent = message;
-            
+
             container.appendChild(notification);
-            
+
             // Animate in
             setTimeout(() => {
                 notification.style.transform = 'translateX(0)';
                 notification.style.opacity = '1';
             }, 100);
-            
+
             // Remove notification after 3 seconds
             setTimeout(() => {
                 notification.style.transform = 'translateX(100%)';
@@ -397,13 +397,13 @@
             if (profileForm) {
                 profileForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
+
                     // Add loading effect to submit button
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
                     submitBtn.disabled = true;
-                    
+
                     showNotification('Menyimpan pengaturan profil...', 'info');
                     setTimeout(() => {
                         showNotification('Pengaturan profil berhasil disimpan!', 'success');
@@ -418,13 +418,13 @@
             if (passwordForm) {
                 passwordForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
+
                     // Add loading effect to submit button
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mengubah...';
                     submitBtn.disabled = true;
-                    
+
                     showNotification('Mengubah password...', 'info');
                     setTimeout(() => {
                         showNotification('Password berhasil diubah!', 'success');
@@ -440,13 +440,13 @@
             if (notifForm) {
                 notifForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    
+
                     // Add loading effect to submit button
                     const submitBtn = this.querySelector('button[type="submit"]');
                     const originalText = submitBtn.innerHTML;
                     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
                     submitBtn.disabled = true;
-                    
+
                     showNotification('Menyimpan pengaturan notifikasi...', 'info');
                     setTimeout(() => {
                         showNotification('Pengaturan notifikasi berhasil disimpan!', 'success');

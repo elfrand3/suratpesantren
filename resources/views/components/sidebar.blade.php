@@ -63,17 +63,6 @@
                 </div>
             </a>
 
-            <!-- Template Surat -->
-            <a href="/admintemplatesurat" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('admintemplatesurat') ? 'text-white bg-white/15 shadow-lg' : '' }}">
-                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('admintemplatesurat') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
-                    <i class="fas fa-file-alt text-sm"></i>
-                </div>
-                <span class="font-medium">Template Surat</span>
-                <div class="ml-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <i class="fas fa-chevron-right text-xs"></i>
-                </div>
-            </a>
-
             <!-- Pengaturan -->
             <a href="/adminpengaturan" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('adminpengaturan') ? 'text-white bg-white/15 shadow-lg' : '' }}">
                 <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('adminpengaturan') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
@@ -99,7 +88,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 @endif
 
 <!-- Sidebar pengasuh -->
@@ -183,7 +172,7 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 @endif
 
 <!-- Sidebar sekolah -->
@@ -260,5 +249,5 @@
             </div>
         </div>
     </div>
-</div> 
+</div>
 @endif

@@ -101,10 +101,10 @@
                             <i class="fas fa-plus mr-2"></i>
                             Buat Surat Baru
                         </button>
-                        <button onclick="quickAction('export-laporan')" class="quick-action-btn w-full flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium">
+                        {{-- <button onclick="quickAction('export-laporan')" class="quick-action-btn w-full flex items-center justify-center px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-colors font-medium">
                             <i class="fas fa-file-export mr-2"></i>
                             Export Laporan
-                        </button>
+                        </button> --}}
                         <button onclick="quickAction('tambah-santri')" class="quick-action-btn w-full flex items-center justify-center px-4 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 transition-colors font-medium">
                             <i class="fas fa-user-plus mr-2"></i>
                             Tambah Santri
@@ -136,7 +136,7 @@
                 <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
             </div>
             <div class="flex items-center space-x-6 mb-6">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                      alt="Admin" class="h-20 w-20 rounded-full">
                 <div>
                     <h4 class="text-xl font-semibold text-gray-800">Administrator</h4>
@@ -180,11 +180,11 @@
     <script>
         // Authentication check
         document.addEventListener('DOMContentLoaded', function() {
-            
+
             renderRecentLetters();
             updateDashboardStats();
         });
-        
+
         // Profile modal functions
         function openProfileModal() {
             document.getElementById('profileModal').classList.remove('hidden');
@@ -219,7 +219,7 @@
             const originalText = button.innerHTML;
             button.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Memproses...';
             button.disabled = true;
-            
+
             switch(action) {
                 case 'buat-surat':
                     showNotification('Mengarahkan ke halaman Buat Surat...', 'info');
@@ -227,7 +227,7 @@
                         window.location.href = '/bs';
                     }, 300);
                     break;
-                    
+
                 case 'export-laporan':
                     showNotification('Menyiapkan laporan untuk di-export...', 'info');
                     setTimeout(() => {
@@ -239,21 +239,21 @@
                         }, 1000);
                     }, 300);
                     break;
-                    
+
                 case 'tambah-santri':
                     showNotification('Mengarahkan ke halaman Data Santri...', 'info');
                     setTimeout(() => {
                         window.location.href = '/ds';
                     }, 300);
                     break;
-                    
+
                 case 'pengaturan':
                     showNotification('Mengarahkan ke halaman Pengaturan...', 'info');
                     setTimeout(() => {
                         window.location.href = '/p';
                     }, 300);
                     break;
-                    
+
                 default:
                     showNotification('Aksi tidak dikenali!', 'error');
                     button.innerHTML = originalText;
@@ -265,17 +265,17 @@
         function exportLaporan() {
             // Simulate export process
             showNotification('Mengunduh laporan...', 'info');
-            
+
             setTimeout(() => {
                 // Create a dummy CSV file for download
-                const csvContent = "data:text/csv;charset=utf-8," 
+                const csvContent = "data:text/csv;charset=utf-8,"
                     + "No,Nama,Jenis Surat,Tanggal,Status\n"
                     + "1,John Doe,Surat Tugas,2024-01-15,Disetujui\n"
                     + "2,Jane Smith,Surat Izin,2024-01-14,Menunggu\n"
                     + "3,Mike Johnson,Surat Rekomendasi,2024-01-13,Disetujui\n"
                     + "4,Sarah Wilson,Surat Tugas,2024-01-12,Disetujui\n"
                     + "5,David Brown,Surat Izin,2024-01-11,Menunggu";
-                
+
                 const encodedUri = encodeURI(csvContent);
                 const link = document.createElement("a");
                 link.setAttribute("href", encodedUri);
@@ -283,7 +283,7 @@
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                
+
                 showNotification('Laporan berhasil di-export!', 'success');
             }, 500);
         }
@@ -303,8 +303,8 @@
             // Create notification element
             const notification = document.createElement('div');
             notification.className = `notification px-6 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full opacity-0 pointer-events-auto ${
-                type === 'success' ? 'bg-green-500 text-white' : 
-                type === 'error' ? 'bg-red-500 text-white' : 
+                type === 'success' ? 'bg-green-500 text-white' :
+                type === 'error' ? 'bg-red-500 text-white' :
                 type === 'warning' ? 'bg-yellow-500 text-white' :
                 'bg-blue-500 text-white'
             }`;

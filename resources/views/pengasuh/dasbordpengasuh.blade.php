@@ -14,7 +14,7 @@
         <main class="p-6">
             <div class="bg-white rounded-xl shadow p-8 flex flex-col items-center justify-center min-h-[400px]">
                 <h1 class="text-2xl font-bold text-gray-800 mb-4">Selamat Datang di Dashboard Pengasuh</h1>
-                <p class="text-gray-600 mb-2">Silakan kelola data santri, absensi, dan surat melalui menu di sidebar.</p>
+                <p class="text-gray-600 mb-2">Silakan setujui data surat santri melalui menu di sidebar.</p>
                 <div class="mt-6">
                     <i class="fas fa-user-tie text-5xl text-blue-400"></i>
                 </div>
@@ -22,4 +22,4 @@
         </main>
     </div>
 </body>
-</html> 
+</html>

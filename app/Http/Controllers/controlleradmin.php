@@ -62,6 +62,7 @@ class ControllerAdmin extends Controller
         return redirect()->back()->with('success', 'Santri berhasil ditambahkan');
     }
 
+
     public function detailSantri($id)
     {
         $santriDetail = \App\Models\santri::findOrFail($id);
@@ -134,6 +135,45 @@ class ControllerAdmin extends Controller
         return view('admin.buatsurat', compact('santris'));
     }
 
+    // public function storeSurat(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //         'nomor_surat' => 'required|unique:surats,nomor_surat',
+    //         'jenis_surat' => 'required',
+    //         'tanggal_surat' => 'required|date',
+    //         'perihal' => 'required',
+    //         'status' => 'required',
+    //         'template_surat' => 'nullable',
+    //         'nis' => 'required',
+    //         'nama_santri' => 'required',
+    //         'alasan' => 'nullable',
+    //         'diagnosa' => 'nullable',
+    //         'tanggal_kembali' => 'nullable|date',
+    //         'content' => 'nullable',
+    //         'santri_id' => 'nullable|exists:santris,id',
+    //         'file_surat' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
+    //     ]);
+
+    //     // Handle file upload if present
+    //     if ($request->hasFile('file_surat')) {
+    //         $file = $request->file('file_surat');
+    //         $fileName = time() . '_' . $file->getClientOriginalName();
+    //         $file->storeAs('public/surats', $fileName);
+    //         $validated['file_surat'] = $fileName;
+    //     }
+
+    //     // Find santri by NIS if santri_id is not provided
+    //     if (!$validated['santri_id']) {
+    //         $santri = \App\Models\santri::where('nis', $validated['nis'])->first();
+    //         if ($santri) {
+    //             $validated['santri_id'] = $santri->id;
+    //         }
+    //     }
+
+    //     $surat = \App\Models\surat::create($validated);
+
+    //     return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil dibuat');
+    // }
     public function storeSurat(Request $request)
     {
         $validated = $request->validate([
@@ -153,7 +193,7 @@ class ControllerAdmin extends Controller
             'file_surat' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
         ]);
 
-        // Handle file upload if present
+        // Upload file jika ada
         if ($request->hasFile('file_surat')) {
             $file = $request->file('file_surat');
             $fileName = time() . '_' . $file->getClientOriginalName();
@@ -161,17 +201,75 @@ class ControllerAdmin extends Controller
             $validated['file_surat'] = $fileName;
         }
 
-        // Find santri by NIS if santri_id is not provided
+        // Temukan data santri
         if (!$validated['santri_id']) {
             $santri = \App\Models\santri::where('nis', $validated['nis'])->first();
             if ($santri) {
                 $validated['santri_id'] = $santri->id;
             }
+        } else {
+            $santri = \App\Models\santri::find($validated['santri_id']);
         }
 
+        // Simpan surat
         $surat = \App\Models\surat::create($validated);
 
+        // Kirim notifikasi WhatsApp via Fonnte
+        if ($santri && $santri->no_telp) {
+            $pesan = "*[Notifikasi Surat Baru]*\n\n";
+            $pesan .= "📄 *Nomor Surat:* {$validated['nomor_surat']}\n";
+            $pesan .= "📂 *Jenis:* {$validated['jenis_surat']}\n";
+            $pesan .= "📅 *Tanggal:* {$validated['tanggal_surat']}\n";
+            $pesan .= "👤 *Nama:* {$validated['nama_santri']}\n";
+            $pesan .= "📝 *Perihal:* {$validated['perihal']}\n";
+            if (!empty($validated['alasan'])) {
+                $pesan .= "🧾 *Alasan:* {$validated['alasan']}\n";
+            }
+            if (!empty($validated['diagnosa'])) {
+                $pesan .= "💊 *Diagnosa:* {$validated['diagnosa']}\n";
+            }
+            if (!empty($validated['tanggal_kembali'])) {
+                $pesan .= "🔙 *Tanggal Kembali:* {$validated['tanggal_kembali']}\n";
+            }
+
+            $this->kirimWaFonnte($santri->no_telp, $pesan);
+        }
+
         return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil dibuat');
+    }
+
+    private function kirimWaFonnte($nomor, $pesan)
+    {
+        $token = '4D27rRQAhcTCxE1Z23YGJEVa7gtiN5rQQBhP2V'; // <-- ganti dengan token kamu dari Fonnte
+
+        // Ubah nomor 08xxx → 628xxx jika perlu
+        $nomor = trim($nomor);
+        if (strpos($nomor, '+62') === 0) {
+            $nomor = str_replace('+62', '62', $nomor);
+        } elseif (strpos($nomor, '0') === 0) {
+            $nomor = '62' . substr($nomor, 1);
+        }
+
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://api.fonnte.com/send",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_POST => true,
+            CURLOPT_POSTFIELDS => [
+                'target' => $nomor,
+                'message' => $pesan,
+                'delay' => 2
+            ],
+            CURLOPT_HTTPHEADER => [
+                "Authorization: $token"
+            ],
+        ));
+
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+        // Optional: untuk debugging
+        \Log::info("WA ke $nomor: $response");
     }
 
     public function getSuratList(Request $request)
@@ -179,9 +277,9 @@ class ControllerAdmin extends Controller
         $query = $request->input('q');
         $jenis_surat = $request->input('jenis_surat');
         $status = $request->input('status');
-        
+
         $surats = \App\Models\surat::with('santri');
-        
+
         if ($query) {
             $surats = $surats->where(function($qobj) use ($query) {
                 $qobj->where('nomor_surat', 'like', "%{$query}%")
@@ -190,17 +288,17 @@ class ControllerAdmin extends Controller
                   ->orWhere('perihal', 'like', "%{$query}%");
             });
         }
-        
+
         if ($jenis_surat) {
             $surats = $surats->where('jenis_surat', $jenis_surat);
         }
-        
+
         if ($status) {
             $surats = $surats->where('status', $status);
         }
-        
+
         $surats = $surats->orderBy('created_at', 'desc')->get();
-        
+
         return view('admin.daftarpembuatsurat', [
             'surats' => $surats,
             'search' => $query
@@ -223,7 +321,7 @@ class ControllerAdmin extends Controller
     public function updateSurat(Request $request, $id)
     {
         $surat = \App\Models\surat::findOrFail($id);
-        
+
         $validated = $request->validate([
             'nomor_surat' => 'required|unique:surats,nomor_surat,' . $id,
             'jenis_surat' => 'required',
@@ -247,7 +345,7 @@ class ControllerAdmin extends Controller
             if ($surat->file_surat) {
                 Storage::delete('public/surats/' . $surat->file_surat);
             }
-            
+
             $file = $request->file('file_surat');
             $fileName = time() . '_' . $file->getClientOriginalName();
             $file->storeAs('public/surats', $fileName);
@@ -270,14 +368,14 @@ class ControllerAdmin extends Controller
     public function deleteSurat($id)
     {
         $surat = \App\Models\surat::findOrFail($id);
-        
+
         // Delete associated file if exists
         if ($surat->file_surat) {
             \Storage::delete('public/surats/' . $surat->file_surat);
         }
-        
+
         $surat->delete();
-        
+
         return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil dihapus');
     }
 
@@ -291,14 +389,14 @@ class ControllerAdmin extends Controller
     {
         $nis = $request->input('nis');
         $santri = Santri::where('nis', $nis)->first();
-        
+
         if ($santri) {
             return response()->json([
                 'success' => true,
                 'santri' => $santri
             ]);
         }
-        
+
         return response()->json([
             'success' => false,
             'message' => 'Santri tidak ditemukan'
@@ -309,12 +407,12 @@ class ControllerAdmin extends Controller
     {
         $jenis_surat = $request->input('jenis_surat');
         $currentYear = date('Y');
-        
+
         // Get the last surat number for this year
         $lastSurat = \App\Models\surat::where('nomor_surat', 'like', "%/{$currentYear}")
             ->orderBy('nomor_surat', 'desc')
             ->first();
-        
+
         if ($lastSurat) {
             // Extract number from last surat
             preg_match('/(\d+)\//', $lastSurat->nomor_surat, $matches);
@@ -323,9 +421,9 @@ class ControllerAdmin extends Controller
         } else {
             $newNumber = 1;
         }
-        
+
         $nomorSurat = sprintf("%03d/SURAT/%s", $newNumber, $currentYear);
-        
+
         return response()->json([
             'nomor_surat' => $nomorSurat
         ]);
@@ -368,7 +466,7 @@ class ControllerAdmin extends Controller
         $template->save() ;
 
         return redirect()->back()->with('success', 'berhasil disimpan');
-        
+
     }
 
     /**
@@ -429,7 +527,7 @@ class ControllerAdmin extends Controller
     {
         try {
             $template = template_surat::findOrFail($id);
-            
+
             // Soft delete template record (file tetap ada sebagai backup)
             $template->delete();
 
@@ -454,7 +552,7 @@ class ControllerAdmin extends Controller
     {
         try {
             $template = template_surat::findOrFail($id);
-            
+
             if (!$template->file_path || !Storage::disk('private')->exists($template->file_path)) {
                 abort(404, 'File tidak ditemukan');
             }
@@ -472,15 +570,15 @@ class ControllerAdmin extends Controller
     public function getTemplates(Request $request)
     {
         $jenisSurat = $request->get('jenis_surat');
-        
+
         $query = template_surat::active();
-        
+
         if ($jenisSurat) {
             $query->byJenisSurat($jenisSurat);
         }
-        
+
         $templates = $query->get(['id', 'nama_template', 'jenis_surat', 'content_html']);
-        
+
         return response()->json([
             'success' => true,
             'templates' => $templates
@@ -494,7 +592,7 @@ class ControllerAdmin extends Controller
     {
         try {
             $template = template_surat::findOrFail($id);
-            
+
             return response()->json([
                 'success' => true,
                 'template' => $template,
@@ -564,10 +662,10 @@ class ControllerAdmin extends Controller
         $query = $request->input('q');
         $jenis_surat = $request->input('jenis_surat');
         $status = $request->input('status');
-        
+
         // Hanya ambil data yang belum di-soft delete
         $templates = template_surat::whereNull('deleted_at');
-        
+
         if ($query) {
             $templates = $templates->where(function($qobj) use ($query) {
                 $qobj->where('nama_template', 'like', "%{$query}%")
@@ -575,19 +673,19 @@ class ControllerAdmin extends Controller
                   ->orWhere('deskripsi', 'like', "%{$query}%");
             });
         }
-        
+
         if ($jenis_surat) {
             $templates = $templates->where('jenis_surat', $jenis_surat);
         }
-        
+
         if ($status !== null && $status !== '') {
             // Convert string status to boolean
             $isActive = $status == 1 || $status === '1' || $status === true;
             $templates = $templates->where('is_active', $isActive);
         }
-        
+
         $templates = $templates->orderBy('created_at', 'desc')->get();
-        
+
         return view('admin.templatesurat', compact('templates'));
     }
 
