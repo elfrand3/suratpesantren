@@ -14,8 +14,9 @@ class surat extends Model
         'status',
         'alasan',
         'diagnosa',
+        'content',
         'tanggal_kembali',
-        'santri_id'
+        'santri_id',
     ];
 
     protected $casts = [
