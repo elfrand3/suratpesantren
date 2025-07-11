@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('jenis_surat');
             $table->date('tanggal_surat');
             $table->string('status');
+            $table->longText('content');
             $table->string('alasan')->nullable();
             $table->string('diagnosa')->nullable();
             $table->date('tanggal_kembali')->nullable();

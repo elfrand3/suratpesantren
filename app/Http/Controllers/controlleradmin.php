@@ -135,6 +135,27 @@ class ControllerAdmin extends Controller
         return view('admin.buatsurat', compact('santris'));
     }
 
+    public function storeSurat(Request $request)
+    {
+
+        dd($request->all());
+        $validated = $request->validate([
+            'santri_id' => 'required|exists:santris,id',
+            'nomor_surat' => 'required|string|unique:surats,nomor_surat',
+            'tanggal_surat' => 'required|date',
+            'tanggal_kembali' => 'nullable|date',
+            'jenis_surat' => 'required|string',
+            'alasan' => 'nullable|string',
+            'diagnosa' => 'nullable|string',
+            'content' => 'required|string',
+        ]);
+
+        Surat::create($validated);
+        dd($validated);
+        return redirect()->route('admin.surat.index')->with('success', 'Surat berhasil disimpan.');
+    }
+
+
     // public function storeSurat(Request $request)
     // {
     //     $validated = $request->validate([
@@ -174,68 +195,45 @@ class ControllerAdmin extends Controller
 
     //     return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil dibuat');
     // }
-    public function storeSurat(Request $request)
+    public function store(Request $request)
     {
         $validated = $request->validate([
-            'nomor_surat' => 'required|unique:surats,nomor_surat',
             'jenis_surat' => 'required',
-            'tanggal_surat' => 'required|date',
-            'perihal' => 'required',
-            'status' => 'required',
-            'template_surat' => 'nullable',
-            'nis' => 'required',
             'nama_santri' => 'required',
-            'alasan' => 'nullable',
-            'diagnosa' => 'nullable',
+            'nis' => 'required',
+            'tanggal_surat' => 'required|date',
             'tanggal_kembali' => 'nullable|date',
-            'content' => 'nullable',
-            'santri_id' => 'nullable|exists:santris,id',
-            'file_surat' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
+            'alasan' => 'nullable|string',
+            'diagnosa' => 'nullable|string',
+            'nomor_surat' => 'required|unique:surats,nomor_surat',
         ]);
 
-        // Upload file jika ada
-        if ($request->hasFile('file_surat')) {
-            $file = $request->file('file_surat');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/surats', $fileName);
-            $validated['file_surat'] = $fileName;
+        $jenis = str_replace('-', '_', $request->jenis_surat);
+        $templatePath = "surat_template.$jenis";
+
+        if (!view()->exists($templatePath)) {
+            return back()->with('error', 'Template surat tidak ditemukan.');
         }
 
-        // Temukan data santri
-        if (!$validated['santri_id']) {
-            $santri = \App\Models\santri::where('nis', $validated['nis'])->first();
-            if ($santri) {
-                $validated['santri_id'] = $santri->id;
-            }
-        } else {
-            $santri = \App\Models\santri::find($validated['santri_id']);
-        }
+        $isiSurat = view($templatePath, [
+            'nama_santri' => $request->nama_santri,
+            'nis' => $request->nis,
+            'tanggal_surat' => $request->tanggal_surat,
+            'tanggal_kembali' => $request->tanggal_kembali,
+            'alasan' => $request->alasan,
+            'diagnosa' => $request->diagnosa,
+        ])->render();
 
-        // Simpan surat
-        $surat = \App\Models\surat::create($validated);
+        // Simpan ke database atau tampilkan kembali
+        Surat::create([
+            'nomor_surat' => $request->nomor_surat,
+            'jenis_surat' => $request->jenis_surat,
+            'tanggal_surat' => $request->tanggal_surat,
+            'content' => $isiSurat,
+            // tambahkan field lain sesuai kolom database kamu
+        ]);
 
-        // Kirim notifikasi WhatsApp via Fonnte
-        if ($santri && $santri->no_telp) {
-            $pesan = "*[Notifikasi Surat Baru]*\n\n";
-            $pesan .= "📄 *Nomor Surat:* {$validated['nomor_surat']}\n";
-            $pesan .= "📂 *Jenis:* {$validated['jenis_surat']}\n";
-            $pesan .= "📅 *Tanggal:* {$validated['tanggal_surat']}\n";
-            $pesan .= "👤 *Nama:* {$validated['nama_santri']}\n";
-            $pesan .= "📝 *Perihal:* {$validated['perihal']}\n";
-            if (!empty($validated['alasan'])) {
-                $pesan .= "🧾 *Alasan:* {$validated['alasan']}\n";
-            }
-            if (!empty($validated['diagnosa'])) {
-                $pesan .= "💊 *Diagnosa:* {$validated['diagnosa']}\n";
-            }
-            if (!empty($validated['tanggal_kembali'])) {
-                $pesan .= "🔙 *Tanggal Kembali:* {$validated['tanggal_kembali']}\n";
-            }
-
-            $this->kirimWaFonnte($santri->no_telp, $pesan);
-        }
-
-        return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil dibuat');
+        return redirect()->route('admin.surat.index')->with('success', 'Surat berhasil dibuat.');
     }
 
     private function kirimWaFonnte($nomor, $pesan)

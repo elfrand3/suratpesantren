@@ -19,11 +19,13 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->createMany([[
                 'name' => 'Admin',
+                'no_telp' => '08123456789',
                 'email' => 'admin@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'Admin'
             ],[
                 'name' => 'Pengasuh',
+                'no_telp' => '08123456780',
                 'email' => 'pengasuh@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'Pengasuh'

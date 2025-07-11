@@ -17,6 +17,19 @@ Route::get('/login', function () {
     return view('login');
 });
 
+// Route AJAX untuk ambil template berdasarkan jenis surat
+Route::get('/get-template/{jenis}', function ($jenis) {
+    $jenis = str_replace('-', '_', $jenis); // agar 'izin-pulang' cocok dengan 'izin_pulang'
+    $view = "surat_template.$jenis";
+
+    if (!view()->exists($view)) {
+        return response("Template tidak ditemukan.", 404);
+    }
+
+    return view($view)->render();
+});
+
+
 // Admin routes
 Route::middleware(['auth'])->group(function () {
     Route::get('/admin', function () {
@@ -70,6 +83,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/surat/search-santri', [ControllerAdmin::class, 'searchSantriByNis'])->name('admin.surat.search-santri');
     Route::post('/admin/surat/generate-nomor', [ControllerAdmin::class, 'generateNomorSurat'])->name('admin.surat.generate-nomor');
     Route::post('/admin/template/read-file', [ControllerAdmin::class, 'readTemplateFile'])->name('admin.template.readFile');
+    Route::post('/admin/surat/store', [ControllerAdmin::class, 'storeSurat'])->name('admin.surat.store');
+
 });
 
 // Pengasuh routes
