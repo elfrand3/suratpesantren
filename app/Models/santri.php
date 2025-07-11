@@ -14,6 +14,7 @@ class santri extends Model
         'nis',
         'kelas',
         'alamat',
+        'agama',
         'status',
         'tempat_lahir',
         'tanggal_lahir',

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nis')->unique();
             $table->string('kelas');
             $table->string('alamat');
+            $table->string('agama');
             $table->string('status');
             $table->string('tempat_lahir');
             $table->date('tanggal_lahir');
