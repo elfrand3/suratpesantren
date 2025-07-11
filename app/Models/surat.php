@@ -6,21 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class surat extends Model
 {
+    protected $table = 'surats';
     protected $fillable = [
         'nomor_surat',
         'jenis_surat',
         'tanggal_surat',
-        'perihal',
         'status',
-        'template_surat',
-        'nis',
-        'nama_santri',
         'alasan',
         'diagnosa',
         'tanggal_kembali',
-        'content',
-        'santri_id',
-        'file_surat'
+        'santri_id'
     ];
 
     protected $casts = [
