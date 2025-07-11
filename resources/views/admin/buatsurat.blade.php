@@ -154,6 +154,7 @@
                         <!-- (1) Data Surat - Kiri -->
                         <div class="lg:col-span-1 space-y-6">
                             <div class="space-y-4">
+                                <input type="hidden" name="status" value="pending">
                                 <div class="flex items-center space-x-2">
                                     <div class="flex-1">
                                         <label class="block text-sm font-medium text-gray-700 mb-2">Nomor Surat</label>
@@ -174,15 +175,15 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <input type="hidden" id="santri_id" name="santri_id">
+                                    <input type="hidden" name="santri_id" id="santri_id">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">NIS</label>
-                                    <input type="text" id="nis-search" name="nis" autocomplete="off" placeholder="Cari Nomer Induk Santri..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="text" id="nis-search"  autocomplete="off" placeholder="Cari Nomer Induk Santri..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nama Santri</label>
-                                    <input type="text" id="nama_santri" name="nama_santri" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <input type="text" id="nama_santri"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                                 <div class="flex items-center space-x-2">
                                     <div class="flex-1">
@@ -233,7 +234,7 @@
                                 </div>
                                 {{-- <input type="hidden" name="content" id="hiddenContent"> --}}
 
-                                <textarea name="content" id="isiSuratHidden" class="hidden"></textarea>
+                                {{-- <textarea name="content" id="isiSuratHidden" class="hidden"></textarea> --}}
                             </div>
                             <!-- (4) Aksi Surat - Kanan Bawah -->
                             <div class="bg-white p-4 rounded-lg border border-gray-200">
@@ -440,7 +441,12 @@
     </script>
     @endverbatim --}}
 
-
+{{-- <script>
+    function previewSurat() {
+        const isi = document.getElementById("isiSurat").value;
+        document.getElementById("previewArea").innerHTML = isi.replace(/\n/g, "<br>");
+    }
+    </script> --}}
 
     @verbatim
     <script>
@@ -492,13 +498,8 @@
     });
     </script>
     @endverbatim
+    
 
-    {{-- <script>
-    function previewSurat() {
-        const isi = document.getElementById("isiSurat").value;
-        document.getElementById("previewArea").innerHTML = isi.replace(/\n/g, "<br>");
-    }
-    </script> --}}
 
     <script>
     function previewSurat() {
@@ -540,6 +541,60 @@
         // Tutup jendela setelah print (opsional)
         printWindow.close();
     }
+    </script>
+
+<script>
+        // Enhanced NIS search with AJAX
+        function searchSantriByNis(nis) {
+            fetch('{{ route("admin.surat.search-santri") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({ nis: nis })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('nama_santri').value = data.santri.nama;
+                    document.getElementById('santri_id').value = data.santri.id;
+                    // Show success message
+                    showNotification('Data santri ditemukan: ' + data.santri.nama, 'success');
+                } else {
+                    document.getElementById('nama_santri').value = '';
+                    document.getElementById('santri_id').value = '';
+                    showNotification('Santri dengan NIS ' + nis + ' tidak ditemukan', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Terjadi kesalahan saat mencari data santri', 'error');
+            });
+        }
+
+        // Update NIS search to use AJAX
+        document.getElementById('nis-search').addEventListener('blur', function() {
+            const nis = this.value.trim();
+            if (nis) {
+                searchSantriByNis(nis);
+            }
+        });
+        // Notification function
+        function showNotification(message, type = 'info') {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'} text-white`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
     </script>
 
 </body>

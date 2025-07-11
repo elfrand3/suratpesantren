@@ -131,23 +131,24 @@ class ControllerAdmin extends Controller
     // Surat Management Methods
     public function createSurat()
     {
-        $santris = \App\Models\santri::all();
+        $santris = \App\Models\Santri::all();
         return view('admin.buatsurat', compact('santris'));
     }
 
     public function storeSurat(Request $request)
     {
 
-        dd($request->all());
+        // dd($request->all());
         $validated = $request->validate([
             'santri_id' => 'required|exists:santris,id',
-            'nomor_surat' => 'required|string|unique:surats,nomor_surat',
-            'tanggal_surat' => 'required|date',
-            'tanggal_kembali' => 'nullable|date',
-            'jenis_surat' => 'required|string',
-            'alasan' => 'nullable|string',
-            'diagnosa' => 'nullable|string',
-            'content' => 'required|string',
+    'nomor_surat' => 'required|string|unique:surats,nomor_surat',
+    'tanggal_surat' => 'required|date',
+    'tanggal_kembali' => 'nullable|date',
+    'jenis_surat' => 'required|string',
+    'status' => 'required|string', // <- ini wajib karena tidak nullable
+    'alasan' => 'nullable|string',
+    'diagnosa' => 'nullable|string',
+    'content' => 'required|string',
         ]);
 
         Surat::create($validated);
