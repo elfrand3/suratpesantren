@@ -12,7 +12,7 @@
         .table-container {
             min-width: 1200px; /* Minimum width to accommodate all columns */
         }
-        
+
         /* Fixed column widths with consistent alignment */
         .col-no { width: 64px; min-width: 64px; max-width: 64px; }
         .col-nis { width: 128px; min-width: 128px; max-width: 128px; }
@@ -21,7 +21,7 @@
         .col-alamat { width: 256px; min-width: 256px; max-width: 256px; }
         .col-status { width: 96px; min-width: 96px; max-width: 96px; }
         .col-aksi { width: 128px; min-width: 128px; max-width: 128px; }
-        
+
         /* Ensure sticky header works properly */
         .sticky-header {
             position: sticky;
@@ -29,20 +29,20 @@
             z-index: 10;
             background-color:rgb(250, 250, 250);
         }
-        
+
         /* Consistent cell padding and alignment */
         .table-cell {
             padding: 1rem 1.5rem;
             vertical-align: middle;
             box-sizing: border-box;
         }
-        
+
         /* Ensure table layout is fixed for consistent column widths */
         .fixed-table {
             table-layout: fixed;
             width: 100%;
         }
-        
+
         /* Prevent text overflow and ensure consistent alignment */
         .table-cell-content {
             overflow: hidden;
@@ -74,12 +74,12 @@
                             <div class="flex-1 min-w-[200px]">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Cari Santri</label>
                                 <div class="relative">
-                                    <input type="text" name="q" id="searchInput" value="{{ isset($search) ? $search : '' }}" placeholder="Cari berdasarkan NIS, nama, kelas, alamat, tempat lahir, atau nama orang tua..." 
+                                    <input type="text" name="q" id="searchInput" value="{{ isset($search) ? $search : '' }}" placeholder="Cari berdasarkan NIS, nama, kelas, alamat, tempat lahir, atau nama orang tua..."
                                            class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                         <i class="fas fa-search text-gray-400"></i>
                                     </div>
-                                </div>                                
+                                </div>
                             </div>
                             <div class="md:w-48 min-w-[150px]">
                                 <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
@@ -213,7 +213,7 @@
                 <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
             </div>
             <div class="flex items-center space-x-6 mb-6">
-                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                      alt="Admin" class="h-20 w-20 rounded-full">
                 <div>
                     <h4 class="text-xl font-semibold text-gray-800">Administrator</h4>
@@ -286,11 +286,6 @@
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Tanggal Lahir <span class="text-red-500">*</span></label>
                         <input name="tanggal_lahir" type="date" id="newTanggalLahir" class="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/70" required>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-gray-700 mb-2">Alamat <span class="text-red-500">*</span></label>
-                        <!-- Field input alamat dihapus, hanya gunakan textarea di bawah -->
-                    </div>
-                    <!-- Kelas (dari Informasi Akademik) -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-2">Kelas <span class="text-red-500">*</span></label>
                         <select id="newKelas" name="kelas" class="w-full px-4 py-3 border-2 border-blue-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/70" required>
