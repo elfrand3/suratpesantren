@@ -18,7 +18,7 @@ class ControllerAdmin extends Controller
         $query = $request->input('q');
         $status = $request->input('status');
         $kelas = $request->input('kelas');
-        $santris = \App\Models\santri::query();
+        $santris = Santri::query();
         if ($query) {
             $santris = $santris->where(function($qobj) use ($query) {
                 $qobj->where('nama', 'like', "%{$query}%")
