@@ -141,19 +141,20 @@ class ControllerAdmin extends Controller
         // dd($request->all());
         $validated = $request->validate([
             'santri_id' => 'required|exists:santris,id',
-    'nomor_surat' => 'required|string|unique:surats,nomor_surat',
-    'tanggal_surat' => 'required|date',
-    'tanggal_kembali' => 'nullable|date',
-    'jenis_surat' => 'required|string',
-    'status' => 'required|string', // <- ini wajib karena tidak nullable
-    'alasan' => 'nullable|string',
-    'diagnosa' => 'nullable|string',
-    'content' => 'required|string',
+            'nomor_surat' => 'required|string|unique:surats,nomor_surat',
+            'tanggal_surat' => 'required|date',
+            'tanggal_kembali' => 'nullable|date',
+            'jenis_surat' => 'required|string',
+            'status' => 'required|string', // <- ini wajib karena tidak nullable
+            'alasan' => 'nullable|string',
+            'diagnosa' => 'nullable|string',
+            'content' => 'required|string',
         ]);
 
         Surat::create($validated);
-        dd($validated);
-        return redirect()->route('admin.surat.index')->with('success', 'Surat berhasil disimpan.');
+        // dd($validated);
+        return redirect()->back()->with('success', 'Surat berhasil disimpan.');
+
     }
 
 
