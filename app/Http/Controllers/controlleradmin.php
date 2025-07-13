@@ -145,7 +145,7 @@ class ControllerAdmin extends Controller
             'tanggal_surat' => 'required|date',
             'tanggal_kembali' => 'nullable|date',
             'jenis_surat' => 'required|string',
-            'status' => 'required|string', // <- ini wajib karena tidak nullable
+            'status' => 'required|string', 
             'alasan' => 'nullable|string',
             'diagnosa' => 'nullable|string',
             'content' => 'required|string',
