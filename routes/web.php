@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\ControllerAdmin;
+use App\Http\Controllers\PengasuhController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -92,11 +93,13 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pengasuh', function () {
         return view('pengasuh.dasbordpengasuh');
     });
-    Route::get('/pengasuhdatasantri', function () {
-        return view('pengasuh.datasantri');
-    });
+    // Route::get('/pengasuhdatasantri', function () {
+    //     return view('pengasuh.datasantri');
+    // });
+    Route::get('/pengasuhdatasantri', [PengasuhController::class, 'getSantriList'])->name('pengasuh.santri.list');
+    Route::get('/pengasuh/santri/{id}', [PengasuhController::class, 'detailSantri'])->name('pengasuh.santri.detail');
 
-    Route::get('/pengasuhdaftarsantri', function () {
+    Route::get('/pengasuhdaftarsurat', function () {
         return view('pengasuh.datasurat');
     });
     Route::get('/pengasuhpengaturan', function () {

@@ -122,8 +122,8 @@
             </a>
 
             <!-- Daftar Surat -->
-            <a href="/pengasuhdaftarsantri" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('dps') ? 'text-white bg-white/15 shadow-lg' : '' }}">
-                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('dps') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
+            <a href="/pengasuhdaftarsurat" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('dps') ? 'text-white bg-white/15 shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('pengasuhdaftarsurat') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
                     <i class="fas fa-list text-sm"></i>
                 </div>
                 <span class="font-medium">Daftar Surat</span>

@@ -20,7 +20,6 @@
             <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-lg font-semibold text-gray-800">Daftar Surat</h3>
-                    <!-- DEBUG: TOMBOL INI HARUS MUNCUL -->
                     <a href="/buatsurat" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center">
                         <i class="fas fa-plus mr-2"></i> Buat Surat Baru
                     </a>
