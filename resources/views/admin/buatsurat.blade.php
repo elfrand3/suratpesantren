@@ -238,7 +238,7 @@
                             </div>
                             <!-- (4) Aksi Surat - Kanan Bawah -->
                             <div class="bg-white p-4 rounded-lg border border-gray-200">
-                                <h3 class="text-lg font-semibold text-blue-700 mb-4 flex items-center section-header">
+                                <h3 class="text-lg font-semibold t3ext-blue-700 mb-4 flex items-center section-header">
                                     <i class="fas fa-tasks text-blue-600 mr-2"></i> Aksi Surat
                                 </h3>
                                 <div class="flex justify-end space-x-3">
@@ -498,9 +498,6 @@
     });
     </script>
     @endverbatim
-    
-
-
     <script>
     function previewSurat() {
         const isi = document.getElementById("isiSurat").value;
@@ -542,7 +539,6 @@
         printWindow.close();
     }
     </script>
-
 <script>
         // Enhanced NIS search with AJAX
         function searchSantriByNis(nis) {
@@ -586,9 +582,9 @@
             const notification = document.createElement('div');
             notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${type === 'success' ? 'bg-green-500' : type === 'error' ? 'bg-red-500' : 'bg-blue-500'} text-white`;
             notification.textContent = message;
-            
+
             document.body.appendChild(notification);
-            
+
             // Remove notification after 3 seconds
             setTimeout(() => {
                 notification.remove();
@@ -596,6 +592,5 @@
         }
 
     </script>
-
 </body>
 </html>
