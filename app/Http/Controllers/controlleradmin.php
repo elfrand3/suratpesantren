@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpWord\IOFactory;
 use Smalot\PdfParser\Parser;
+use Illuminate\Support\Facades\Http;
 
 class ControllerAdmin extends Controller
 {
@@ -145,13 +146,34 @@ class ControllerAdmin extends Controller
             'tanggal_surat' => 'required|date',
             'tanggal_kembali' => 'nullable|date',
             'jenis_surat' => 'required|string',
-            'status' => 'required|string', 
+            'status' => 'required|string',
             'alasan' => 'nullable|string',
             'diagnosa' => 'nullable|string',
             'content' => 'required|string',
         ]);
 
         Surat::create($validated);
+        $santri = Santri::find($request->santri_id);
+
+    if (!$santri) {
+        return redirect()->back()->with('error', 'Santri tidak ditemukan.');
+    }
+
+    // Format pesan WA
+    $pesan = "*📄 Surat Baru Diterbitkan*\n"
+           . "Nama: *{$santri->nama}*\n"
+           . "Jenis Surat: *{$request->jenis_surat}*\n"
+           . "Nomor Surat: *{$request->nomor_surat}*\n"
+           . "Tanggal Surat: *{$request->tanggal_surat}*\n\n"
+           . "Silakan cek detail di sistem atau hubungi pengurus.";
+
+    // Kirim WA lewat Fonnte
+    Http::withOptions(['verify' => false])->withHeaders([
+        'Authorization' => '9fd5BVdFtu6m4tYmHYMQ'
+    ])->post('https://api.fonnte.com/send', [
+        'target' => $santri->no_telp, // pastikan field ini ada dan format 628xxx
+        'message' => $pesan,
+    ]);
         // dd($validated);
         return redirect()->back()->with('success', 'Surat berhasil disimpan.');
 
