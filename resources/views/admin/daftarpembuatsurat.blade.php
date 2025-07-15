@@ -61,7 +61,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
                             <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Status</option>
-                                <option value="Draft">Draft</option>
+                                <option value="pending">Pending</option>
                                 <option value="Selesai">Selesai</option>
                                 <option value="Dikirim">Dikirim</option>
                             </select>
@@ -295,7 +295,7 @@
                     letter.nomor_surat.toLowerCase().includes(searchTerm) ||
                     getJenisSuratDisplayName(letter.jenis_surat).toLowerCase().includes(searchTerm) ||
                     (letter.nis && letter.nis.toLowerCase().includes(searchTerm)) ||
-                    (letter.perihal && letter.perihal.toLowerCase().includes(searchTerm)) ||
+                    (letter.alasan && letter.alasan.toLowerCase().includes(searchTerm)) ||
                     (letter.namaSantri && letter.namaSantri.toLowerCase().includes(searchTerm));
 
                 // Jenis surat filter
@@ -417,7 +417,7 @@
                 } else {
                     // No data at all
                     emptyMessage = 'Belum ada surat tersimpan';
-                    emptySubMessage = 'Buat surat baru untuk mulai menyimpan draft';
+                    emptySubMessage = 'Buat surat baru untuk mulai menyimpan pending';
                 }
 
                 tableBody.innerHTML = `
@@ -511,7 +511,7 @@
 
         function getStatusColor(status) {
             switch (status) {
-                case 'Draft':
+                case 'pending':
                     return 'bg-gray-100 text-gray-800';
                 case 'Selesai':
                     return 'bg-green-100 text-green-800';
@@ -533,7 +533,7 @@
                 const letter = drafts[index];
 
                 if (!letter) {
-                    showNotification('Data surat tidak ditemukan!', 'error');
+                    showNotification('Data surat tidak ditemukan! yoi', 'error');
                     return;
                 }
 
@@ -547,19 +547,15 @@
                             <div class="space-y-3">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Nomor Surat:</label>
-                                    <p class="text-gray-900">${letter.nomorSurat}</p>
+                                    <p class="text-gray-900">${letter.nomor_surat}</p>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Jenis Surat:</label>
-                                    <p class="text-gray-900">${getJenisSuratDisplayName(letter.jenisSurat)}</p>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Template:</label>
-                                    <p class="text-gray-900">${letter.templateSurat}</p>
+                                    <p class="text-gray-900">${getJenisSuratDisplayName(letter.jenis_surat)}</p>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Tanggal Surat:</label>
-                                    <p class="text-gray-900">${formatDate(letter.tanggalSurat)}</p>
+                                    <p class="text-gray-900">${formatDate(letter.tanggal_surat)}</p>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Status:</label>
@@ -669,7 +665,7 @@
                     <!DOCTYPE html>
                     <html>
                     <head>
-                        <title>Cetak Surat - ${letter.nomorSurat}</title>
+                        <title>Cetak Surat - ${letter.nomor_surat}</title>
                         <style>
                             body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
                             @media print {

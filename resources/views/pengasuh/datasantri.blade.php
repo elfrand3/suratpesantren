@@ -283,16 +283,16 @@
     <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-2xl">
             <div class="flex items-center justify-between mb-6">
-                <h3 class="text-lg font-semibold text-gray-800">Profil Admin</h3>
+                <h3 class="text-lg font-semibold text-gray-800">Profil Pengasuh</h3>
                 <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i
                         class="fas fa-times"></i></button>
             </div>
             <div class="flex items-center space-x-6 mb-6">
                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                    alt="Admin" class="h-20 w-20 rounded-full">
+                    alt="Pengasuh" class="h-20 w-20 rounded-full">
                 <div>
-                    <h4 class="text-xl font-semibold text-gray-800">Administrator</h4>
-                    <p class="text-gray-600">Admin Sistem Surat</p>
+                    <h4 class="text-xl font-semibold text-gray-800">Pengasuh</h4>
+                    <p class="text-gray-600">Pengasuh Sistem Surat</p>
                     <p class="text-sm text-gray-500">Bergabung sejak Januari 2023</p>
                 </div>
             </div>
@@ -300,12 +300,12 @@
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
-                        <input type="text" value="Administrator"
+                        <input type="text" value="Pengasuh"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" value="admin@pondok.com"
+                        <input type="email" value="Pengasuh@pondok.com"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
@@ -317,7 +317,7 @@
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Jabatan</label>
-                        <input type="text" value="Administrator Sistem"
+                        <input type="text" value="Pengasuh Sistem"
                             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
