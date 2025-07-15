@@ -33,9 +33,12 @@ Route::get('/get-template/{jenis}', function ($jenis) {
 
 // Admin routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/admin', function () {
-        return view('admin.dasbord');
-    });
+    // Route::get('/admin', function () {
+    //     return view('admin.dasbord');
+    // });
+
+    Route::get('/admin', [ControllerAdmin::class, 'dasbord'])->name('admin.dasbord');
+
     Route::get('/admintemplatesurat', function () {
         return view('admin.templatesurat');
     });

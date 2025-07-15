@@ -533,7 +533,7 @@
                 const letter = drafts[index];
 
                 if (!letter) {
-                    showNotification('Data surat tidak ditemukan!', 'error');
+                    showNotification('Data surat tidak ditemukan! yoi', 'error');
                     return;
                 }
 
@@ -547,19 +547,15 @@
                             <div class="space-y-3">
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Nomor Surat:</label>
-                                    <p class="text-gray-900">${letter.nomorSurat}</p>
+                                    <p class="text-gray-900">${letter.nomor_surat}</p>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Jenis Surat:</label>
-                                    <p class="text-gray-900">${getJenisSuratDisplayName(letter.jenisSurat)}</p>
-                                </div>
-                                <div>
-                                    <label class="block text-sm font-medium text-gray-700">Template:</label>
-                                    <p class="text-gray-900">${letter.templateSurat}</p>
+                                    <p class="text-gray-900">${getJenisSuratDisplayName(letter.jenis_surat)}</p>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Tanggal Surat:</label>
-                                    <p class="text-gray-900">${formatDate(letter.tanggalSurat)}</p>
+                                    <p class="text-gray-900">${formatDate(letter.tanggal_surat)}</p>
                                 </div>
                                 <div>
                                     <label class="block text-sm font-medium text-gray-700">Status:</label>
@@ -669,7 +665,7 @@
                     <!DOCTYPE html>
                     <html>
                     <head>
-                        <title>Cetak Surat - ${letter.nomorSurat}</title>
+                        <title>Cetak Surat - ${letter.nomor_surat}</title>
                         <style>
                             body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
                             @media print {

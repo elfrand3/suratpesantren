@@ -25,15 +25,15 @@
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">Total Surat</p>
-                            <p class="text-2xl font-bold text-gray-900" id="totalSurat">0</p>
+                            <p class="text-2xl font-bold text-gray-900" id="">{{ $totalSurat ?? 0 }}</p>
                         </div>
                     </div>
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <span class="text-green-600 text-sm font-medium">
                             <i class="fas fa-arrow-up mr-1"></i>8%
                         </span>
                         <span class="text-gray-500 text-sm">bulan ini</span>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
@@ -43,15 +43,15 @@
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">Surat Disetujui</p>
-                            <p class="text-2xl font-bold text-gray-900" id="suratDisetujui">0</p>
+                            <p class="text-2xl font-bold text-gray-900" id="">{{ $suratDisetujui ?? 0 }}</p>
                         </div>
                     </div>
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <span class="text-green-600 text-sm font-medium">
                             <i class="fas fa-arrow-up mr-1"></i>12%
                         </span>
                         <span class="text-gray-500 text-sm">bulan ini</span>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
@@ -61,15 +61,15 @@
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">Menunggu</p>
-                            <p class="text-2xl font-bold text-gray-900" id="suratMenunggu">0</p>
+                            <p class="text-2xl font-bold text-gray-900" id="">{{ $suratMenunggu ?? 0 }}</p>
                         </div>
                     </div>
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <span class="text-red-600 text-sm font-medium">
                             <i class="fas fa-arrow-down mr-1"></i>5%
                         </span>
                         <span class="text-gray-500 text-sm">bulan ini</span>
-                    </div>
+                    </div> --}}
                 </div>
 
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
@@ -79,15 +79,15 @@
                         </div>
                         <div class="ml-4">
                             <p class="text-sm font-medium text-gray-600">Santri Aktif</p>
-                            <p class="text-2xl font-bold text-gray-900" id="santriAktif">0</p>
+                            <p class="text-2xl font-bold text-gray-900" id="">{{ $santri ?? 0 }}</p>
                         </div>
                     </div>
-                    <div class="mt-4">
+                    {{-- <div class="mt-4">
                         <span class="text-green-600 text-sm font-medium">
                             <i class="fas fa-arrow-up mr-1"></i>3%
                         </span>
                         <span class="text-gray-500 text-sm">bulan ini</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
@@ -117,12 +117,19 @@
                 </div>
 
                 <!-- Recent Letters -->
-                <div class="lg:col-span-2 bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                {{-- <div class="lg:col-span-2 bg-white rounded-lg shadow-sm p-6 border border-gray-200">
                     <div class="flex items-center justify-between mb-6">
                         <h3 class="text-lg font-semibold text-gray-800">Surat Terbaru</h3>
                         <a href="/dps" class="text-blue-600 hover:text-blue-700 text-sm font-medium">Lihat Semua</a>
                     </div>
                     <div id="recentLetters" class="space-y-4"></div>
+                </div> --}}
+                <div class="lg:col-span-2 bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <h1 class="text-2xl font-bold text-gray-800 mb-4">Selamat Datang di Dashboard Administrator</h1>
+                    <p class="text-gray-600 mb-2">Silakan melakukan pembuatan data surat, santri melalui menu di sidebar.</p>
+                    <div class="mt-6">
+                        <i class="fas fa-user-tie text-5xl text-blue-400"></i>
+                    </div>
                 </div>
             </div>
         </main>
@@ -224,7 +231,7 @@
                 case 'buat-surat':
                     showNotification('Mengarahkan ke halaman Buat Surat...', 'info');
                     setTimeout(() => {
-                        window.location.href = '/bs';
+                        window.location.href = '/buatsurat';
                     }, 300);
                     break;
 
@@ -243,14 +250,14 @@
                 case 'tambah-santri':
                     showNotification('Mengarahkan ke halaman Data Santri...', 'info');
                     setTimeout(() => {
-                        window.location.href = '/ds';
+                        window.location.href = '/datasantri';
                     }, 300);
                     break;
 
                 case 'pengaturan':
                     showNotification('Mengarahkan ke halaman Pengaturan...', 'info');
                     setTimeout(() => {
-                        window.location.href = '/p';
+                        window.location.href = '/pengaturan';
                     }, 300);
                     break;
 
@@ -375,7 +382,7 @@
                 drafts = JSON.parse(localStorage.getItem('letterDrafts') || '[]');
             } catch (e) {}
             // Total surat
-            const totalSurat = drafts.length;
+            const total_surat = drafts.length;
             // Surat Disetujui
             const suratDisetujui = drafts.filter(s => s.status && s.status.toLowerCase().includes('setuju')).length;
             // Surat Menunggu
@@ -387,7 +394,7 @@
             } catch (e) {}
             const santriAktif = santri.filter(s => s.status && s.status.toLowerCase() === 'aktif').length;
             // Update ke HTML
-            document.getElementById('totalSurat').textContent = totalSurat;
+            document.getElementById('total_surat').textContent = total_surat;
             document.getElementById('suratDisetujui').textContent = suratDisetujui;
             document.getElementById('suratMenunggu').textContent = suratMenunggu;
             document.getElementById('santriAktif').textContent = santriAktif;
