@@ -171,7 +171,7 @@ class ControllerAdmin extends Controller
     Http::withOptions(['verify' => false])->withHeaders([
         'Authorization' => '9fd5BVdFtu6m4tYmHYMQ'
     ])->post('https://api.fonnte.com/send', [
-        'target' => $santri->no_telp, // pastikan field ini ada dan format 628xxx
+        'target' => '6282245600877', // pastikan field ini ada dan format 628xxx
         'message' => $pesan,
     ]);
         // dd($validated);

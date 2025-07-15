@@ -292,14 +292,14 @@
             filteredLetterData = allLetterData.filter(letter => {
                 // Enhanced search term filter with multiple criteria
                 const matchesSearch = !searchTerm ||
-                    letter.nomorSurat.toLowerCase().includes(searchTerm) ||
-                    getJenisSuratDisplayName(letter.jenisSurat).toLowerCase().includes(searchTerm) ||
+                    letter.nomor_surat.toLowerCase().includes(searchTerm) ||
+                    getJenisSuratDisplayName(letter.jenis_surat).toLowerCase().includes(searchTerm) ||
                     (letter.nis && letter.nis.toLowerCase().includes(searchTerm)) ||
                     (letter.perihal && letter.perihal.toLowerCase().includes(searchTerm)) ||
                     (letter.namaSantri && letter.namaSantri.toLowerCase().includes(searchTerm));
 
                 // Jenis surat filter
-                const matchesJenisSurat = !jenisSuratFilter || letter.jenisSurat === jenisSuratFilter;
+                const matchesJenisSurat = !jenisSuratFilter || letter.jenis_surat === jenisSuratFilter;
 
                 // Status filter
                 const matchesStatus = !statusFilter || letter.status === statusFilter;
