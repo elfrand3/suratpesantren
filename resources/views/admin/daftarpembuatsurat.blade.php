@@ -61,7 +61,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
                             <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Status</option>
-                                <option value="Draft">Draft</option>
+                                <option value="pending">Pending</option>
                                 <option value="Selesai">Selesai</option>
                                 <option value="Dikirim">Dikirim</option>
                             </select>
@@ -292,14 +292,14 @@
             filteredLetterData = allLetterData.filter(letter => {
                 // Enhanced search term filter with multiple criteria
                 const matchesSearch = !searchTerm ||
-                    letter.nomorSurat.toLowerCase().includes(searchTerm) ||
-                    getJenisSuratDisplayName(letter.jenisSurat).toLowerCase().includes(searchTerm) ||
+                    letter.nomor_surat.toLowerCase().includes(searchTerm) ||
+                    getJenisSuratDisplayName(letter.jenis_surat).toLowerCase().includes(searchTerm) ||
                     (letter.nis && letter.nis.toLowerCase().includes(searchTerm)) ||
-                    (letter.perihal && letter.perihal.toLowerCase().includes(searchTerm)) ||
+                    (letter.alasan && letter.alasan.toLowerCase().includes(searchTerm)) ||
                     (letter.namaSantri && letter.namaSantri.toLowerCase().includes(searchTerm));
 
                 // Jenis surat filter
-                const matchesJenisSurat = !jenisSuratFilter || letter.jenisSurat === jenisSuratFilter;
+                const matchesJenisSurat = !jenisSuratFilter || letter.jenis_surat === jenisSuratFilter;
 
                 // Status filter
                 const matchesStatus = !statusFilter || letter.status === statusFilter;
@@ -417,7 +417,7 @@
                 } else {
                     // No data at all
                     emptyMessage = 'Belum ada surat tersimpan';
-                    emptySubMessage = 'Buat surat baru untuk mulai menyimpan draft';
+                    emptySubMessage = 'Buat surat baru untuk mulai menyimpan pending';
                 }
 
                 tableBody.innerHTML = `
@@ -511,7 +511,7 @@
 
         function getStatusColor(status) {
             switch (status) {
-                case 'Draft':
+                case 'pending':
                     return 'bg-gray-100 text-gray-800';
                 case 'Selesai':
                     return 'bg-green-100 text-green-800';
