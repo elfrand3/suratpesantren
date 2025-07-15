@@ -250,14 +250,14 @@
                 case 'tambah-santri':
                     showNotification('Mengarahkan ke halaman Data Santri...', 'info');
                     setTimeout(() => {
-                        window.location.href = '/datasantri';
+                        window.location.href = '/admindatasantri';
                     }, 300);
                     break;
 
                 case 'pengaturan':
                     showNotification('Mengarahkan ke halaman Pengaturan...', 'info');
                     setTimeout(() => {
-                        window.location.href = '/pengaturan';
+                        window.location.href = '/adminpengaturan';
                     }, 300);
                     break;
 
