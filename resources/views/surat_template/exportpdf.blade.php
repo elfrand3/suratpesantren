@@ -3,49 +3,103 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Surat Izin Pulang</title>
-    <link rel="stylesheet" href="{{ asset ('pdf.css')}}">
+    <title>Surat Izin {{ $jenis_surat ?? '' }}</title>
+    {{-- <link rel="stylesheet" href="{{ asset ('pdf.css')}}"> --}}
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            margin: 40px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .signature {
+            margin-top: 5px;
+        }
+
+        .indent {
+            text-indent: 40px;
+        }
+
+        .text-uppercase {
+            text-transform: uppercase;
+        }
+
+        .kop-header {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .kop-logo {
+            width: 100px;
+        }
+
+        .kop-teks {
+            text-align: center;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .kop-alamat {
+            margin: 0 auto 20px auto;
+            font-family: "Times New Roman", Times, serif;
+            font-size: 12px;
+            border: 1px solid black;
+            padding: 5px;
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
-<!-- Header dengan logo dan nama pesantren -->
-<div class="kop-header">
-    <!-- Gambar di kiri -->
-    <img src="{{ asset('logo.png') }}" alt="Logo" class="kop-logo">
+    <!-- Header dengan logo dan nama pesantren -->
+    <table class="kop-header">
+        <tr>
+            <!-- Logo kiri -->
+            <td style="width: 80px;">
+                <img src="{{ public_path('logo.png') }}" class="kop-logo" alt="Logo" style="margin-left: 40px;">
+            </td>
 
-    <!-- Teks institusi -->
-    <div class="kop-teks text-uppercase">
-        <strong>
-            Pondok Pesantren<br>
-            Mambaul Ulum<br>
-            Kaliacar – Gading – Probolinggo
-        </strong>
-    </div>
-</div>
 
-<!-- Alamat dengan border -->
-<p class="kop-alamat">
-    Jl. KH. Asy’ari Kaliacar, Gading. Email: <i>doktren_mambaululum@yahoo.com</i>
-    Tlp. 0831-1234-51485 Pos: 67285
-</p>
+            <!-- Teks kanan -->
+            <td class="kop-teks">
+                <strong class="text-uppercase">
+                    Pondok Pesantren<br>
+                    Mambaul Ulum<br>
+                    Kaliacar – Gading – Probolinggo
+                </strong>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Alamat dengan border -->
+    <p class="kop-alamat">
+        Jl. KH. Asy’ari Kaliacar, Gading. Email: <a>doktren_mambaululum@yahoo.com</a>
+        Tlp. 0831-1234-51485 Pos: 67285
+    </p>
 
     <div class="text-center">
         <strong>003/PP-MU/D4/09-2025</strong><br>
-        <h2><u>SURAT IZIN {{ strtoupper($jenis_izin ?? 'PULANG') }}</u></h2>
+        <h2><u>SURAT IZIN {{ strtoupper($jenis_surat ?? '') }}</u></h2>
     </div>
     <p class="text-center">Assalamualaikum Wr. Wb</p>
     <p>Dengan ini kami menyatakan bahwa nama Santri di bawah ini:</p>
     <p>
         Nama : {{ $santri->nama ?? '..................................................' }}<br>
         Alamat : {{ $santri->alamat ?? '..................................................' }}<br>
-        Kamar : {{ $santri->kamar ?? '..................................................' }}
+        Kelas : {{ $santri->kelas ?? '..................................................' }}
     </p>
     <p class="indent">
-        Telah dinyatakan diberikan <strong>IZIN {{ strtoupper($jenis_izin ?? 'PULANG') }}</strong> <u>alasan</u>
+        Telah dinyatakan diberikan <strong>IZIN {{ strtoupper($jenis_surat ?? '') }}</strong> <u>{{ $alasan }}</u>
         terhitung sejak tanggal:
-        {{ $tanggal_mulai ?? '...' }} – {{ $tanggal_selesai ?? '...' }} M.<br>
+        {{ $tanggal_surat ?? '...' }} – {{ $tanggal_kembali ?? '...' }} M.<br>
         Batas waktu <strong>KEMBALI</strong> ke Pesantren pada tanggal:
-        {{ $tanggal_selesai ?? '...' }}.
+        {{ $tanggal_kembali ?? '...' }}.
     </p>
     <p class="indent">
         Demikian surat ini kami buat dengan sebenar-benarnya agar diperhatikan dan dipatuhi dengan sebaik mungkin.
@@ -54,9 +108,9 @@
     <div class="text-center">
         <div class="signature">
             <p><i>Wassalamualaikum Wr. Wb</i></p>
-            <p>Kaliacar, {{ $tanggal_cetak ?? '___, ____________, 2025' }}</p>
+            <p>Kaliacar, {{ $tanggal_surat ?? '___, ____________, 2025' }}</p>
             <p>Pengasuh Pesantren</p>
-            <br><br><br>
+            <img src="{{ public_path('logosignatur.png') }}" class="kop-logo" alt="Logo" style="width: 130px;">
             <p><strong>KH. As'ad Abu Hasan</strong></p>
         </div>
     </div>

@@ -567,9 +567,10 @@
                             <button onclick="deleteLetterById('${letter.id}')" class="text-red-600 hover:text-black-800" title="Hapus Data">
                                 <i class="fas fa-trash-alt"></i>
                             </button>
-                            <button onclick="printLetterFromList(${allLetterData.indexOf(letter)})" class="text-green-600 hover:text-green-800" title="Cetak">
-                                <i class="fas fa-print"></i>
-                            </button>
+                            <button onclick="window.open('/exportpdf/' + ${letter.id}, '_blank')" class="text-green-600 hover:text-green-800" title="Cetak">
+    <i class="fas fa-print"></i>
+</button>
+
                         </div>
                     </td>
                 `;

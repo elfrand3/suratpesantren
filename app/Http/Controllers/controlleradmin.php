@@ -12,6 +12,7 @@ use PhpOffice\PhpWord\IOFactory;
 use Smalot\PdfParser\Parser;
 use Illuminate\Support\Facades\Http;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class ControllerAdmin extends Controller
 {
@@ -800,5 +801,29 @@ class ControllerAdmin extends Controller
         return response()->json($surat);
     }
 
+    public function exportPDF($id)
+{
+    $letter = Surat::findOrFail($id);
+
+    $santri = $letter->santri; // pastikan relasi 'santri' ada di model Surat
+
+    $jenis_surat = $letter->jenis_surat;
+    $alasan = $letter->alasan;
+    $tanggal_kembali = Carbon::parse($letter->tanggal_kembali)->translatedFormat('d F Y');
+    $tanggal_surat = Carbon::parse($letter->tanggal_surat)->translatedFormat('d F Y');
+
+    $pdf = Pdf::loadView('surat_template.exportpdf', compact(
+        'letter',
+        'santri',
+        'jenis_surat',
+        'alasan',
+        'tanggal_kembali',
+        'tanggal_surat'
+    ))->setPaper('A4', 'portrait');
+
+    // return $pdf->download('surat_izin.pdf');
+    return $pdf->stream('surat_izin.pdf');
+
+}
 
 }
