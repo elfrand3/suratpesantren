@@ -182,6 +182,12 @@
                                     <input type="text" id="nis-search"  autocomplete="off" placeholder="Cari Nomer Induk Santri..." class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
                                 <div>
+                                    <input type="hidden" name="alamat" id="alamat">
+                                </div>
+                                <div>
+                                    <input type="hidden" name="kelas" id="kelas">
+                                </div>
+                                <div>
                                     <label class="block text-sm font-medium text-gray-700 mb-2">Nama Santri</label>
                                     <input type="text" id="nama_santri"  class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 </div>
@@ -472,6 +478,8 @@
         const map = {
             nama_santri: document.getElementById('nama_santri').value,
             nis: document.getElementById('nis-search').value,
+            alamat: document.getElementById('alamat').value,
+            kelas: document.getElementById('kelas').value,
             alasan: document.getElementById('alasan').value,
             tanggal_surat: document.getElementById('tanggalSurat').value,
             tanggal_kembali: document.getElementById('tanggalKembali').value,
@@ -555,11 +563,15 @@
                 if (data.success) {
                     document.getElementById('nama_santri').value = data.santri.nama;
                     document.getElementById('santri_id').value = data.santri.id;
+                    document.getElementById('alamat').value = data.santri.alamat;
+                    document.getElementById('kelas').value = data.santri.kelas;
                     // Show success message
                     showNotification('Data santri ditemukan: ' + data.santri.nama, 'success');
                 } else {
                     document.getElementById('nama_santri').value = '';
                     document.getElementById('santri_id').value = '';
+                    document.getElementById('alamat').value = '';
+                    document.getElementById('kelas').value = '';
                     showNotification('Santri dengan NIS ' + nis + ' tidak ditemukan', 'error');
                 }
             })

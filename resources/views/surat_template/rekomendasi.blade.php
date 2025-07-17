@@ -1,15 +1,25 @@
 @verbatim
+{{ nomor_surat }}
 SURAT REKOMENDASI
-Nomor: {{ nomor_surat }}
 
-Yang bertanda tangan di bawah ini menyatakan bahwa:
+Assalamualaikum Wr. Wb
+
+Dengan ini kami menyatakan bahwa nama santri di bawah ini:
 Nama: {{ nama_santri }}
-NIS: {{ nis }}
+Kelas : {{ kelas }}
 
-Adalah benar santri aktif yang memiliki perilaku baik dan rajin dalam kegiatan pondok.
+Telah dinyatakan diberikan IZIN REKOMENDASI {{ alasan }} terhitung sejak tanggal: {{ tanggal_surat }} M
+Batas waktu KEMBALI ke Pesantren pada tanggal: {{ tanggal_kembali }} M
 
-Dengan ini kami merekomendasikan santri tersebut untuk keperluan: {{ alasan }}
+Demikian surat ini kami buat dengan sebenar-benarnya agar diperhatikan dan dipatuhi dengan sebaik mungkin.
 
-Paiton, {{ tanggal_surat }}
-Pimpinan Pondok Pesantren
+wassalamualaikum Wr. Wb
+
+Kaliacar, {{ tanggal_surat }}
+Pengasuh Pesantren
+
+KH. As'ad Abu Hasan
 @endverbatim
+
+
+

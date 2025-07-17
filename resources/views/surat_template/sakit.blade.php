@@ -1,17 +1,23 @@
 @verbatim
+{{ nomor_surat }}
 SURAT KETERANGAN SAKIT
-Nomor: {{ nomor_surat }}
 
-Yang bertanda tangan di bawah ini menyatakan bahwa:
+Assalamualaikum Wr. Wb
+
+Dengan ini kami menyatakan bahwa nama santri di bawah ini:
 Nama: {{ nama_santri }}
-NIS: {{ nis }}
+Alamat: {{ alamat }}
+Kelas : {{ kelas }}
 
-Tidak dapat mengikuti kegiatan pondok mulai tanggal {{ tanggal_surat }} sampai {{ tanggal_kembali }} dikarenakan alasan kesehatan.
+Telah dinyatakan diberikan IZIN PULANG {{ alasan }} terhitung sejak tanggal: {{ tanggal_surat }} M
+Batas waktu KEMBALI ke Pesantren pada tanggal: {{ tanggal_kembali }} M
 
-Diagnosa: {{ diagnosa }}
+Demikian surat ini kami buat dengan sebenar-benarnya agar diperhatikan dan dipatuhi dengan sebaik mungkin.
 
-Demikian surat ini dibuat untuk digunakan sebagaimana mestinya.
+wassalamualaikum Wr. Wb
 
-Paiton, {{ tanggal_surat }}
-Admin Kesehatan
+Kaliacar, {{ tanggal_surat }}
+Pengasuh Pesantren
+
+KH. As'ad Abu Hasan
 @endverbatim
