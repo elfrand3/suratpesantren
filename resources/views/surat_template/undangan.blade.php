@@ -1,18 +1,23 @@
 @verbatim
+{{ nomor_surat }}
 SURAT UNDANGAN
-Nomor: {{ nomor_surat }}
 
-Kepada Yth.
-{{ nama_santri }}
+Assalamualaikum Wr. Wb
 
-Dengan ini kami mengundang Saudara/i untuk menghadiri acara yang akan dilaksanakan pada:
-
-Tanggal: {{ tanggal_surat }}
+Dengan ini kami menyatakan bahwa nama santri di bawah ini:
+Nama: {{ nama_santri }}
 Tempat: Ruang Pertemuan
-Keperluan: {{ alasan }}
+Kelas : {{ kelas }}
 
-Demikian undangan ini kami sampaikan. Atas kehadiran dan perhatiannya, kami ucapkan terima kasih.
+Telah dinyatakan diberikan IZIN UNDANGAN {{ alasan }} terhitung sejak tanggal: {{ tanggal_surat }} M
+Batas waktu KEMBALI ke Pesantren pada tanggal: {{ tanggal_kembali }} M
 
-Paiton, {{ tanggal_surat }}
-Panitia
+Demikian surat ini kami buat dengan sebenar-benarnya agar diperhatikan dan dipatuhi dengan sebaik mungkin.
+
+wassalamualaikum Wr. Wb
+
+Kaliacar, {{ tanggal_surat }}
+Pengasuh Pesantren
+
+KH. As'ad Abu Hasan
 @endverbatim

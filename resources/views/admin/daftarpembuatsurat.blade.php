@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google" content="notranslate">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Daftar Pembuat Surat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -150,6 +151,21 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Modal Edit Surat -->
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-scrollable">
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editModalLabel">Edit Data Surat</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="modalEditContent">
+                        <!-- Konten form akan diisi melalui JavaScript (editLetterById) -->
+                    </div>
+                    </div>
+                </div>
                 </div>
 
 
@@ -542,8 +558,14 @@
                     </td>
                     <td class="table-cell col-aksi text-center">
                         <div class="table-cell-content actions">
-                            <button onclick="viewLetterById('${letter.id}')" class="text-blue-600 hover:text-blue-800" title="Lihat Detail">
+                            <button onclick="viewLetterById('${letter.id}')" class="text-blue-600 hover:text-black-800" title="Lihat Detail">
                                 <i class="fas fa-eye"></i>
+                            </button>
+                            <button onclick="editLetterById('${letter.id}')" class="text-yellow-600 hover:text-black-800" title="Edit Data">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button onclick="deleteLetterById('${letter.id}')" class="text-red-600 hover:text-black-800" title="Hapus Data">
+                                <i class="fas fa-trash-alt"></i>
                             </button>
                             <button onclick="printLetterFromList(${allLetterData.indexOf(letter)})" class="text-green-600 hover:text-green-800" title="Cetak">
                                 <i class="fas fa-print"></i>
@@ -554,6 +576,98 @@
                 tableBody.appendChild(row);
             });
         }
+
+        function editLetterById(id) {
+            const letter = allLetterData.find(l => l.id == id);
+            if (!letter) {
+                document.getElementById('modalEditContent').innerHTML =
+                    "<p class='text-danger'>Data surat tidak ditemukan!</p>";
+                const modal = new bootstrap.Modal(document.getElementById('editModal'));
+                modal.show();
+                return;
+            }
+
+            const content = `
+                <form id="editLetterForm">
+                    <div class="mb-3">
+                        <label for="edit_nomor_surat" class="form-label">Nomor Surat</label>
+                        <input type="text" class="form-control" id="edit_nomor_surat" name="nomor_surat" value="${letter.nomor_surat}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_jenis_surat" class="form-label">Jenis Surat</label>
+                        <input type="text" class="form-control" id="edit_jenis_surat" name="jenis_surat" value="${letter.jenis_surat}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_nis" class="form-label">NIS Santri</label>
+                        <input type="text" class="form-control" id="edit_nis" name="nis" value="${letter.santri?.nis || ''}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_nama_santri" class="form-label">Nama Santri</label>
+                        <input type="text" class="form-control" id="edit_nama_santri" name="nama_santri" value="${letter.santri?.nama || ''}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_tanggal_surat" class="form-label">Tanggal Surat</label>
+                        <input type="date" class="form-control" id="edit_tanggal_surat" name="tanggal_surat" value="${letter.tanggal_surat}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_tanggal_kembali" class="form-label">Tanggal Kembali</label>
+                        <input type="date" class="form-control" id="edit_tanggal_kembali" name="tanggal_kembali" value="${letter.tanggal_kembali}">
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_alasan" class="form-label">Alasan / Perihal</label>
+                        <textarea class="form-control" id="edit_alasan" name="alasan">${letter.alasan || ''}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_status" class="form-label">Status</label>
+                        <select class="form-control" id="edit_status" name="status">
+                            <option value="pending" ${letter.status === 'pending' ? 'selected' : ''}>Pending</option>
+                            <option value="disetujui" ${letter.status === 'disetujui' ? 'selected' : ''}>Disetujui</option>
+                            <option value="ditolak" ${letter.status === 'ditolak' ? 'selected' : ''}>Ditolak</option>
+                        </select>
+                    </div>
+                    <button type="button" onclick="submitEditForm(${letter.id})" class="btn btn-primary">Simpan Perubahan</button>
+                </form>
+            `;
+
+            document.getElementById('modalEditContent').innerHTML = content;
+
+            const modal = new bootstrap.Modal(document.getElementById('editModal'));
+            modal.show(); // Tampilkan modal edit
+        }
+
+        function submitEditForm(id) {
+            const form = document.getElementById('editLetterForm');
+            const formData = new FormData(form);
+
+            fetch(`/admin/surat/${id}/edit`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                    'Accept': 'application/json',
+                    'X-HTTP-Method-Override': 'PUT'
+                },
+                body: formData
+            })
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(err => { throw err; });
+                }
+                return response.json();
+            })
+            .then(data => {
+                alert('Data berhasil diperbarui!');
+                location.reload(); // atau refresh tabel data jika pakai datatables
+            })
+            .catch(error => {
+                console.error('Gagal memperbarui data:', error);
+                alert('Terjadi kesalahan saat menyimpan perubahan.');
+            });
+        }
+
+        // function printLetterById(id) {
+        //     const url = `/admin/surat/${id}/cetak`;
+        //     window.open(url, '_blank'); // Buka di tab baru
+        // }
 
         function viewLetterById(id) {
             const letter = allLetterData.find(l => l.id == id);
@@ -566,14 +680,14 @@
             }
 
             const content = `
-        <p><strong>Nomor Surat:</strong> ${letter.nomor_surat}</p>
-        <p><strong>Jenis Surat:</strong> ${getJenisSuratDisplayName(letter.jenis_surat)}</p>
-        <p><strong>Tanggal Surat:</strong> ${formatDate(letter.tanggal_surat)}</p>
-        <p><strong>NIS:</strong> ${letter.santri?.nis || '-'}</p>
-        <p><strong>Nama Santri:</strong> ${letter.santri?.nama || '-'}</p>
-        <p><strong>Alasan / Perihal:</strong> ${letter.alasan}</p>
-        <p><strong>Status:</strong> ${letter.status}</p>
-    `;
+                <p><strong>Nomor Surat:</strong> ${letter.nomor_surat}</p>
+                <p><strong>Jenis Surat:</strong> ${getJenisSuratDisplayName(letter.jenis_surat)}</p>
+                <p><strong>Tanggal Surat:</strong> ${formatDate(letter.tanggal_surat)}</p>
+                <p><strong>NIS:</strong> ${letter.santri?.nis || '-'}</p>
+                <p><strong>Nama Santri:</strong> ${letter.santri?.nama || '-'}</p>
+                <p><strong>Alasan / Perihal:</strong> ${letter.alasan}</p>
+                <p><strong>Status:</strong> ${letter.status}</p>
+            `;
             document.getElementById('modalContent').innerHTML = content;
 
             const modal = new bootstrap.Modal(document.getElementById('detailModal'));

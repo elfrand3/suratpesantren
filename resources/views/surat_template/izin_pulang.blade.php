@@ -1,22 +1,23 @@
 @verbatim
+{{ nomor_surat }}
 SURAT IZIN PULANG
-Nomor: {{ nomor_surat }}
 
-Kepada Yth.
-Wali Santri {{ nama_santri }}
-Di Tempat
+Assalamualaikum Wr. Wb
 
-Dengan hormat,
-
-Kami memberikan izin kepada santri atas nama:
+Dengan ini kami menyatakan bahwa nama santri di bawah ini:
 Nama: {{ nama_santri }}
-NIS: {{ nis }}
-Untuk pulang pada tanggal {{ tanggal_surat }} dan kembali pada tanggal {{ tanggal_kembali }}.
+Alamat: {{ alamat }}
+Kelas : {{ kelas }}
 
-Alasan: {{ alasan }}
+Telah dinyatakan diberikan IZIN PULANG {{ alasan }} terhitung sejak tanggal: {{ tanggal_surat }} M
+Batas waktu KEMBALI ke Pesantren pada tanggal: {{ tanggal_kembali }} M
 
-Demikian surat ini dibuat untuk dipergunakan sebagaimana mestinya.
+Demikian surat ini kami buat dengan sebenar-benarnya agar diperhatikan dan dipatuhi dengan sebaik mungkin.
 
-Paiton, {{ tanggal_surat }}
-Admin Pondok Pesantren
+wassalamualaikum Wr. Wb
+
+Kaliacar, {{ tanggal_surat }}
+Pengasuh Pesantren
+
+KH. As'ad Abu Hasan
 @endverbatim

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use PhpOffice\PhpWord\IOFactory;
 use Smalot\PdfParser\Parser;
 use Illuminate\Support\Facades\Http;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ControllerAdmin extends Controller
 {
@@ -348,12 +349,37 @@ class ControllerAdmin extends Controller
         return view('admin.detailSurat', compact('surat'));
     }
 
-    public function editSurat($id)
+    // public function editSurat($id)
+    // {
+    //     $surat = \App\Models\surat::findOrFail($id);
+    //     $santris = Santri::all();
+    //     return view('admin.editSurat', compact('surat', 'santris'));
+    // }
+
+    public function editSurat(Request $request, $id)
     {
-        $surat = \App\Models\surat::findOrFail($id);
-        $santris = Santri::all();
-        return view('admin.editSurat', compact('surat', 'santris'));
+        $request->validate([
+            'nomor_surat' => 'required',
+            'jenis_surat' => 'required',
+            'tanggal_surat' => 'required|date',
+            'tanggal_kembali' => 'nullable|date',
+            'alasan' => 'nullable|string',
+            'diagnosa' => 'nullable|string',
+            'content' => 'nullable|string',
+            'status' => 'required',
+            'santri_id' => 'required|exists:santris,id'
+        ]);
+
+        $surat = Surat::findOrFail($id);
+        $surat->update($request->only([
+            'nomor_surat', 'jenis_surat', 'tanggal_surat',
+            'tanggal_kembali', 'alasan', 'diagnosa',
+            'content', 'status', 'santri_id'
+        ]));
+
+        return response()->json(['message' => 'Surat berhasil diperbarui']);
     }
+
 
     public function updateSurat(Request $request, $id)
     {
@@ -767,4 +793,12 @@ class ControllerAdmin extends Controller
 
         return response()->json(['content_html' => $content]);
     }
+
+    public function getSuratById($id)
+    {
+        $surat = \App\Models\Surat::with('santri')->findOrFail($id);
+        return response()->json($surat);
+    }
+
+
 }
