@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" translate="no">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,9 @@
     <title>Daftar Pembuat Surat</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-gray-50">
     @include('components.sidebar')
 
@@ -20,7 +23,8 @@
             <div class="bg-white rounded-lg shadow-lg p-8 border border-gray-200">
                 <div class="flex items-center justify-between mb-6">
                     <h3 class="text-lg font-semibold text-gray-800">Daftar Surat</h3>
-                    <a href="/buatsurat" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center">
+                    <a href="/buatsurat"
+                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center">
                         <i class="fas fa-plus mr-2"></i> Buat Surat Baru
                     </a>
                 </div>
@@ -31,8 +35,9 @@
                         <div class="flex-1 min-w-[200px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Cari Surat</label>
                             <div class="relative">
-                                <input type="text" id="searchInput" placeholder="Cari berdasarkan nomor surat, jenis surat, NIS, perihal, atau nama santri..."
-                                       class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="text" id="searchInput"
+                                    placeholder="Cari berdasarkan nomor surat, jenis surat, NIS, perihal, atau nama santri..."
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i class="fas fa-search text-gray-400"></i>
                                 </div>
@@ -48,7 +53,8 @@
                         </div>
                         <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Jenis Surat</label>
-                            <select id="jenisSuratFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select id="jenisSuratFilter"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Jenis</option>
                                 <option value="izin-pulang">Surat Izin Pulang</option>
                                 <option value="sakit">Surat Sakit</option>
@@ -59,7 +65,8 @@
                         </div>
                         <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
-                            <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select id="statusFilter"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Status</option>
                                 <option value="pending">Pending</option>
                                 <option value="Selesai">Selesai</option>
@@ -68,7 +75,8 @@
                         </div>
                         <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
-                            <button onclick="refreshData()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                            <button onclick="refreshData()"
+                                class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                                 <i class="fas fa-sync-alt mr-2"></i>Refresh
                             </button>
                         </div>
@@ -93,14 +101,30 @@
                     <table class="min-w-max w-full divide-y divide-gray-200 fixed-table">
                         <thead class="sticky-header">
                             <tr>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-no">No</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nomor">Nomor Surat</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-jenis">Jenis Surat</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">Tanggal</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nis">NIS</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-perihal">Perihal</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-status">Status</th>
-                                <th class="table-cell text-center text-xs font-medium text-gray-500 uppercase tracking-wider col-aksi">Aksi</th>
+                                <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-no">
+                                    No</th>
+                                <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nomor">
+                                    Nomor Surat</th>
+                                <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-jenis">
+                                    Jenis Surat</th>
+                                <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">
+                                    Tanggal</th>
+                                <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nis">
+                                    NIS</th>
+                                <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-perihal">
+                                    Perihal</th>
+                                <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-status">
+                                    Status</th>
+                                <th
+                                    class="table-cell text-center text-xs font-medium text-gray-500 uppercase tracking-wider col-aksi">
+                                    Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="letterTableBody" class="bg-white divide-y divide-gray-200">
@@ -108,17 +132,40 @@
                         </tbody>
                     </table>
                 </div>
+                <!-- Modal Bootstrap Detail Surat -->
+                <div class="modal fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="detailModalLabel">Detail Surat</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Tutup"></button>
+                            </div>
+                            <div class="modal-body" id="modalContent">
+                                <!-- Akan diisi via JavaScript -->
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
                 <!-- Pagination Info -->
                 <div class="mt-4 flex items-center justify-between text-sm text-gray-700">
                     <div id="paginationInfo">
-                        Menampilkan <span id="startIndex">1</span> - <span id="endIndex">10</span> dari <span id="totalItems">0</span> surat
+                        Menampilkan <span id="startIndex">1</span> - <span id="endIndex">10</span> dari <span
+                            id="totalItems">0</span> surat
                     </div>
                     <div class="flex space-x-2">
-                        <button id="prevPage" onclick="previousPage()" class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button id="prevPage" onclick="previousPage()"
+                            class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                             <i class="fas fa-chevron-left mr-1"></i>Sebelumnya
                         </button>
-                        <button id="nextPage" onclick="nextPage()" class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <button id="nextPage" onclick="nextPage()"
+                            class="px-3 py-1 border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed">
                             Selanjutnya<i class="fas fa-chevron-right ml-1"></i>
                         </button>
                     </div>
@@ -132,11 +179,12 @@
         <div class="bg-white rounded-lg shadow-lg p-8 w-full max-w-2xl">
             <div class="flex items-center justify-between mb-6">
                 <h3 class="text-lg font-semibold text-gray-800">Profil Admin</h3>
-                <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
+                <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i
+                        class="fas fa-times"></i></button>
             </div>
             <div class="flex items-center space-x-6 mb-6">
                 <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                     alt="Admin" class="h-20 w-20 rounded-full">
+                    alt="Admin" class="h-20 w-20 rounded-full">
                 <div>
                     <h4 class="text-xl font-semibold text-gray-800">Administrator</h4>
                     <p class="text-gray-600">Admin Sistem Surat</p>
@@ -147,30 +195,38 @@
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
-                        <input type="text" value="Administrator" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" value="Administrator"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
-                        <input type="email" value="admin@pondok.com" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="email" value="admin@pondok.com"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="grid grid-cols-2 gap-4 mb-4">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">No. Telepon</label>
-                        <input type="tel" value="081234567890" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="tel" value="081234567890"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-2">Jabatan</label>
-                        <input type="text" value="Administrator Sistem" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" value="Administrator Sistem"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                     </div>
                 </div>
                 <div class="mb-4">
                     <label class="block text-sm font-medium text-gray-700 mb-2">Alamat</label>
-                    <textarea class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" rows="3">Jl. Pondok Pesantren No. 123, Kecamatan Pondok, Kota Santri</textarea>
+                    <textarea
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        rows="3">Jl. Pondok Pesantren No. 123, Kecamatan Pondok, Kota Santri</textarea>
                 </div>
                 <div class="flex justify-end space-x-2">
-                    <button type="button" onclick="closeProfileModal()" class="px-4 py-2 border border-gray-300 rounded-md">Batal</button>
-                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Simpan Perubahan</button>
+                    <button type="button" onclick="closeProfileModal()"
+                        class="px-4 py-2 border border-gray-300 rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md">Simpan
+                        Perubahan</button>
                 </div>
             </form>
         </div>
@@ -184,7 +240,8 @@
         });
 
         function checkAuth() {
-            const loginData = JSON.parse(localStorage.getItem('loginData') || sessionStorage.getItem('loginData') || 'null');
+            const loginData = JSON.parse(localStorage.getItem('loginData') || sessionStorage.getItem('loginData') ||
+            'null');
 
             if (!loginData || loginData.role !== 'admin') {
                 alert('Anda harus login sebagai admin untuk mengakses halaman ini!');
@@ -428,14 +485,14 @@
                                 <h3 class="text-lg font-medium text-gray-700 mb-2">${emptyMessage}</h3>
                                 <p class="text-sm text-gray-500 mb-4">${emptySubMessage}</p>
                                 ${!searchTerm && !jenisSuratFilter && !statusFilter ? `
-                                    <a href="/buatsurat" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                                        <i class="fas fa-plus mr-2"></i>Buat Surat Pertama
-                                    </a>
-                                ` : `
-                                    <button onclick="refreshData()" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
-                                        <i class="fas fa-sync-alt mr-2"></i>Refresh Data
-                                    </button>
-                                `}
+                                        <a href="/buatsurat" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                                            <i class="fas fa-plus mr-2"></i>Buat Surat Pertama
+                                        </a>
+                                    ` : `
+                                        <button onclick="refreshData()" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
+                                            <i class="fas fa-sync-alt mr-2"></i>Refresh Data
+                                        </button>
+                                    `}
                             </div>
                         </td>
                     </tr>
@@ -485,7 +542,7 @@
                     </td>
                     <td class="table-cell col-aksi text-center">
                         <div class="table-cell-content actions">
-                            <button onclick="viewLetter(${allLetterData.indexOf(letter)})" class="text-blue-600 hover:text-blue-800" title="Lihat Detail">
+                            <button onclick="viewLetterById('${letter.id}')" class="text-blue-600 hover:text-blue-800" title="Lihat Detail">
                                 <i class="fas fa-eye"></i>
                             </button>
                             <button onclick="printLetterFromList(${allLetterData.indexOf(letter)})" class="text-green-600 hover:text-green-800" title="Cetak">
@@ -496,6 +553,31 @@
                 `;
                 tableBody.appendChild(row);
             });
+        }
+
+        function viewLetterById(id) {
+            const letter = allLetterData.find(l => l.id == id);
+            if (!letter) {
+                document.getElementById('modalContent').innerHTML =
+                "<p class='text-danger'>Data surat tidak ditemukan!</p>";
+                const modal = new bootstrap.Modal(document.getElementById('detailModal'));
+                modal.show();
+                return;
+            }
+
+            const content = `
+        <p><strong>Nomor Surat:</strong> ${letter.nomor_surat}</p>
+        <p><strong>Jenis Surat:</strong> ${getJenisSuratDisplayName(letter.jenis_surat)}</p>
+        <p><strong>Tanggal Surat:</strong> ${formatDate(letter.tanggal_surat)}</p>
+        <p><strong>NIS:</strong> ${letter.santri?.nis || '-'}</p>
+        <p><strong>Nama Santri:</strong> ${letter.santri?.nama || '-'}</p>
+        <p><strong>Alasan / Perihal:</strong> ${letter.alasan}</p>
+        <p><strong>Status:</strong> ${letter.status}</p>
+    `;
+            document.getElementById('modalContent').innerHTML = content;
+
+            const modal = new bootstrap.Modal(document.getElementById('detailModal'));
+            modal.show(); // TAMPILKAN MODAL
         }
 
         function getJenisSuratDisplayName(jenisSurat) {
@@ -704,7 +786,8 @@
             if (!container) {
                 container = document.createElement('div');
                 container.id = 'notificationContainer';
-                container.className = 'fixed top-20 right-8 z-[9999] flex flex-col items-end space-y-3 w-full max-w-xs sm:max-w-sm pointer-events-none';
+                container.className =
+                    'fixed top-20 right-8 z-[9999] flex flex-col items-end space-y-3 w-full max-w-xs sm:max-w-sm pointer-events-none';
                 document.body.appendChild(container);
             }
             // Remove existing notifications
@@ -757,12 +840,15 @@
             // Create modal overlay
             const modalOverlay = document.createElement('div');
             modalOverlay.id = 'logoutModalOverlay';
-            modalOverlay.className = 'fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]';
+            modalOverlay.className =
+                'fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-[9999]';
 
             // Create modal content
             const modalContent = document.createElement('div');
-            modalContent.className = 'bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0';
-            modalContent.innerHTML = `
+            modalContent.className =
+                'bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4 transform transition-all duration-300 scale-95 opacity-0';
+            modalContent.innerHTML =
+                `
                 <div class=\"text-center\">\n                    <div class=\"mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100 mb-6\">\n                        <i class=\"fas fa-sign-out-alt text-2xl text-red-600\"></i>\n                    </div>\n                    <h3 class=\"text-xl font-bold text-gray-900 mb-4\">Konfirmasi Keluar</h3>\n                    <p class=\"text-gray-600 mb-8\">Apakah Anda yakin ingin keluar dari sistem? Semua data yang belum disimpan akan hilang.</p>\n                    <div class=\"flex space-x-4\">\n                        <button onclick=\"cancelLogout()\" class=\"flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium\">\n                            Batal\n                        </button>\n                        <button onclick=\"confirmLogout()\" class=\"flex-1 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors font-medium\">\n                            <i class=\"fas fa-sign-out-alt mr-2\"></i>Keluar\n                        </button>\n                    </div>\n                </div>\n            `;
 
             modalOverlay.appendChild(modalContent);
@@ -796,7 +882,8 @@
             const modalContent = modalOverlay.querySelector('div');
 
             // Show loading state
-            modalContent.innerHTML = `
+            modalContent.innerHTML =
+                `
                 <div class=\"text-center\">\n                    <div class=\"mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-blue-100 mb-6\">\n                        <i class=\"fas fa-spinner fa-spin text-2xl text-blue-600\"></i>\n                    </div>\n                    <h3 class=\"text-xl font-bold text-gray-900 mb-4\">Memproses...</h3>\n                    <p class=\"text-gray-600\">Sedang keluar dari sistem...</p>\n                </div>\n            `;
 
             // Show notification if function exists
@@ -907,7 +994,10 @@
                 for (const row of rows) {
                     if (row.innerHTML.includes(highlightNomor)) {
                         row.classList.add('bg-yellow-100', 'transition');
-                        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        row.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'center'
+                        });
                         setTimeout(() => {
                             row.classList.remove('bg-yellow-100');
                         }, 2500);
@@ -917,5 +1007,7 @@
             }, 500); // Delay to ensure table is rendered
         }
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>
