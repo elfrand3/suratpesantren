@@ -142,3 +142,7 @@ Route::get('/posts', function () {
 Route::get('/word/upload', [WordEditorController::class, 'uploadForm'])->name('word.upload');
 Route::post('/word/upload', [WordEditorController::class, 'handleUpload'])->name('word.handleUpload');
 Route::post('/word/save', [WordEditorController::class, 'saveEdited'])->name('word.save');
+
+Route::get('/p', function () {
+        return view('surat_template.exportpdf');
+    });
