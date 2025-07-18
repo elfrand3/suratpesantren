@@ -248,9 +248,9 @@
                                     <i class="fas fa-tasks text-blue-600 mr-2"></i> Aksi Surat
                                 </h3>
                                 <div class="flex justify-end space-x-3">
-                                    <label class="block text-sm font-medium text-gray-700 mb-2">Jenis Surat</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Template Surat</label>
                                     <select id="jenisSurat" name="jenis_surat" onchange="loadTemplate()" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                        <option value="jenis-surat">jenis Surat</option>
+                                        <option value="jenis-surat">Pilih Jenis Surat</option>
                                         <option value="pulang">Surat Pulang</option>
                                         <option value="sakit">Surat Sakit</option>
                                         <option value="rekomendasi">Surat Rekomendasi</option>

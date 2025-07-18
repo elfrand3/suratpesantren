@@ -106,12 +106,27 @@
         Demikian surat ini kami buat dengan sebenar-benarnya agar diperhatikan dan dipatuhi dengan sebaik mungkin.
     </p>
 
-    <div class="text-center">
+    {{-- <div class="text-center">
         <div class="signature">
             <p><i>Wassalamualaikum Wr. Wb</i></p>
             <p>Kaliacar, {{ $tanggal_surat ?? '___, ____________, 2025' }}</p>
             <p>Pengasuh Pesantren</p>
             <img src="{{ public_path('logosignatur.png') }}" class="kop-logo" alt="Logo" style="width: 130px;">
+            <p><strong>KH. As'ad Abu Hasan</strong></p>
+        </div>
+    </div> --}}
+
+    <div style="position: relative; margin-top: 20px; min-height: 180px;">
+        @if($qr_image_base64)
+            <div style="position: absolute; margin-top:120px ;top: 0; left: 0;">
+                <img src="{{ $qr_image_base64 }}" alt="QR Code" style="width: 120px;">
+            </div>
+        @endif
+        <div style="text-align: center;">
+            <p><i>Wassalamualaikum Wr. Wb</i></p>
+            <p>Kaliacar, {{ $tanggal_surat ?? '___, ____________, 2025' }}</p>
+            <p>Pengasuh Pesantren</p>
+            <img src="{{ public_path('logosignatur.png') }}" alt="Stempel" style="width: 130px;">
             <p><strong>KH. As'ad Abu Hasan</strong></p>
         </div>
     </div>

@@ -13,6 +13,7 @@ use Smalot\PdfParser\Parser;
 use Illuminate\Support\Facades\Http;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class ControllerAdmin extends Controller
 {
@@ -797,32 +798,76 @@ class ControllerAdmin extends Controller
         return response()->json($surat);
     }
 
+    // public function exportPDF($id)
+    // {
+    //     $letter = Surat::findOrFail($id);
+
+    //     $santri = $letter->santri; // pastikan relasi 'santri' ada di model Surat
+
+    //     $jenis_surat = $letter->jenis_surat;
+    //     $nomor_surat = $letter->nomor_surat;
+    //     $alasan = $letter->alasan;
+    //     // $status = $letter->status;
+    //     $tanggal_kembali = Carbon::parse($letter->tanggal_kembali)->translatedFormat('d F Y');
+    //     $tanggal_surat = Carbon::parse($letter->tanggal_surat)->translatedFormat('d F Y');
+
+    //     $pdf = Pdf::loadView('surat_template.exportpdf', compact(
+    //         'letter',
+    //         'santri',
+    //         'jenis_surat',
+    //         'nomor_surat',
+    //         'alasan',
+    //         'tanggal_kembali',
+    //         'tanggal_surat'
+    //     ))->setPaper('A4', 'portrait');
+
+    //     // return $pdf->download('surat_izin.pdf');
+    //     return $pdf->stream('surat_izin.pdf');
+
+    // }
+
+
     public function exportPDF($id)
-{
-    $letter = Surat::findOrFail($id);
+    {
+        $letter = Surat::findOrFail($id);
+        $santri = $letter->santri;
 
-    $santri = $letter->santri; // pastikan relasi 'santri' ada di model Surat
+        $jenis_surat = $letter->jenis_surat;
+        $nomor_surat = $letter->nomor_surat;
+        $alasan = $letter->alasan;
+        $tanggal_kembali = Carbon::parse($letter->tanggal_kembali)->translatedFormat('d F Y');
+        $tanggal_surat = Carbon::parse($letter->tanggal_surat)->translatedFormat('d F Y');
 
-    $jenis_surat = $letter->jenis_surat;
-    $nomor_surat = $letter->nomor_surat;
-    $alasan = $letter->alasan;
-    // $status = $letter->status;
-    $tanggal_kembali = Carbon::parse($letter->tanggal_kembali)->translatedFormat('d F Y');
-    $tanggal_surat = Carbon::parse($letter->tanggal_surat)->translatedFormat('d F Y');
+        $qr_image_base64 = null;
+        if ($letter->status === 'disetujui') {
+            $isi_qrcode = 'ID: ' . $letter->id .
+                        ' | Nomor: ' . $letter->nomor_surat .
+                        ' | Status: Disetujui' .
+                        ' | Tanggal: ' . $letter->tanggal_surat;
 
-    $pdf = Pdf::loadView('surat_template.exportpdf', compact(
-        'letter',
-        'santri',
-        'jenis_surat',
-        'nomor_surat',
-        'alasan',
-        'tanggal_kembali',
-        'tanggal_surat'
-    ))->setPaper('A4', 'portrait');
+            $qr_text = urlencode($isi_qrcode);
+            $qr_url = "https://api.qrserver.com/v1/create-qr-code/?data={$qr_text}&size=150x150";
 
-    // return $pdf->download('surat_izin.pdf');
-    return $pdf->stream('surat_izin.pdf');
+            // Ambil gambar dan ubah ke base64
+            $response = Http::get($qr_url);
+            if ($response->ok()) {
+                $imageData = base64_encode($response->body());
+                $qr_image_base64 = 'data:image/png;base64,' . $imageData;
+            }
+        }
 
-}
+        $pdf = Pdf::loadView('surat_template.exportpdf', compact(
+            'letter',
+            'santri',
+            'jenis_surat',
+            'nomor_surat',
+            'alasan',
+            'tanggal_kembali',
+            'tanggal_surat',
+            'qr_image_base64'
+        ))->setPaper('A4', 'portrait');
+
+        return $pdf->stream('surat_izin.pdf');
+    }
 
 }
