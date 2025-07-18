@@ -57,7 +57,7 @@
                             <select id="jenisSuratFilter"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Jenis</option>
-                                <option value="izin-pulang">Surat Izin Pulang</option>
+                                <option value="pulang">Surat Izin Pulang</option>
                                 <option value="sakit">Surat Sakit</option>
                                 <option value="rekomendasi">Surat Rekomendasi</option>
                                 <option value="keterangan">Surat Keterangan</option>
@@ -70,8 +70,8 @@
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Status</option>
                                 <option value="pending">Pending</option>
-                                <option value="Selesai">Selesai</option>
-                                <option value="Dikirim">Dikirim</option>
+                                <option value="disetujui">Disetujui</option>
+                                <option value="ditolak">Ditolak</option>
                             </select>
                         </div>
                         <div class="md:w-48 min-w-[150px]">
@@ -155,17 +155,17 @@
 
                 <!-- Modal Edit Surat -->
                 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-scrollable">
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editModalLabel">Edit Data Surat</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="modal-dialog modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editModalLabel">Edit Data Surat</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="modalEditContent">
+                                <!-- Konten form akan diisi melalui JavaScript (editLetterById) -->
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body" id="modalEditContent">
-                        <!-- Konten form akan diisi melalui JavaScript (editLetterById) -->
-                    </div>
-                    </div>
-                </div>
                 </div>
 
 
@@ -568,8 +568,8 @@
                                 <i class="fas fa-trash-alt"></i>
                             </button>
                             <button onclick="window.open('/exportpdf/' + ${letter.id}, '_blank')" class="text-green-600 hover:text-green-800" title="Cetak">
-    <i class="fas fa-print"></i>
-</button>
+                                <i class="fas fa-print"></i>
+                            </button>
 
                         </div>
                     </td>
@@ -596,27 +596,36 @@
                     </div>
                     <div class="mb-3">
                         <label for="edit_jenis_surat" class="form-label">Jenis Surat</label>
-                        <input type="text" class="form-control" id="edit_jenis_surat" name="jenis_surat" value="${letter.jenis_surat}">
+                        <input type="text" class="form-control" id="edit_jenis_surat" name="jenis_surat" value="${letter.jenis_surat}" >
                     </div>
+                    <input type="hidden" name="santri_id" value="${letter.santri?.id || ''}">
                     <div class="mb-3">
                         <label for="edit_nis" class="form-label">NIS Santri</label>
-                        <input type="text" class="form-control" id="edit_nis" name="nis" value="${letter.santri?.nis || ''}">
+                        <input type="text" class="form-control" id="edit_nis" name="nis" value="${letter.santri?.nis || ''}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="edit_nama_santri" class="form-label">Nama Santri</label>
-                        <input type="text" class="form-control" id="edit_nama_santri" name="nama_santri" value="${letter.santri?.nama || ''}">
+                        <input type="text" class="form-control" id="edit_nama_santri" name="nama_santri" value="${letter.santri?.nama || ''}" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="edit_tanggal_surat" class="form-label">Tanggal Surat</label>
-                        <input type="date" class="form-control" id="edit_tanggal_surat" name="tanggal_surat" value="${letter.tanggal_surat}">
+                        <input type="date" class="form-control" id="edit_tanggal_surat" name="tanggal_surat" value="${letter.tanggal_surat ? letter.tanggal_surat.split('T')[0] : ''}">
                     </div>
                     <div class="mb-3">
                         <label for="edit_tanggal_kembali" class="form-label">Tanggal Kembali</label>
-                        <input type="date" class="form-control" id="edit_tanggal_kembali" name="tanggal_kembali" value="${letter.tanggal_kembali}">
+                        <input type="date" class="form-control" id="edit_tanggal_kembali" name="tanggal_kembali" value="${letter.tanggal_kembali ? letter.tanggal_kembali.split('T')[0] : ''}">
                     </div>
                     <div class="mb-3">
-                        <label for="edit_alasan" class="form-label">Alasan / Perihal</label>
+                        <label for="edit_alasan" class="form-label">Alasan</label>
                         <textarea class="form-control" id="edit_alasan" name="alasan">${letter.alasan || ''}</textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit_diagnosa" class="form-label">Diagnosa</label>
+                        <textarea class="form-control" id="edit_diagnosa" name="diagnosa">${letter.diagnosa || ''}</textarea>
+                    </div>
+                    <div class="mb-3 d-none">
+                        <label for="edit_content" class="form-label">content</label>
+                        <textarea class="form-control" id="edit_content" name="content" readonly>${letter.content || ''}</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="edit_status" class="form-label">Status</label>
@@ -638,9 +647,17 @@
 
         function submitEditForm(id) {
             const form = document.getElementById('editLetterForm');
+                // Pastikan format tanggal sesuai yyyy-MM-dd
+            const tanggalSurat = new Date(form.edit_tanggal_surat.value);
+            form.edit_tanggal_surat.value = tanggalSurat.toISOString().split('T')[0];
+
+            if (form.edit_tanggal_kembali && form.edit_tanggal_kembali.value) {
+                const tanggalKembali = new Date(form.edit_tanggal_kembali.value);
+                form.edit_tanggal_kembali.value = tanggalKembali.toISOString().split('T')[0];
+            }
             const formData = new FormData(form);
 
-            fetch(`/admin/surat/${id}/edit`, {
+            fetch(`/admin/surat/${id}`, {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -665,10 +682,32 @@
             });
         }
 
-        // function printLetterById(id) {
-        //     const url = `/admin/surat/${id}/cetak`;
-        //     window.open(url, '_blank'); // Buka di tab baru
-        // }
+        function deleteLetterById(id) {
+            if (confirm('Yakin ingin menghapus surat ini?')) {
+                fetch(`/admin/surat/${id}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json',
+                        'X-HTTP-Method-Override': 'DELETE'
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => { throw err; });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Surat berhasil dihapus.');
+                    location.reload(); // atau panggil render data ulang
+                })
+                .catch(error => {
+                    console.error('Gagal menghapus surat:', error);
+                    alert('Terjadi kesalahan saat menghapus data.');
+                });
+            }
+        }
 
         function viewLetterById(id) {
             const letter = allLetterData.find(l => l.id == id);
@@ -697,7 +736,7 @@
 
         function getJenisSuratDisplayName(jenisSurat) {
             const displayNames = {
-                'izin-pulang': 'Surat Izin Pulang',
+                'pulang': 'Surat Izin Pulang',
                 'sakit': 'Surat Sakit',
                 'rekomendasi': 'Surat Rekomendasi',
                 'keterangan': 'Surat Keterangan',
@@ -710,10 +749,10 @@
             switch (status) {
                 case 'pending':
                     return 'bg-gray-100 text-gray-800';
-                case 'Selesai':
+                case 'disetujui':
                     return 'bg-green-100 text-green-800';
-                case 'Dikirim':
-                    return 'bg-blue-100 text-blue-800';
+                case 'ditolak':
+                    return 'bg-red-100 text-blue-800';
                 default:
                     return 'bg-gray-100 text-gray-800';
             }

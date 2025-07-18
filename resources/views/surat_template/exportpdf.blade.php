@@ -84,11 +84,12 @@
     </p>
 
     <div class="text-center">
-        <strong>003/PP-MU/D4/09-2025</strong><br>
+        <strong>{{$nomor_surat}}</strong><br>
+        {{-- <strong>003/PP-MU/D4/09-2025</strong><br> --}}
         <h2><u>SURAT IZIN {{ strtoupper($jenis_surat ?? '') }}</u></h2>
     </div>
     <p class="text-center">Assalamualaikum Wr. Wb</p>
-    <p>Dengan ini kami menyatakan bahwa nama Santri di bawah ini:</p>
+    <p>Dengan ini kami menyatakan bahwa Nama Santri di bawah ini:</p>
     <p>
         Nama : {{ $santri->nama ?? '..................................................' }}<br>
         Alamat : {{ $santri->alamat ?? '..................................................' }}<br>
@@ -99,7 +100,7 @@
         terhitung sejak tanggal:
         {{ $tanggal_surat ?? '...' }} – {{ $tanggal_kembali ?? '...' }} M.<br>
         Batas waktu <strong>KEMBALI</strong> ke Pesantren pada tanggal:
-        {{ $tanggal_kembali ?? '...' }}.
+        {{ $tanggal_kembali ?? '...' }} M.
     </p>
     <p class="indent">
         Demikian surat ini kami buat dengan sebenar-benarnya agar diperhatikan dan dipatuhi dengan sebaik mungkin.

@@ -82,8 +82,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/admin/surat', [ControllerAdmin::class, 'getSuratList'])->name('admin.surat.list');
     Route::get('/admin/surat/{id}', [ControllerAdmin::class, 'detailSurat'])->name('admin.surat.detail');
     // Route::get('/admin/surat/{id}/edit', [ControllerAdmin::class, 'editSurat'])->name('admin.surat.edit');
-    Route::post('/admin/surat/{id}/edit', [ControllerAdmin::class, 'editSurat'])->name('admin.surat.edit');
-    Route::put('/admin/surat/{id}', [ControllerAdmin::class, 'updateSurat'])->name('admin.surat.update');
+    Route::put('/admin/surat/{id}', [ControllerAdmin::class, 'editSurat'])->name('admin.surat.update');
+    // Route::put('/admin/surat/{id}', [ControllerAdmin::class, 'updateSurat'])->name('admin.surat.update');
     Route::delete('/admin/surat/{id}', [ControllerAdmin::class, 'deleteSurat'])->name('admin.surat.delete');
     Route::get('/admin/surat/{id}/json', [ControllerAdmin::class, 'getSuratJson'])->name('admin.surat.json');
     Route::post('/admin/surat/search-santri', [ControllerAdmin::class, 'searchSantriByNis'])->name('admin.surat.search-santri');

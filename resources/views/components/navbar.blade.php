@@ -5,18 +5,12 @@
             <h2 class="text-xl font-semibold text-gray-800">{{ $title ?? 'Dashboard' }}</h2>
         </div>
         <div class="flex items-center space-x-4">
-            <div class="relative">
-                <button class="text-gray-500 hover:text-gray-700">
-                    <i class="fas fa-bell text-xl"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">{{ $notificationCount ?? '2' }}</span>
-                </button>
-            </div>
             <div class="flex items-center space-x-3">
-                <img src="{{ $userImage ?? 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80' }}" 
+                <img src="{{ $userImage ?? 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80' }}"
                      alt="User" class="h-8 w-8 rounded-full">
                 <div class="relative">
                     <button onclick="toggleProfileDropdown()" class="flex items-center space-x-2 text-gray-700 font-medium hover:text-blue-600 transition-colors">
-                        <span>{{ $userName ?? 'Admin' }}</span>
+                        <span>{{ $name ?? 'Admin' }}</span>
                         <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     <!-- Profile Dropdown -->
@@ -42,7 +36,7 @@
                                 <button onclick="closeProfileModal()" class="text-gray-500 hover:text-gray-700"><i class="fas fa-times"></i></button>
                             </div>
                             <div class="flex items-center space-x-6 mb-6">
-                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                                <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                      alt="Admin" class="h-20 w-20 rounded-full">
                                 <div>
                                     <h4 class="text-xl font-semibold text-gray-800">Administrator</h4>
@@ -137,29 +131,29 @@
             container.className = 'fixed top-20 right-8 z-[9999] flex flex-col items-end space-y-3 w-full max-w-xs sm:max-w-sm pointer-events-none';
             document.body.appendChild(container);
         }
-        
+
         // Remove existing notifications
         const existingNotifications = container.querySelectorAll('.notification');
         existingNotifications.forEach(notification => notification.remove());
-        
+
         // Create notification element
         const notification = document.createElement('div');
         notification.className = `notification px-6 py-3 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full opacity-0 pointer-events-auto ${
-            type === 'success' ? 'bg-green-500 text-white' : 
-            type === 'error' ? 'bg-red-500 text-white' : 
+            type === 'success' ? 'bg-green-500 text-white' :
+            type === 'error' ? 'bg-red-500 text-white' :
             type === 'warning' ? 'bg-yellow-500 text-white' :
             'bg-blue-500 text-white'
         }`;
         notification.textContent = message;
-        
+
         container.appendChild(notification);
-        
+
         // Animate in
         setTimeout(() => {
             notification.style.transform = 'translateX(0)';
             notification.style.opacity = '1';
         }, 100);
-        
+
         // Remove notification after 3 seconds
         setTimeout(() => {
             notification.style.transform = 'translateX(100%)';
@@ -191,4 +185,4 @@
     function submitLogoutForm() {
         document.getElementById('logoutForm').submit();
     }
-</script> 
+</script>

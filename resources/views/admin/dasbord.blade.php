@@ -235,18 +235,6 @@
                     }, 300);
                     break;
 
-                case 'export-laporan':
-                    showNotification('Menyiapkan laporan untuk di-export...', 'info');
-                    setTimeout(() => {
-                        exportLaporan();
-                        // Reset button after export
-                        setTimeout(() => {
-                            button.innerHTML = originalText;
-                            button.disabled = false;
-                        }, 1000);
-                    }, 300);
-                    break;
-
                 case 'tambah-santri':
                     showNotification('Mengarahkan ke halaman Data Santri...', 'info');
                     setTimeout(() => {
@@ -266,6 +254,11 @@
                     button.innerHTML = originalText;
                     button.disabled = false;
             }
+            // Reset button after action
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.disabled = false;
+            }, 1000);
         }
 
         // Export Laporan Function

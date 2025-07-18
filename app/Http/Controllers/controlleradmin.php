@@ -359,6 +359,8 @@ class ControllerAdmin extends Controller
 
     public function editSurat(Request $request, $id)
     {
+        $surat = \App\Models\surat::findOrFail($id);
+
         $request->validate([
             'nomor_surat' => 'required',
             'jenis_surat' => 'required',
@@ -371,7 +373,7 @@ class ControllerAdmin extends Controller
             'santri_id' => 'required|exists:santris,id'
         ]);
 
-        $surat = Surat::findOrFail($id);
+
         $surat->update($request->only([
             'nomor_surat', 'jenis_surat', 'tanggal_surat',
             'tanggal_kembali', 'alasan', 'diagnosa',
@@ -382,65 +384,59 @@ class ControllerAdmin extends Controller
     }
 
 
-    public function updateSurat(Request $request, $id)
-    {
-        $surat = \App\Models\surat::findOrFail($id);
+    // public function updateSurat(Request $request, $id)
+    // {
+    //     $surat = \App\Models\surat::findOrFail($id);
 
-        $validated = $request->validate([
-            'nomor_surat' => 'required|unique:surats,nomor_surat,' . $id,
-            'jenis_surat' => 'required',
-            'tanggal_surat' => 'required|date',
-            'perihal' => 'required',
-            'status' => 'required',
-            'template_surat' => 'nullable',
-            'nis' => 'required',
-            'nama_santri' => 'required',
-            'alasan' => 'nullable',
-            'diagnosa' => 'nullable',
-            'tanggal_kembali' => 'nullable|date',
-            'content' => 'nullable',
-            'santri_id' => 'nullable|exists:santris,id',
-            'file_surat' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
-        ]);
+    //     $validated = $request->validate([
+    //         'nomor_surat' => 'required|unique:surats,nomor_surat,' . $id,
+    //         'jenis_surat' => 'required',
+    //         'tanggal_surat' => 'required|date',
+    //         'perihal' => 'required',
+    //         'status' => 'required',
+    //         'template_surat' => 'nullable',
+    //         'nis' => 'required',
+    //         'nama_santri' => 'required',
+    //         'alasan' => 'nullable',
+    //         'diagnosa' => 'nullable',
+    //         'tanggal_kembali' => 'nullable|date',
+    //         'content' => 'nullable',
+    //         'santri_id' => 'nullable|exists:santris,id',
+    //         'file_surat' => 'nullable|file|mimes:pdf,doc,docx|max:2048'
+    //     ]);
 
-        // Handle file upload if present
-        if ($request->hasFile('file_surat')) {
-            // Delete old file if exists
-            if ($surat->file_surat) {
-                Storage::delete('public/surats/' . $surat->file_surat);
-            }
+    //     // Handle file upload if present
+    //     if ($request->hasFile('file_surat')) {
+    //         // Delete old file if exists
+    //         if ($surat->file_surat) {
+    //             Storage::delete('public/surats/' . $surat->file_surat);
+    //         }
 
-            $file = $request->file('file_surat');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->storeAs('public/surats', $fileName);
-            $validated['file_surat'] = $fileName;
-        }
+    //         $file = $request->file('file_surat');
+    //         $fileName = time() . '_' . $file->getClientOriginalName();
+    //         $file->storeAs('public/surats', $fileName);
+    //         $validated['file_surat'] = $fileName;
+    //     }
 
-        // Find santri by NIS if santri_id is not provided
-        if (!$validated['santri_id']) {
-            $santri = Santri::where('nis', $validated['nis'])->first();
-            if ($santri) {
-                $validated['santri_id'] = $santri->id;
-            }
-        }
+    //     // Find santri by NIS if santri_id is not provided
+    //     if (!$validated['santri_id']) {
+    //         $santri = Santri::where('nis', $validated['nis'])->first();
+    //         if ($santri) {
+    //             $validated['santri_id'] = $santri->id;
+    //         }
+    //     }
 
-        $surat->update($validated);
+    //     $surat->update($validated);
 
-        return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil diupdate');
-    }
+    //     return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil diupdate');
+    // }
 
     public function deleteSurat($id)
     {
-        $surat = \App\Models\surat::findOrFail($id);
-
-        // Delete associated file if exists
-        if ($surat->file_surat) {
-            \Storage::delete('public/surats/' . $surat->file_surat);
-        }
-
+        $surat = \App\Models\Surat::findOrFail($id);
         $surat->delete();
 
-        return redirect()->route('admin.surat.list')->with('success', 'Surat berhasil dihapus');
+        return response()->json(['message' => 'Surat berhasil dihapus']);
     }
 
     public function getSuratJson($id)
@@ -808,7 +804,9 @@ class ControllerAdmin extends Controller
     $santri = $letter->santri; // pastikan relasi 'santri' ada di model Surat
 
     $jenis_surat = $letter->jenis_surat;
+    $nomor_surat = $letter->nomor_surat;
     $alasan = $letter->alasan;
+    // $status = $letter->status;
     $tanggal_kembali = Carbon::parse($letter->tanggal_kembali)->translatedFormat('d F Y');
     $tanggal_surat = Carbon::parse($letter->tanggal_surat)->translatedFormat('d F Y');
 
@@ -816,6 +814,7 @@ class ControllerAdmin extends Controller
         'letter',
         'santri',
         'jenis_surat',
+        'nomor_surat',
         'alasan',
         'tanggal_kembali',
         'tanggal_surat'
