@@ -107,6 +107,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pengasuhdaftarsurat', function () {
         return view('pengasuh.datasurat');
     });
+    Route::get('/pengasuh/surat/{id}', [PengasuhController::class, 'detailpengasuhSurat'])->name('pengasuh.surat.detail');
+    Route::put('/pengasuh/surat/{id}', [PengasuhController::class, 'updatepengasuhSurat'])->name('pengasuh.surat.update');
+
     Route::get('/pengasuhpengaturan', function () {
         return view('pengasuh.pengaturan');
     });

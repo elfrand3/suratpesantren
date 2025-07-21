@@ -46,4 +46,35 @@ class PengasuhController extends Controller
         return view('pengasuh.datasantri', compact('santris', 'santriDetail'));
     }
 
+    public function updatepengasuhSurat(Request $request, $id)
+    {
+        $surat = \App\Models\surat::findOrFail($id);
+
+        $request->validate([
+            'nomor_surat' => 'required',
+            'jenis_surat' => 'required',
+            'tanggal_surat' => 'required|date',
+            'tanggal_kembali' => 'nullable|date',
+            'alasan' => 'nullable|string',
+            'diagnosa' => 'nullable|string',
+            'content' => 'nullable|string',
+            'status' => 'required',
+            'santri_id' => 'required|exists:santris,id'
+        ]);
+
+        $surat->update($request->only([
+            'nomor_surat', 'jenis_surat', 'tanggal_surat',
+            'tanggal_kembali', 'alasan', 'diagnosa',
+            'content', 'status', 'santri_id'
+        ]));
+
+        return response()->json(['message' => 'Surat berhasil diperbarui']);
+    }
+
+    public function detailpengasuhSurat($id)
+    {
+        $surat = \App\Models\surat::with('santri')->findOrFail($id);
+        return view('pengasuh.editSurat', compact('surat'));
+    }
+
 }
