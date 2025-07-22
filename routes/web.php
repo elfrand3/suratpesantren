@@ -128,6 +128,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::get('/sekolah', function () {
     //     return view('sekolah.dasbordsekolah');
     // });
+
     Route::get('/sekolah', [SekolahController::class, 'dasbord'])->name('pengasuh.dasbordsekolah');
     Route::get('/sekolahdatasantri', [SekolahController::class, 'getSantriList'])->name('sekolah.santri.list');
     Route::get('/sekolah/santri/{id}', [SekolahController::class, 'detailSantri'])->name('sekolah.santri.detail');
@@ -135,6 +136,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sekolahdatasurat', function () {
         return view('sekolah.datasurat');
     });
+    Route::get('/sekolahdatasurat', [SekolahController::class, 'searchSantriInSurat'])->name('sekolah.surat.santri.search');
     Route::get('/sekolah/surat/{id}', [SekolahController::class, 'detailsekolahSurat'])->name('sekolah.surat.detail');
 
     Route::get('/sekolahpengaturan', function () {
