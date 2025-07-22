@@ -235,6 +235,10 @@
                 </div>
             </a>
         </div>
+        <div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-400 text-yellow-800 rounded">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <span>Peringatan: Sekolah tidak dapat membuat surat dan menambah santri.</span>
+        </div>
     </nav>
 
     <!-- Footer -->
