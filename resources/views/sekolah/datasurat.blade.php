@@ -64,7 +64,7 @@
                                 <option value="undangan">Surat Undangan</option>
                             </select>
                         </div>
-                        <div class="md:w-48 min-w-[150px]">
+                        {{-- <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
                             <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Status</option>
@@ -72,7 +72,7 @@
                                 <option value="Selesai">Selesai</option>
                                 <option value="Dikirim">Dikirim</option>
                             </select>
-                        </div>
+                        </div> --}}
                         <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
                             <button onclick="refreshData()"
@@ -390,7 +390,7 @@
         function setupEventListeners() {
             const searchInput = document.getElementById('searchInput');
             const jenisSuratFilter = document.getElementById('jenisSuratFilter');
-            const statusFilter = document.getElementById('statusFilter');
+            // const statusFilter = document.getElementById('statusFilter');
 
             // Search input with debounce for better performance
             let searchTimeout;
@@ -408,10 +408,10 @@
                 showFilterNotification();
             });
 
-            statusFilter.addEventListener('change', function() {
-                performSearch();
-                showFilterNotification();
-            });
+            // statusFilter.addEventListener('change', function() {
+            //     performSearch();
+            //     showFilterNotification();
+            // });
 
             // Enter key to search
             searchInput.addEventListener('keypress', function(e) {
@@ -445,7 +445,7 @@
         function performSearch() {
             const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
             const jenisSuratFilter = document.getElementById('jenisSuratFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
+            // const statusFilter = document.getElementById('statusFilter').value;
 
             filteredLetterData = allLetterData.filter(letter => {
                 // Enhanced search term filter with multiple criteria
@@ -460,7 +460,7 @@
                 const matchesJenisSurat = !jenisSuratFilter || letter.jenis_surat === jenisSuratFilter;
 
                 // Status filter
-                const matchesStatus = !statusFilter || letter.status === statusFilter;
+                // const matchesStatus = !statusFilter || letter.status === statusFilter;
 
                 return matchesSearch && matchesJenisSurat && matchesStatus;
             });
@@ -474,7 +474,7 @@
         function clearSearch() {
             document.getElementById('searchInput').value = '';
             document.getElementById('jenisSuratFilter').value = '';
-            document.getElementById('statusFilter').value = '';
+            // document.getElementById('statusFilter').value = '';
             filteredLetterData = [...allLetterData];
             currentPage = 1;
             renderLetterTable();
@@ -516,16 +516,17 @@
 
         function showFilterNotification() {
             const jenisSuratFilter = document.getElementById('jenisSuratFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
+            // const statusFilter = document.getElementById('statusFilter').value;
 
             let message = '';
-            if (jenisSuratFilter && statusFilter) {
-                message = `Filter: ${getJenisSuratDisplayName(jenisSuratFilter)} - ${statusFilter}`;
+            if (jenisSuratFilter) {
+                message = `Filter: ${getJenisSuratDisplayName(jenisSuratFilter)} `;
             } else if (jenisSuratFilter) {
                 message = `Filter Jenis: ${getJenisSuratDisplayName(jenisSuratFilter)}`;
-            } else if (statusFilter) {
-                message = `Filter Status: ${statusFilter}`;
             }
+            // else if (statusFilter) {
+            //     message = `Filter Status: ${statusFilter}`;
+            // }
 
             if (message) {
                 const results = filteredLetterData.length;
@@ -536,11 +537,11 @@
         function updateSearchResultsInfo() {
             const searchTerm = document.getElementById('searchInput').value.trim();
             const jenisSuratFilter = document.getElementById('jenisSuratFilter').value;
-            const statusFilter = document.getElementById('statusFilter').value;
+            // const statusFilter = document.getElementById('statusFilter').value;
 
             let infoText = `Menampilkan ${filteredLetterData.length} dari ${allLetterData.length} surat`;
 
-            if (searchTerm || jenisSuratFilter || statusFilter) {
+            if (searchTerm || jenisSuratFilter) {
                 infoText += ' (hasil pencarian)';
             }
 
@@ -568,12 +569,12 @@
             if (paginatedData.length === 0) {
                 const searchTerm = document.getElementById('searchInput').value.trim();
                 const jenisSuratFilter = document.getElementById('jenisSuratFilter').value;
-                const statusFilter = document.getElementById('statusFilter').value;
+                // const statusFilter = document.getElementById('statusFilter').value;
 
                 let emptyMessage = '';
                 let emptySubMessage = '';
 
-                if (searchTerm || jenisSuratFilter || statusFilter) {
+                if (searchTerm || jenisSuratFilter) {
                     // No results from search/filter
                     emptyMessage = 'Tidak ada data surat ditemukan';
                     emptySubMessage = 'Coba ubah kata kunci pencarian atau filter yang digunakan';
@@ -594,7 +595,7 @@
                                 <i class="fas fa-search text-6xl mb-4 text-gray-300"></i>
                                 <h3 class="text-lg font-medium text-gray-700 mb-2">${emptyMessage}</h3>
                                 <p class="text-sm text-gray-500 mb-4">${emptySubMessage}</p>
-                                ${!searchTerm && !jenisSuratFilter && !statusFilter ? `
+                                ${!searchTerm && !jenisSuratFilter ? `
                                     <a href="/buatsurat" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                                         <i class="fas fa-plus mr-2"></i>Buat Surat Pertama
                                     </a>
