@@ -3,6 +3,7 @@
 use App\Http\Controllers\SesiController;
 use App\Http\Controllers\ControllerAdmin;
 use App\Http\Controllers\PengasuhController;
+use App\Http\Controllers\SekolahController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -98,6 +99,7 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pengasuh', function () {
         return view('pengasuh.dasbordpengasuh');
     });
+    Route::get('/pengasuhdaftarsurat', [PengasuhController::class, 'searchSantriInSurat'])->name('pengasuh.surat.santri.search');
     // Route::get('/pengasuhdatasantri', function () {
     //     return view('pengasuh.datasantri');
     // });
@@ -113,6 +115,26 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pengasuhpengaturan', function () {
         return view('pengasuh.pengaturan');
     });
+});
+
+// Sekolah routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/sekolah', function () {
+        return view('sekolah.dasbordsekolah');
+    });
+    Route::get('/sekolahdatasantri', [SekolahController::class, 'getSantriList'])->name('sekolah.santri.list');
+    Route::get('/sekolah/santri/{id}', [SekolahController::class, 'detailSantri'])->name('sekolah.santri.detail');
+
+    Route::get('/sekolahdatasurat', function () {
+        return view('sekolah.datasurat');
+    });
+    Route::get('/sekolah/surat/{id}', [SekolahController::class, 'detailsekolahSurat'])->name('sekolah.surat.detail');
+    
+    Route::get('/sekolahpengaturan', function () {
+        return view('sekolah.pengaturan');
+    });
+    
+
 });
 
 
