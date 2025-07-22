@@ -38,6 +38,8 @@ class SesiController extends Controller
             return redirect(to:'/admin');
         } elseif ($role === 'Pengasuh') {
             return redirect(to:'/pengasuh');
+        } elseif ($role === 'Sekolah') {
+            return redirect(to:'/sekolah');
         } else {
             Auth::logout(); // jika role tidak dikenali
             return back()->with('Error', 'Role tidak dikenali.');

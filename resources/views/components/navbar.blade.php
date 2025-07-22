@@ -6,19 +6,19 @@
         </div>
         <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-3">
-                <img src="{{ $userImage ?? 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80' }}"
-                     alt="User" class="h-8 w-8 rounded-full">
+                {{-- <img src="{{ $userImage ?? 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80' }}"
+                     alt="User" class="h-8 w-8 rounded-full"> --}}
                 <div class="relative">
                     <button onclick="toggleProfileDropdown()" class="flex items-center space-x-2 text-gray-700 font-medium hover:text-blue-600 transition-colors">
-                        <span>{{ $name ?? 'Admin' }}</span>
+                        <span>{{ $name ?? 'Logout' }}</span>
                         <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     <!-- Profile Dropdown -->
                     <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50 hidden">
-                        <a href="#" onclick="showProfileModal(); return false;" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
+                        {{-- <a href="#" onclick="showProfileModal(); return false;" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 flex items-center">
                             <i class="fas fa-user mr-3"></i>
                             <span>Profil Saya</span>
-                        </a>
+                        </a> --}}
                         <div class="border-t border-gray-100"></div>
                         <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                             @csrf

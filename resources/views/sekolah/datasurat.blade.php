@@ -134,21 +134,6 @@
                     </div>
                 </div>
 
-                <!-- Modal Edit Surat -->
-                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="editModalLabel">Edit Data Surat</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body" id="modalEditContent">
-                                <!-- Konten form akan diisi melalui JavaScript (editLetterById) -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Pagination Info -->
                 <div class="mt-4 flex items-center justify-between text-sm text-gray-700">
                     <div id="paginationInfo">
@@ -226,7 +211,7 @@
         function checkAuth() {
             const loginData = JSON.parse(localStorage.getItem('loginData') || sessionStorage.getItem('loginData') || 'null');
 
-            if (!loginData || loginData.role !== 'admin') {
+            if (!loginData || loginData.role !== 'sekolah') {
                 alert('Anda harus login sebagai admin untuk mengakses halaman ini!');
                 window.location.href = '/login';
                 return;
@@ -340,7 +325,7 @@
             }
             const formData = new FormData(form);
 
-            fetch(`/pengasuh/surat/${id}`, {
+            fetch(`/sekolah/surat/${id}`, {
                 method: 'POST',
                 headers: {
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
@@ -464,8 +449,8 @@
                     letter.nomorSurat.toLowerCase().includes(searchTerm) ||
                     getJenisSuratDisplayName(letter.jenisSurat).toLowerCase().includes(searchTerm) ||
                     (letter.nis && letter.nis.toLowerCase().includes(searchTerm)) ||
-                    (letter.alasan && letter.alasan.toLowerCase().includes(searchTerm)) ||
-                    (letter.nama_santri && letter.nama_santri.toLowerCase().includes(searchTerm));
+                    (letter.perihal && letter.perihal.toLowerCase().includes(searchTerm)) ||
+                    (letter.namaSantri && letter.namaSantri.toLowerCase().includes(searchTerm));
 
                 // Jenis surat filter
                 const matchesJenisSurat = !jenisSuratFilter || letter.jenisSurat === jenisSuratFilter;
@@ -656,9 +641,6 @@
                         <div class="table-cell-content actions">
                             <button onclick="viewLetterById('${letter.id}')" class="text-blue-600 hover:text-black-800" title="Lihat Detail">
                                 <i class="fas fa-eye"></i>
-                            </button>
-                            <button onclick="editLetterById('${letter.id}')" class="text-yellow-600 hover:text-black-800" title="Edit Data">
-                                <i class="fas fa-edit"></i>
                             </button>
                         </div>
                     </td>

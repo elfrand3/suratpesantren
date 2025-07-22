@@ -29,6 +29,12 @@ class DatabaseSeeder extends Seeder
                 'email' => 'pengasuh@gmail.com',
                 'password' => Hash::make('123456'),
                 'role' => 'Pengasuh'
+            ],[
+                'name' => 'Sekolah',
+                'no_telp' => '08123456780',
+                'email' => 'sekolah@gmail.com',
+                'password' => Hash::make('123456'),
+                'role' => 'sekolah'
             ]
         ]);
     }

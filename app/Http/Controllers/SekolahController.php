@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Santri;
+use App\Models\Surat;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class PengasuhController extends Controller
+class SekolahController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-
     public function getSantriList(Request $request)
     {
         $query = $request->input('q');
@@ -34,19 +32,13 @@ class PengasuhController extends Controller
             $santris = $santris->where('kelas', $kelas);
         }
         $santris = $santris->get();
-        return view('pengasuh.datasantri', [
+        return view('sekolah.datasantri', [
             'santris' => $santris,
             'search' => $query
         ]);
     }
-    public function detailSantri($id)
-    {
-        $santriDetail = \App\Models\santri::findOrFail($id);
-        $santris = \App\Models\santri::all();
-        return view('pengasuh.datasantri', compact('santris', 'santriDetail'));
-    }
 
-    public function updatepengasuhSurat(Request $request, $id)
+    public function updatesekolahSurat(Request $request, $id)
     {
         $surat = \App\Models\surat::findOrFail($id);
 
@@ -71,45 +63,9 @@ class PengasuhController extends Controller
         return response()->json(['message' => 'Surat berhasil diperbarui']);
     }
 
-    public function detailpengasuhSurat($id)
+    public function detailsekolahSurat($id)
     {
         $surat = \App\Models\surat::with('santri')->findOrFail($id);
-        return view('pengasuh.editSurat', compact('surat'));
+        return view('sekolah.editSurat', compact('surat'));
     }
-
-    public function searchSantriInSurat(Request $request)
-    {
-        $query = $request->input('q');
-        $santris = [];
-        if ($query) {
-            $santris = \App\Models\santri::where('nama', 'like', "%{$query}%")
-                ->orWhere('nis', 'like', "%{$query}%")
-                ->get();
-        } else {
-            $santris = \App\Models\santri::all();
-        }
-        return view('pengasuh.datasurat', [
-            'santris' => $santris,
-            'search' => $query
-        ]);
-    }
-    
-    public function searchSantriByNis(Request $request)
-    {
-        $nis = $request->input('nis');
-        $santri = Santri::where('nis', $nis)->first();
-
-        if ($santri) {
-            return response()->json([
-                'success' => true,
-                'santri' => $santri
-            ]);
-        }
-
-        return response()->json([
-            'success' => false,
-            'message' => 'Santri tidak ditemukan'
-        ]);
-    }
-
 }
