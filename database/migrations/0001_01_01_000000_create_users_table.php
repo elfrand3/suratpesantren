@@ -21,6 +21,7 @@ return new class extends Migration
 
             $table->enum('role',['Admin','Pengasuh','Sekolah']);
 
+
             $table->rememberToken();
             $table->timestamps();
         });

@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('users')->truncate();
+        // DB::table('users')->truncate();
 
         User::factory()->createMany([[
                 'name' => 'Admin',
