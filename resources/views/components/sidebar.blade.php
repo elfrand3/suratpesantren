@@ -111,8 +111,8 @@
     <nav class="mt-8 px-4">
         <div class="space-y-2">
             <!-- Dashboard -->
-            <a href="/pengasuh" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('dp') ? 'text-white bg-white/15 shadow-lg' : '' }}">
-                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('dp') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
+            <a href="/pengasuh" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('pengasuh') ? 'text-white bg-white/15 shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('pengasuh') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
                     <i class="fas fa-tachometer-alt text-sm"></i>
                 </div>
                 <span class="font-medium">Dasbor</span>
@@ -122,7 +122,7 @@
             </a>
 
             <!-- Daftar Surat -->
-            <a href="/pengasuhdaftarsurat" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('dps') ? 'text-white bg-white/15 shadow-lg' : '' }}">
+            <a href="/pengasuhdaftarsurat" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('pengasuhdaftarsurat') ? 'text-white bg-white/15 shadow-lg' : '' }}">
                 <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('pengasuhdaftarsurat') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
                     <i class="fas fa-list text-sm"></i>
                 </div>
@@ -133,8 +133,8 @@
             </a>
 
             <!-- Data Santri -->
-            <a href="/pengasuhdatasantri" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('ds') ? 'text-white bg-white/15 shadow-lg' : '' }}">
-                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('ds') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
+            <a href="/pengasuhdatasantri" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('pengasuhdatasantri') ? 'text-white bg-white/15 shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('pengasuhdatasantri') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
                     <i class="fas fa-users text-sm"></i>
                 </div>
                 <span class="font-medium">Data Santri</span>
@@ -144,8 +144,8 @@
             </a>
 
             <!-- Pengaturan -->
-            <a href="/pengasuhpengaturan" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('p') ? 'text-white bg-white/15 shadow-lg' : '' }}">
-                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('p') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
+            <a href="/pengasuhpengaturan" class="group flex items-center px-4 py-4 text-blue-100 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 {{ request()->is('pengasuhpengaturan') ? 'text-white bg-white/15 shadow-lg' : '' }}">
+                <div class="flex items-center justify-center w-8 h-8 mr-4 rounded-lg {{ request()->is('pengasuhpengaturan') ? 'bg-white/20' : 'bg-blue-500/30 group-hover:bg-white/20' }} transition-all duration-300">
                     <i class="fas fa-cog text-sm"></i>
                 </div>
                 <span class="font-medium">Pengaturan</span>
