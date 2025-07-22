@@ -55,7 +55,7 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Jenis Surat</label>
                             <select id="jenisSuratFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Jenis</option>
-                                <option value="izin-pulang">Surat Izin Pulang</option>
+                                <option value="pulang">Surat Izin Pulang</option>
                                 <option value="sakit">Surat Sakit</option>
                                 <option value="rekomendasi">Surat Rekomendasi</option>
                                 <option value="keterangan">Surat Keterangan</option>
@@ -66,9 +66,9 @@
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
                             <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Status</option>
-                                <option value="Draft">Draft</option>
-                                <option value="Selesai">Selesai</option>
-                                <option value="Dikirim">Dikirim</option>
+                                <option value="pending">Pending</option>
+                                <option value="disetujui">Disetujui</option>
+                                <option value="ditolak">Ditolak</option>
                             </select>
                         </div>
                         <div class="md:w-48 min-w-[150px]">
@@ -463,14 +463,14 @@
             filteredLetterData = allLetterData.filter(letter => {
                 // Enhanced search term filter with multiple criteria
                 const matchesSearch = !searchTerm ||
-                    letter.nomorSurat.toLowerCase().includes(searchTerm) ||
-                    getJenisSuratDisplayName(letter.jenisSurat).toLowerCase().includes(searchTerm) ||
-                    (letter.nis && letter.nis.toLowerCase().includes(searchTerm)) ||
+                    letter.nomor_surat.toLowerCase().includes(searchTerm) ||
+                    getJenisSuratDisplayName(letter.jenis_surat).toLowerCase().includes(searchTerm) ||
+                    (letter.santri.nis && letter.santri.nis.toLowerCase().includes(searchTerm)) ||
                     (letter.alasan && letter.alasan.toLowerCase().includes(searchTerm)) ||
-                    (letter.nama_santri && letter.nama_santri.toLowerCase().includes(searchTerm));
+                    (letter.santri.nama && letter.santri.nama.toLowerCase().includes(searchTerm));
 
                 // Jenis surat filter
-                const matchesJenisSurat = !jenisSuratFilter || letter.jenisSurat === jenisSuratFilter;
+                const matchesJenisSurat = !jenisSuratFilter || letter.jenis_surat === jenisSuratFilter;
 
                 // Status filter
                 const matchesStatus = !statusFilter || letter.status === statusFilter;
@@ -677,7 +677,7 @@
 
         function getJenisSuratDisplayName(jenisSurat) {
             const displayNames = {
-                'izin-pulang': 'Surat Izin Pulang',
+                'pulang': 'Surat Izin Pulang',
                 'sakit': 'Surat Sakit',
                 'rekomendasi': 'Surat Rekomendasi',
                 'keterangan': 'Surat Keterangan',

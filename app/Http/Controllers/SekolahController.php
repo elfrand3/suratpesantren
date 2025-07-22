@@ -52,7 +52,23 @@ class SekolahController extends Controller
             'search' => $query
         ]);
     }
-
+    public function searchSantriInSurat(Request $request)
+    {
+        $query = $request->input('q');
+        $santris = [];
+        if ($query) {
+            $santris = \App\Models\santri::where('nama', 'like', "%{$query}%")
+                ->orWhere('nis', 'like', "%{$query}%")
+                ->get();
+        } else {
+            $santris = \App\Models\santri::all();
+        }
+        return view('sekolah.datasurat', [
+            'santris' => $santris,
+            'search' => $query
+        ]);
+    }
+    
     public function updatesekolahSurat(Request $request, $id)
     {
         $surat = \App\Models\surat::findOrFail($id);
