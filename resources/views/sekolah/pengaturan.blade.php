@@ -26,16 +26,10 @@
                 <button onclick="showTab('profile')" id="tab-profile" class="flex-1 min-w-[110px] flex items-center justify-center px-3 py-2 rounded-md text-gray-700 hover:bg-blue-50 focus:bg-blue-100 font-medium transition text-sm">
                     <i class="fas fa-user mr-2"></i> Profil
                 </button>
-                <button onclick="showTab('password')" id="tab-password" class="flex-1 min-w-[110px] flex items-center justify-center px-3 py-2 rounded-md text-gray-700 hover:bg-blue-50 focus:bg-blue-100 font-medium transition text-sm">
-                    <i class="fas fa-lock mr-2"></i> Password
-                </button>
-                <button onclick="showTab('notif')" id="tab-notif" class="flex-1 min-w-[110px] flex items-center justify-center px-3 py-2 rounded-md text-gray-700 hover:bg-blue-50 focus:bg-blue-100 font-medium transition text-sm">
-                    <i class="fas fa-bell mr-2"></i> Notifikasi
-                </button>
             </div>
             <!-- Tab Content -->
             <div id="content-profile" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8">
-                <h2 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-user mr-2 text-blue-500"></i> Pengaturan Profil</h2>
+                {{-- <h2 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-user mr-2 text-blue-500"></i> Pengaturan Profil</h2> --}}
                 <form class="space-y-5">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
@@ -45,13 +39,13 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="sekolah@email.com">
                     </div>
-                    <div>
+                    {{-- <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Foto Profil</label>
                         <input type="file" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                    </div>
-                    <div class="flex justify-end">
+                    </div> --}}
+                    {{-- <div class="flex justify-end">
                         <button type="submit" class="form-submit-btn px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Simpan</button>
-                    </div>
+                    </div> --}}
                 </form>
             </div>
             <div id="content-password" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8 hidden">
@@ -102,17 +96,15 @@
             document.getElementById('content-password').classList.add('hidden');
             document.getElementById('content-notif').classList.add('hidden');
             document.getElementById('tab-profile').classList.remove('bg-blue-100', 'text-blue-700');
-            document.getElementById('tab-password').classList.remove('bg-blue-100', 'text-blue-700');
-            document.getElementById('tab-notif').classList.remove('bg-blue-100', 'text-blue-700');
             if(tab === 'profile') {
                 document.getElementById('content-profile').classList.remove('hidden');
                 document.getElementById('tab-profile').classList.add('bg-blue-100', 'text-blue-700');
             } else if(tab === 'password') {
                 document.getElementById('content-password').classList.remove('hidden');
-                document.getElementById('tab-password').classList.add('bg-blue-100', 'text-blue-700');
+                document.getElementById('tab-password').classList.add('hidden');
             } else if(tab === 'notif') {
                 document.getElementById('content-notif').classList.remove('hidden');
-                document.getElementById('tab-notif').classList.add('bg-blue-100', 'text-blue-700');
+                document.getElementById('tab-notif').classList.add('hidden');
             }
         }
         // Default tab
