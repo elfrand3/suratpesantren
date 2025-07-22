@@ -98,6 +98,22 @@
                     </div>
                 </div>
 
+                <form action="{{ route('export.surat') }}" method="GET" class="mb-3">
+    <div class="row g-2">
+        <div class="col-auto">
+            <select name="bulan" class="form-select">
+                <option value="">-- Pilih Bulan --</option>
+                @foreach(range(1, 12) as $bln)
+                    <option value="{{ $bln }}">{{ DateTime::createFromFormat('!m', $bln)->format('F') }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-success">Export Excel</button>
+        </div>
+    </div>
+</form>
+
                 <div class="overflow-x-auto w-full">
                     <table class="min-w-max w-full divide-y divide-gray-200 fixed-table">
                         <thead class="sticky-header">

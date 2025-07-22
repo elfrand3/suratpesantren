@@ -92,6 +92,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/template/read-file', [ControllerAdmin::class, 'readTemplateFile'])->name('admin.template.readFile');
     Route::post('/admin/surat/store', [ControllerAdmin::class, 'storeSurat'])->name('admin.surat.store');
 
+    Route::get('/export-surat', [ControllerAdmin::class, 'exportExcel'])->name('export.surat');
+
+
 });
 
 // Pengasuh routes
@@ -129,11 +132,11 @@ Route::middleware(['auth'])->group(function () {
         return view('sekolah.datasurat');
     });
     Route::get('/sekolah/surat/{id}', [SekolahController::class, 'detailsekolahSurat'])->name('sekolah.surat.detail');
-    
+
     Route::get('/sekolahpengaturan', function () {
         return view('sekolah.pengaturan');
     });
-    
+
 
 });
 

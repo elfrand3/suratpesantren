@@ -36,8 +36,9 @@
                         <div class="flex-1 min-w-[200px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Cari Surat</label>
                             <div class="relative">
-                                <input type="text" id="searchInput" placeholder="Cari berdasarkan nomor surat, jenis surat, NIS, perihal, atau nama santri..."
-                                       class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <input type="text" id="searchInput"
+                                    placeholder="Cari berdasarkan nomor surat, jenis surat, NIS, perihal, atau nama santri..."
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                                     <i class="fas fa-search text-gray-400"></i>
                                 </div>
@@ -53,9 +54,10 @@
                         </div>
                         <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Jenis Surat</label>
-                            <select id="jenisSuratFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select id="jenisSuratFilter"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Jenis</option>
-                                <option value="izin-pulang">Surat Izin Pulang</option>
+                                <option value="pulang">Surat Izin Pulang</option>
                                 <option value="sakit">Surat Sakit</option>
                                 <option value="rekomendasi">Surat Rekomendasi</option>
                                 <option value="keterangan">Surat Keterangan</option>
@@ -64,16 +66,18 @@
                         </div>
                         <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
-                            <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <select id="statusFilter"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Status</option>
-                                <option value="Draft">Draft</option>
-                                <option value="Selesai">Selesai</option>
-                                <option value="Dikirim">Dikirim</option>
+                                <option value="pending">Pending</option>
+                                <option value="disetujui">Disetujui</option>
+                                <option value="ditolak">Ditolak</option>
                             </select>
                         </div>
                         <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
-                            <button onclick="refreshData()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                            <button onclick="refreshData()"
+                                class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                                 <i class="fas fa-sync-alt mr-2"></i>Refresh
                             </button>
                         </div>
@@ -446,14 +450,14 @@
             filteredLetterData = allLetterData.filter(letter => {
                 // Enhanced search term filter with multiple criteria
                 const matchesSearch = !searchTerm ||
-                    letter.nomorSurat.toLowerCase().includes(searchTerm) ||
-                    getJenisSuratDisplayName(letter.jenisSurat).toLowerCase().includes(searchTerm) ||
+                    letter.nomor_surat.toLowerCase().includes(searchTerm) ||
+                    getJenisSuratDisplayName(letter.jenis_surat).toLowerCase().includes(searchTerm) ||
                     (letter.nis && letter.nis.toLowerCase().includes(searchTerm)) ||
-                    (letter.perihal && letter.perihal.toLowerCase().includes(searchTerm)) ||
+                    (letter.alasan && letter.alasan.toLowerCase().includes(searchTerm)) ||
                     (letter.namaSantri && letter.namaSantri.toLowerCase().includes(searchTerm));
 
                 // Jenis surat filter
-                const matchesJenisSurat = !jenisSuratFilter || letter.jenisSurat === jenisSuratFilter;
+                const matchesJenisSurat = !jenisSuratFilter || letter.jenis_surat === jenisSuratFilter;
 
                 // Status filter
                 const matchesStatus = !statusFilter || letter.status === statusFilter;

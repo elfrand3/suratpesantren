@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Http;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use App\Exports\SuratExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ControllerAdmin extends Controller
 {
@@ -869,5 +871,11 @@ class ControllerAdmin extends Controller
 
         return $pdf->stream('surat_izin.pdf');
     }
+
+    public function exportExcel(Request $request)
+{
+    $bulan = $request->get('bulan');
+    return Excel::download(new SuratExport($bulan), 'daftar-surat.xlsx');
+}
 
 }
