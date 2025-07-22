@@ -63,15 +63,6 @@
                             </select>
                         </div>
                         <div class="md:w-48 min-w-[150px]">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Filter Status</label>
-                            <select id="statusFilter" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
-                                <option value="">Semua Status</option>
-                                <option value="Draft">Draft</option>
-                                <option value="Selesai">Selesai</option>
-                                <option value="Dikirim">Dikirim</option>
-                            </select>
-                        </div>
-                        <div class="md:w-48 min-w-[150px]">
                             <label class="block text-sm font-medium text-gray-700 mb-2">&nbsp;</label>
                             <button onclick="refreshData()" class="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
                                 <i class="fas fa-sync-alt mr-2"></i>Refresh
@@ -101,11 +92,12 @@
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-no">No</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nomor">Nomor Surat</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-jenis">Jenis Surat</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">Tanggal</th>
+                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">Tanggal Izin</th>
+                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">Tanggal Kembali</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nis">NIS</th>
+                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nis">Nama</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-perihal">Perihal</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-status">Status</th>
-                                <th class="table-cell text-center text-xs font-medium text-gray-500 uppercase tracking-wider col-aksi">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="letterTableBody" class="bg-white divide-y divide-gray-200">
@@ -550,7 +542,16 @@
             const tableBody = document.getElementById('letterTableBody');
             const startIndex = (currentPage - 1) * itemsPerPage;
             const endIndex = startIndex + itemsPerPage;
-            const paginatedData = filteredLetterData.slice(startIndex, endIndex);
+            // const paginatedData = filteredLetterData.slice(startIndex, endIndex);
+            const approvedLetters = filteredLetterData.filter(letter => letter.status === 'disetujui');
+            const paginatedData = approvedLetters.slice(startIndex, endIndex);
+            // let filteredData = filteredLetterData;
+
+            // if (statusFilter === 'disetujui') {
+            //     filteredData = filteredLetterData.filter(letter => letter.status === 'disetujui');
+            // }
+
+            // const paginatedData = filteredData.slice(startIndex, endIndex);
 
             if (paginatedData.length === 0) {
                 const searchTerm = document.getElementById('searchInput').value.trim();
@@ -624,8 +625,14 @@
                     <td class="table-cell col-tanggal">
                         <div class="table-cell-content">${formatDate(letter.tanggal_surat)}</div>
                     </td>
+                    <td class="table-cell col-tanggal">
+                        <div class="table-cell-content">${formatDate(letter.tanggal_kembali)}</div>
+                    </td>
                     <td class="table-cell col-nis">
                         <div class="table-cell-content">${highlightText(letter.santri.nis)}</div>
+                    </td>
+                    <td class="table-cell col-nama">
+                        <div class="table-cell-content">${highlightText(letter.santri.nama)}</div>
                     </td>
                     <td class="table-cell col-perihal">
                         <div class="table-cell-content">${highlightText(letter.alasan)}</div>
@@ -635,13 +642,6 @@
                             <span class="px-3 py-1 ${getStatusColor(letter.status)} text-xs rounded-full">
                                 ${letter.status}
                             </span>
-                        </div>
-                    </td>
-                    <td class="table-cell col-aksi text-center">
-                        <div class="table-cell-content actions">
-                            <button onclick="viewLetterById('${letter.id}')" class="text-blue-600 hover:text-black-800" title="Lihat Detail">
-                                <i class="fas fa-eye"></i>
-                            </button>
                         </div>
                     </td>
                 `;

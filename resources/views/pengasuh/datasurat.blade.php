@@ -101,8 +101,10 @@
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-no">No</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nomor">Nomor Surat</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-jenis">Jenis Surat</th>
-                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">Tanggal</th>
+                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">Tanggal Izin</th>
+                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-tanggal">Tanggal Kembali</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nis">NIS</th>
+                                <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-nis">Nama</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-perihal">Perihal</th>
                                 <th class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-status">Status</th>
                                 <th class="table-cell text-center text-xs font-medium text-gray-500 uppercase tracking-wider col-aksi">Aksi</th>
@@ -639,8 +641,14 @@
                     <td class="table-cell col-tanggal">
                         <div class="table-cell-content">${formatDate(letter.tanggal_surat)}</div>
                     </td>
+                    <td class="table-cell col-tanggal">
+                        <div class="table-cell-content">${formatDate(letter.tanggal_kembali)}</div>
+                    </td>
                     <td class="table-cell col-nis">
                         <div class="table-cell-content">${highlightText(letter.santri.nis)}</div>
+                    </td>
+                    <td class="table-cell col-nama">
+                        <div class="table-cell-content">${highlightText(letter.santri.nama)}</div>
                     </td>
                     <td class="table-cell col-perihal">
                         <div class="table-cell-content">${highlightText(letter.alasan)}</div>
