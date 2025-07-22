@@ -176,7 +176,8 @@ class ControllerAdmin extends Controller
         $santri = Santri::find($request->santri_id);
 
     if (!$santri) {
-        return redirect()->back()->with('error', 'Santri tidak ditemukan.');
+        // return redirect()->back()->with('error', 'Santri tidak ditemukan.');
+        return redirect()->route('admin.surat.store')->with('error', 'Santri tidak ditemukan');
     }
 
     // Format pesan WA
@@ -195,7 +196,8 @@ class ControllerAdmin extends Controller
         'message' => $pesan,
     ]);
         // dd($validated);
-        return redirect()->back()->with('success', 'Surat berhasil disimpan.');
+        return redirect()->route('admin.surat.store')->with('succes', 'Surat berhasil disimpan');
+        // return redirect()->back()->with('success', 'Surat berhasil disimpan.');
 
     }
 

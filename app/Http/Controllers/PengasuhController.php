@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Santri;
+use App\Models\Surat;
+use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class PengasuhController extends Controller
@@ -10,6 +13,20 @@ class PengasuhController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function dasbord() {
+
+        $totalSurat = Surat::count(); // hitung semua data surat
+        $suratDisetujui = Surat::where('status', 'disetujui')->count(); // hitung surat yang disetujui
+        $suratMenunggu = Surat::where('status', 'pending')->count(); // hitung surat yang menunggu
+        $santri = Santri::count(); // ambil semua data santri
+
+        return view('pengasuh.dasbordpengasuh', [
+            'totalSurat' => $totalSurat,
+            'santri' => $santri,
+            'suratDisetujui' => $suratDisetujui,
+            'suratMenunggu' => $suratMenunggu,
+        ]);
+    }
 
     public function getSantriList(Request $request)
     {
@@ -93,7 +110,7 @@ class PengasuhController extends Controller
             'search' => $query
         ]);
     }
-    
+
     public function searchSantriByNis(Request $request)
     {
         $nis = $request->input('nis');

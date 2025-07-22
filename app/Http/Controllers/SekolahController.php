@@ -9,6 +9,21 @@ use Illuminate\Http\Request;
 
 class SekolahController extends Controller
 {
+    public function dasbord() {
+
+        $totalSurat = Surat::count(); // hitung semua data surat
+        $suratDisetujui = Surat::where('status', 'disetujui')->count(); // hitung surat yang disetujui
+        $suratMenunggu = Surat::where('status', 'pending')->count(); // hitung surat yang menunggu
+        $santri = Santri::count(); // ambil semua data santri
+
+        return view('sekolah.dasbordsekolah', [
+            'totalSurat' => $totalSurat,
+            'santri' => $santri,
+            'suratDisetujui' => $suratDisetujui,
+            'suratMenunggu' => $suratMenunggu,
+        ]);
+    }
+
     public function getSantriList(Request $request)
     {
         $query = $request->input('q');

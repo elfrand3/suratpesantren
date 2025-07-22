@@ -79,7 +79,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/santri/{id}', [ControllerAdmin::class, 'deleteSantri'])->name('admin.santri.delete');
     Route::get('/admin/santri/{id}/json', [ControllerAdmin::class, 'getSantriJson'])->name('admin.santri.json');
     Route::get('/admin/surat/create', [ControllerAdmin::class, 'createSurat'])->name('admin.surat.create');
-    Route::post('/admin/surat', [ControllerAdmin::class, 'storeSurat'])->name('admin.surat.store');
+    Route::post('admindaftarpembuatsurat', [ControllerAdmin::class, 'storeSurat'])->name('admin.surat.store');
     Route::get('/admin/surat', [ControllerAdmin::class, 'getSuratList'])->name('admin.surat.list');
     Route::get('/admin/surat/{id}', [ControllerAdmin::class, 'detailSurat'])->name('admin.surat.detail');
     // Route::get('/admin/surat/{id}/edit', [ControllerAdmin::class, 'editSurat'])->name('admin.surat.edit');
@@ -90,7 +90,7 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/surat/search-santri', [ControllerAdmin::class, 'searchSantriByNis'])->name('admin.surat.search-santri');
     Route::post('/admin/surat/generate-nomor', [ControllerAdmin::class, 'generateNomorSurat'])->name('admin.surat.generate-nomor');
     Route::post('/admin/template/read-file', [ControllerAdmin::class, 'readTemplateFile'])->name('admin.template.readFile');
-    Route::post('/admin/surat/store', [ControllerAdmin::class, 'storeSurat'])->name('admin.surat.store');
+    // Route::post('/admin/surat/store', [ControllerAdmin::class, 'storeSurat'])->name('admin.surat.store');
 
     Route::get('/export-surat', [ControllerAdmin::class, 'exportExcel'])->name('export.surat');
 
@@ -99,9 +99,12 @@ Route::middleware(['auth'])->group(function () {
 
 // Pengasuh routes
 Route::middleware(['auth'])->group(function(){
-    Route::get('/pengasuh', function () {
-        return view('pengasuh.dasbordpengasuh');
-    });
+    // Route::get('/pengasuh', function () {
+    //     return view('pengasuh.dasbordpengasuh');
+    // });
+
+    Route::get('/pengasuh', [PengasuhController::class, 'dasbord'])->name('pengasuh.dasbordpengasuh');
+
     Route::get('/pengasuhdaftarsurat', [PengasuhController::class, 'searchSantriInSurat'])->name('pengasuh.surat.santri.search');
     // Route::get('/pengasuhdatasantri', function () {
     //     return view('pengasuh.datasantri');
@@ -122,9 +125,10 @@ Route::middleware(['auth'])->group(function(){
 
 // Sekolah routes
 Route::middleware(['auth'])->group(function () {
-    Route::get('/sekolah', function () {
-        return view('sekolah.dasbordsekolah');
-    });
+    // Route::get('/sekolah', function () {
+    //     return view('sekolah.dasbordsekolah');
+    // });
+    Route::get('/sekolah', [SekolahController::class, 'dasbord'])->name('pengasuh.dasbordsekolah');
     Route::get('/sekolahdatasantri', [SekolahController::class, 'getSantriList'])->name('sekolah.santri.list');
     Route::get('/sekolah/santri/{id}', [SekolahController::class, 'detailSantri'])->name('sekolah.santri.detail');
 
