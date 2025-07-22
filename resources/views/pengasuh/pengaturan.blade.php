@@ -26,7 +26,7 @@
                 <button onclick="showTab('profile')" id="tab-profile" class="flex-1 min-w-[110px] flex items-center justify-center px-3 py-2 rounded-md text-gray-700 hover:bg-blue-50 focus:bg-blue-100 font-medium transition text-sm">
                     <i class="fas fa-user mr-2"></i> Profil
                 </button>
-                <button onclick="showTab('password')" id="tab-password" class="flex-1 min-w-[110px] flex items-center justify-center px-3 py-2 rounded-md text-gray-700 hover:bg-blue-50 focus:bg-blue-100 font-medium transition text-sm">
+                <button onclick="showTab('password')" id="tab-password" class="flex-1 min-w-[110px] flex items-center justify-center px-3 py-2 rounded-md text-gray-700 hover:bg-blue-50 focus:bg-blue-100 font-medium transition text-sm" >
                     <i class="fas fa-lock mr-2"></i> Password
                 </button>
                 <button onclick="showTab('notif')" id="tab-notif" class="flex-1 min-w-[110px] flex items-center justify-center px-3 py-2 rounded-md text-gray-700 hover:bg-blue-50 focus:bg-blue-100 font-medium transition text-sm">
