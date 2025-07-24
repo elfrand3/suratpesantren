@@ -118,7 +118,7 @@
 
     <div style="position: relative; margin-top: 20px; min-height: 180px;">
         @if($qr_image_base64)
-            <div style="position: absolute; margin-top:120px ;top: 0; left: 0;">
+            <div style="position: absolute; margin-top:0; top: 0; left: 75%;">
                 <img src="{{ $qr_image_base64 }}" alt="QR Code" style="width: 120px;">
             </div>
         @endif
@@ -126,7 +126,9 @@
             <p><i>Wassalamualaikum Wr. Wb</i></p>
             <p>Kaliacar, {{ $tanggal_surat ?? '___, ____________, 2025' }}</p>
             <p>Pengasuh Pesantren</p>
-            <img src="{{ public_path('logosignatur.png') }}" alt="Stempel" style="width: 130px;">
+            @if ($qr_image_base64)
+                <img src="{{ public_path('logosignatur.png') }}" alt="Stempel" style="width: 130px;">
+            @endif
             <p><strong>KH. As'ad Abu Hasan</strong></p>
         </div>
     </div>

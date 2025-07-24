@@ -218,6 +218,9 @@
                                         Kelas</th>
                                     <th
                                         class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-alamat">
+                                        Jenis Kelamin</th>
+                                    <th
+                                        class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-alamat">
                                         Alamat</th>
                                     <th
                                         class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-status">
@@ -242,6 +245,9 @@
                                         </td>
                                         <td class="table-cell col-kelas">
                                             <div class="table-cell-content">{{ $santri->kelas }}</div>
+                                        </td>
+                                        <td class="table-cell col-js">
+                                            <div class="table-cell-content">{{ $santri->jenis_kelamin }}</div>
                                         </td>
                                         <td class="table-cell col-alamat">
                                             <div class="table-cell-content">{{ $santri->alamat }}</div>
@@ -564,7 +570,7 @@
     </div>
 
     <!-- Modal Edit Santri (tanpa JS, langsung tampil jika $santriEdit ada) -->
-    @if (isset($santriEdit))
+    {{-- @if (isset($santriEdit))
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
             <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative max-h-[90vh] overflow-y-auto">
                 <a href="{{ route('admin.santri.list') }}"
@@ -606,6 +612,70 @@
                 </form>
             </div>
         </div>
+    @endif --}}
+    @if (isset($santriEdit))
+    <!-- Modal Bootstrap Edit Santri -->
+    <div class="modal show fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Data Santri</h5>
+                    <a href="{{ route('admin.santri.list') }}" class="btn-close" aria-label="Tutup"></a>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('admin.santri.update', $santriEdit->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" name="nis" class="form-control" placeholder="NIS" value="{{ $santriEdit->nis }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="nama" class="form-control" placeholder="Nama" value="{{ $santriEdit->nama }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="tempat_lahir" class="form-control" placeholder="Tempat Lahir" value="{{ $santriEdit->tempat_lahir }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="date" name="tanggal_lahir" class="form-control" value="{{ $santriEdit->tanggal_lahir }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="jenis_kelamin" class="form-control" placeholder="Jenis Kelamin" value="{{ $santriEdit->jenis_kelamin }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="agama" class="form-control" placeholder="Agama" value="{{ $santriEdit->agama }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="kelas" class="form-control" placeholder="Kelas" value="{{ $santriEdit->kelas }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="status" class="form-control" placeholder="Status" value="{{ $santriEdit->status }}" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" name="alamat" class="form-control" placeholder="Alamat" value="{{ $santriEdit->alamat }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="no_telp" class="form-control" placeholder="No Telp" value="{{ $santriEdit->no_telp }}" required>
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" name="nama_ortu" class="form-control" placeholder="Nama Ortu" value="{{ $santriEdit->nama_ortu }}" required>
+                            </div>
+                            <div class="col-12">
+                                <input type="text" name="alamat_ortu" class="form-control" placeholder="Alamat Ortu" value="{{ $santriEdit->alamat_ortu }}" required>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-end">
+                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            <a href="{{ route('admin.santri.list') }}" class="btn btn-secondary">Batal</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Backdrop manual -->
+    <div class="modal-backdrop fade show"></div>
     @endif
 
     <!-- Notification Container (for elegant stacked notifications) -->

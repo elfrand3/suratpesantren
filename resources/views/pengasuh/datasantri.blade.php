@@ -42,7 +42,7 @@
         }
 
         .col-alamat {
-            width: 256px;
+            width: 225px;
             min-width: 256px;
             max-width: 256px;
         }
@@ -204,6 +204,9 @@
                                     class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-kelas">
                                     Kelas</th>
                                 <th
+                                    class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-js">
+                                    Jenis Kelamin</th>
+                                <th
                                     class="table-cell text-left text-xs font-medium text-gray-500 uppercase tracking-wider col-alamat">
                                     Alamat</th>
                                 <th
@@ -229,6 +232,9 @@
                                     </td>
                                     <td class="table-cell col-kelas">
                                         <div class="table-cell-content">{{ $santri->kelas }}</div>
+                                    </td>
+                                    <td class="table-cell col-js">
+                                        <div class="table-cell-content">{{ $santri->jenis_kelamin }}</div>
                                     </td>
                                     <td class="table-cell col-alamat">
                                         <div class="table-cell-content">{{ $santri->alamat }}</div>
@@ -446,7 +452,7 @@
     <!-- Tambahkan overlay hitam -->
     <div class="modal-backdrop fade show"></div>
     @endif
-    
+
     <script>
         function addNewSantri() {
             var modal = document.getElementById('addSantriModal');
