@@ -48,9 +48,9 @@
         }
 
         .col-status {
-            width: 96px;
-            min-width: 96px;
-            max-width: 96px;
+            width: 130px;
+            min-width: 120px;
+            max-width: 130px;
         }
 
         .col-aksi {
@@ -129,32 +129,30 @@
                             <select id="kelasFilter" name="kelas"
                                 class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <option value="">Semua Kelas</option>
-                                <option value="X IPA 1" {{ request('kelas') == 'X IPA 1' ? 'selected' : '' }}>X IPA 1
+                                <option value="I MI" {{ request('kelas') == 'I MI' ? 'selected' : '' }}>I MI
                                 </option>
-                                <option value="X IPA 2" {{ request('kelas') == 'X IPA 2' ? 'selected' : '' }}>X IPA 2
+                                <option value="2 MI" {{ request('kelas') == '2 MI' ? 'selected' : '' }}>II MI
                                 </option>
-                                <option value="X IPA 3" {{ request('kelas') == 'X IPA 3' ? 'selected' : '' }}>X IPA 3
+                                <option value="3 MI" {{ request('kelas') == '3 MI' ? 'selected' : '' }}>III MI
                                 </option>
-                                <option value="X IPS 1" {{ request('kelas') == 'X IPS 1' ? 'selected' : '' }}>X IPS 1
+                                <option value="4 MI" {{ request('kelas') == '4 MI' ? 'selected' : '' }}>IV MI
                                 </option>
-                                <option value="X IPS 2" {{ request('kelas') == 'X IPS 2' ? 'selected' : '' }}>X IPS 2
+                                <option value="5 MI" {{ request('kelas') == '5 MI' ? 'selected' : '' }}>V MI
                                 </option>
-                                <option value="XI IPA 1" {{ request('kelas') == 'XI IPA 1' ? 'selected' : '' }}>XI IPA 1
+                                <option value="6 MI" {{ request('kelas') == '6 MI' ? 'selected' : '' }}>VI MI
                                 </option>
-                                <option value="XI IPA 2" {{ request('kelas') == 'XI IPA 2' ? 'selected' : '' }}>XI IPA
-                                    2</option>
-                                <option value="XI IPS 1" {{ request('kelas') == 'XI IPS 1' ? 'selected' : '' }}>XI IPS
-                                    1</option>
-                                <option value="XI IPS 2" {{ request('kelas') == 'XI IPS 2' ? 'selected' : '' }}>XI IPS
-                                    2</option>
-                                <option value="XII IPA 1" {{ request('kelas') == 'XII IPA 1' ? 'selected' : '' }}>XII
-                                    IPA 1</option>
-                                <option value="XII IPA 2" {{ request('kelas') == 'XII IPA 2' ? 'selected' : '' }}>XII
-                                    IPA 2</option>
-                                <option value="XII IPS 1" {{ request('kelas') == 'XII IPS 1' ? 'selected' : '' }}>XII
-                                    IPS 1</option>
-                                <option value="XII IPS 2" {{ request('kelas') == 'XII IPS 2' ? 'selected' : '' }}>XII
-                                    IPS 2</option>
+                                <option value="1 MTS" {{ request('kelas') == '1 MTS' ? 'selected' : '' }}>VII MTS
+                                </option>
+                                <option value="2 MTS" {{ request('kelas') == '2 MTS' ? 'selected' : '' }}>VIII MTS
+                                </option>
+                                <option value="3 MTS" {{ request('kelas') == '3 MTS' ? 'selected' : '' }}>IX MTS
+                                </option>
+                                <option value="1 SMA" {{ request('kelas') == '1 SMA' ? 'selected' : '' }}>X SMA
+                                </option>
+                                <option value="2 SMA" {{ request('kelas') == '2 SMA' ? 'selected' : '' }}>XI SMA
+                                </option>
+                                <option value="3 SMA" {{ request('kelas') == '3 SMA' ? 'selected' : '' }}>XII SMA
+                                </option>
                             </select>
                         </div>
                         <div class="md:w-45 min-w-[150px] flex items-center gap-2 justify-end">

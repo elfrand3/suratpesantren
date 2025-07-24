@@ -9,6 +9,84 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <style>
+        /* Ensure table has minimum width and stable columns */
+        .table-container {
+            min-width: 1200px;
+            /* Minimum width to accommodate all columns */
+        }
+
+        /* Fixed column widths with consistent alignment */
+        .col-no {
+            width: 64px;
+            min-width: 64px;
+            max-width: 64px;
+        }
+
+        .col-nis {
+            width: 128px;
+            min-width: 128px;
+            max-width: 128px;
+        }
+
+        .col-nama {
+            width: 192px;
+            min-width: 192px;
+            max-width: 192px;
+        }
+
+        .col-kelas {
+            width: 128px;
+            min-width: 128px;
+            max-width: 128px;
+        }
+
+        .col-alamat {
+            width: 225px;
+            min-width: 256px;
+            max-width: 256px;
+        }
+
+        .col-status {
+            width: 130px;
+            min-width: 120px;
+            max-width: 130px;
+        }
+
+        .col-aksi {
+            width: 128px;
+            min-width: 128px;
+            max-width: 128px;
+        }
+
+        /* Ensure sticky header works properly */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: rgb(250, 250, 250);
+        }
+
+        /* Consistent cell padding and alignment */
+        .table-cell {
+            padding: 1rem 1.5rem;
+            vertical-align: middle;
+            box-sizing: border-box;
+        }
+
+        /* Ensure table layout is fixed for consistent column widths */
+        .fixed-table {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        /* Prevent text overflow and ensure consistent alignment */
+        .table-cell-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     @include('components.sidebar')

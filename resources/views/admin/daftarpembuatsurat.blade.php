@@ -49,9 +49,9 @@
         }
 
         .col-status {
-            width: 96px;
-            min-width: 96px;
-            max-width: 96px;
+            width: 130px;
+            min-width: 120px;
+            max-width: 130px;
         }
 
         .col-aksi {
