@@ -10,6 +10,84 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Ensure table has minimum width and stable columns */
+        .table-container {
+            min-width: 1200px;
+            /* Minimum width to accommodate all columns */
+        }
+
+        /* Fixed column widths with consistent alignment */
+        .col-no {
+            width: 64px;
+            min-width: 64px;
+            max-width: 64px;
+        }
+
+        .col-nis {
+            width: 128px;
+            min-width: 128px;
+            max-width: 128px;
+        }
+
+        .col-nama {
+            width: 192px;
+            min-width: 192px;
+            max-width: 192px;
+        }
+
+        .col-kelas {
+            width: 128px;
+            min-width: 128px;
+            max-width: 128px;
+        }
+
+        .col-alamat {
+            width: 256px;
+            min-width: 256px;
+            max-width: 256px;
+        }
+
+        .col-status {
+            width: 96px;
+            min-width: 96px;
+            max-width: 96px;
+        }
+
+        .col-aksi {
+            width: 128px;
+            min-width: 128px;
+            max-width: 128px;
+        }
+
+        /* Ensure sticky header works properly */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background-color: rgb(250, 250, 250);
+        }
+
+        /* Consistent cell padding and alignment */
+        .table-cell {
+            padding: 1rem 1.5rem;
+            vertical-align: middle;
+            box-sizing: border-box;
+        }
+
+        /* Ensure table layout is fixed for consistent column widths */
+        .fixed-table {
+            table-layout: fixed;
+            width: 100%;
+        }
+
+        /* Prevent text overflow and ensure consistent alignment */
+        .table-cell-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+    </style>
 </head>
 
 <body class="bg-gray-50">
@@ -99,20 +177,21 @@
                 </div>
 
                 <form action="{{ route('export.surat') }}" method="GET" class="mb-3">
-    <div class="row g-2">
-        <div class="col-auto">
-            <select name="bulan" class="form-select">
-                <option value="">-- Pilih Bulan --</option>
-                @foreach(range(1, 12) as $bln)
-                    <option value="{{ $bln }}">{{ DateTime::createFromFormat('!m', $bln)->format('F') }}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-success">Export Excel</button>
-        </div>
-    </div>
-</form>
+                    <div class="row g-2">
+                        <div class="col-auto">
+                            <select name="bulan" class="form-select">
+                                <option value="">-- Pilih Bulan --</option>
+                                @foreach (range(1, 12) as $bln)
+                                    <option value="{{ $bln }}">
+                                        {{ DateTime::createFromFormat('!m', $bln)->format('F') }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success">Export Excel</button>
+                        </div>
+                    </div>
+                </form>
 
                 <div class="overflow-x-auto w-full">
                     <table class="min-w-max w-full divide-y divide-gray-200 fixed-table">
@@ -163,19 +242,22 @@
                                 <!-- Akan diisi via JavaScript -->
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Tutup</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- Modal Edit Surat -->
-                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel"
+                    aria-hidden="true">
                     <div class="modal-dialog modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" id="editModalLabel">Edit Data Surat</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body" id="modalEditContent">
                                 <!-- Konten form akan diisi melalui JavaScript (editLetterById) -->
@@ -273,7 +355,7 @@
 
         function checkAuth() {
             const loginData = JSON.parse(localStorage.getItem('loginData') || sessionStorage.getItem('loginData') ||
-            'null');
+                'null');
 
             if (!loginData || loginData.role !== 'admin') {
                 alert('Anda harus login sebagai admin untuk mengakses halaman ini!');
@@ -517,14 +599,14 @@
                                 <h3 class="text-lg font-medium text-gray-700 mb-2">${emptyMessage}</h3>
                                 <p class="text-sm text-gray-500 mb-4">${emptySubMessage}</p>
                                 ${!searchTerm && !jenisSuratFilter && !statusFilter ? `
-                                        <a href="/buatsurat" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                                            <i class="fas fa-plus mr-2"></i>Buat Surat Pertama
-                                        </a>
-                                    ` : `
-                                        <button onclick="refreshData()" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
-                                            <i class="fas fa-sync-alt mr-2"></i>Refresh Data
-                                        </button>
-                                    `}
+                                            <a href="/buatsurat" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                                                <i class="fas fa-plus mr-2"></i>Buat Surat Pertama
+                                            </a>
+                                        ` : `
+                                            <button onclick="refreshData()" class="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-700 transition-colors">
+                                                <i class="fas fa-sync-alt mr-2"></i>Refresh Data
+                                            </button>
+                                        `}
                             </div>
                         </td>
                     </tr>
@@ -663,7 +745,7 @@
 
         function submitEditForm(id) {
             const form = document.getElementById('editLetterForm');
-                // Pastikan format tanggal sesuai yyyy-MM-dd
+            // Pastikan format tanggal sesuai yyyy-MM-dd
             const tanggalSurat = new Date(form.edit_tanggal_surat.value);
             form.edit_tanggal_surat.value = tanggalSurat.toISOString().split('T')[0];
 
@@ -674,54 +756,58 @@
             const formData = new FormData(form);
 
             fetch(`/admin/surat/${id}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                    'Accept': 'application/json',
-                    'X-HTTP-Method-Override': 'PUT'
-                },
-                body: formData
-            })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(err => { throw err; });
-                }
-                return response.json();
-            })
-            .then(data => {
-                alert('Data berhasil diperbarui!');
-                location.reload(); // atau refresh tabel data jika pakai datatables
-            })
-            .catch(error => {
-                console.error('Gagal memperbarui data:', error);
-                alert('Terjadi kesalahan saat menyimpan perubahan.');
-            });
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                        'Accept': 'application/json',
+                        'X-HTTP-Method-Override': 'PUT'
+                    },
+                    body: formData
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.json().then(err => {
+                            throw err;
+                        });
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    alert('Data berhasil diperbarui!');
+                    location.reload(); // atau refresh tabel data jika pakai datatables
+                })
+                .catch(error => {
+                    console.error('Gagal memperbarui data:', error);
+                    alert('Terjadi kesalahan saat menyimpan perubahan.');
+                });
         }
 
         function deleteLetterById(id) {
             if (confirm('Yakin ingin menghapus surat ini?')) {
                 fetch(`/admin/surat/${id}`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Accept': 'application/json',
-                        'X-HTTP-Method-Override': 'DELETE'
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        return response.json().then(err => { throw err; });
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    alert('Surat berhasil dihapus.');
-                    location.reload(); // atau panggil render data ulang
-                })
-                .catch(error => {
-                    console.error('Gagal menghapus surat:', error);
-                    alert('Terjadi kesalahan saat menghapus data.');
-                });
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+                            'Accept': 'application/json',
+                            'X-HTTP-Method-Override': 'DELETE'
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.json().then(err => {
+                                throw err;
+                            });
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        alert('Surat berhasil dihapus.');
+                        location.reload(); // atau panggil render data ulang
+                    })
+                    .catch(error => {
+                        console.error('Gagal menghapus surat:', error);
+                        alert('Terjadi kesalahan saat menghapus data.');
+                    });
             }
         }
 
@@ -729,7 +815,7 @@
             const letter = allLetterData.find(l => l.id == id);
             if (!letter) {
                 document.getElementById('modalContent').innerHTML =
-                "<p class='text-danger'>Data surat tidak ditemukan!</p>";
+                    "<p class='text-danger'>Data surat tidak ditemukan!</p>";
                 const modal = new bootstrap.Modal(document.getElementById('detailModal'));
                 modal.show();
                 return;

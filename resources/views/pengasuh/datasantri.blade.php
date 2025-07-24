@@ -8,6 +8,7 @@
     <title>Data Santri</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* Ensure table has minimum width and stable columns */
         .table-container {
@@ -355,7 +356,7 @@
         class="fixed top-20 right-8 z-[9999] flex flex-col items-end space-y-3 w-full max-w-xs sm:max-w-sm pointer-events-none">
     </div>
 
-    @if (isset($santriDetail))
+    {{-- @if (isset($santriDetail))
         <!-- Modal Detail Santri (tanpa JS, langsung tampil jika $santriDetail ada) -->
         <div class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
             <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
@@ -410,8 +411,42 @@
                 </table>
             </div>
         </div>
-    @endif
+    @endif --}}
+    @if (isset($santriDetail))
+    <!-- Modal Bootstrap Detail Santri -->
+    <div class="modal show fade" id="detailModal" tabindex="-1" aria-labelledby="detailModalLabel" style="display: block;" aria-modal="true" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="detailModalLabel">Detail Data Santri</h5>
+                    <a href="{{ route('admin.santri.list') }}" class="btn-close" aria-label="Tutup"></a>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-sm">
+                        <tr><th>NIS</th><td>{{ $santriDetail->nis }}</td></tr>
+                        <tr><th>Nama</th><td>{{ $santriDetail->nama }}</td></tr>
+                        <tr><th>Tempat, Tanggal Lahir</th><td>{{ $santriDetail->tempat_lahir }}, {{ $santriDetail->tanggal_lahir }}</td></tr>
+                        <tr><th>Jenis Kelamin</th><td>{{ $santriDetail->jenis_kelamin }}</td></tr>
+                        <tr><th>Agama</th><td>{{ $santriDetail->agama }}</td></tr>
+                        <tr><th>Kelas</th><td>{{ $santriDetail->kelas }}</td></tr>
+                        <tr><th>Status</th><td>{{ $santriDetail->status }}</td></tr>
+                        <tr><th>Alamat</th><td>{{ $santriDetail->alamat }}</td></tr>
+                        <tr><th>No Telp</th><td>{{ $santriDetail->no_telp }}</td></tr>
+                        <tr><th>Nama Ortu</th><td>{{ $santriDetail->nama_ortu }}</td></tr>
+                        <tr><th>Alamat Ortu</th><td>{{ $santriDetail->alamat_ortu }}</td></tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a href="{{ route('admin.santri.list') }}" class="btn btn-secondary">Tutup</a>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- Tambahkan overlay hitam -->
+    <div class="modal-backdrop fade show"></div>
+    @endif
+    
     <script>
         function addNewSantri() {
             var modal = document.getElementById('addSantriModal');

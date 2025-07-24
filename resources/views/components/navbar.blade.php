@@ -10,7 +10,7 @@
                      alt="User" class="h-8 w-8 rounded-full"> --}}
                 <div class="relative">
                     <button onclick="toggleProfileDropdown()" class="flex items-center space-x-2 text-gray-700 font-medium hover:text-blue-600 transition-colors">
-                        <span>{{ $name ?? 'Logout' }}</span>
+                        <span>{{ old('name', Auth::user()->name) }}</span>
                         <i class="fas fa-chevron-down text-xs"></i>
                     </button>
                     <!-- Profile Dropdown -->
@@ -22,7 +22,7 @@
                         <div class="border-t border-gray-100"></div>
                         <form id="logoutForm" action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="button" onclick="showLogoutConfirmModal()" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center">
+                            <button type="button" onclick="document.getElementById('logoutForm').submit();" class="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50 flex items-center">
                                 <i class="fas fa-sign-out-alt mr-3"></i>
                                 <span>Keluar</span>
                             </button>
