@@ -198,6 +198,13 @@
                         </div>
                     </div>
                 </div>
+                <form action="{{ route('export.santri') }}" method="GET" class="mb-3">
+                    <div class="row g-2">
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-success">Export Data Santri</button>
+                        </div>
+                    </div>
+                </form>
                 <!-- Box tabel data santri -->
                 <div class="bg-white rounded-lg shadow border border-gray-200 p-0">
                     <div class="overflow-x-auto w-full">

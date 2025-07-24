@@ -93,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
     // Route::post('/admin/surat/store', [ControllerAdmin::class, 'storeSurat'])->name('admin.surat.store');
 
     Route::get('/export-surat', [ControllerAdmin::class, 'exportExcel'])->name('export.surat');
+    Route::get('/export-santri', [ControllerAdmin::class, 'exportExcelSantri'])->name('export.santri');
 
 
 });

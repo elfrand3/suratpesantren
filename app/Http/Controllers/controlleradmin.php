@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Exports\SuratExport;
+use App\Exports\SantriExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class ControllerAdmin extends Controller
@@ -875,9 +876,14 @@ class ControllerAdmin extends Controller
     }
 
     public function exportExcel(Request $request)
-{
-    $bulan = $request->get('bulan');
-    return Excel::download(new SuratExport($bulan), 'daftar-surat.xlsx');
-}
+    {
+        $bulan = $request->get('bulan');
+        return Excel::download(new SuratExport($bulan), 'daftar-surat.xlsx');
+    }
+
+    public function exportExcelSantri(Request $request)
+    {
+        return Excel::download(new SantriExport, 'data-santri.xlsx');
+    }
 
 }
