@@ -54,9 +54,11 @@ Route::middleware(['auth'])->group(function () {
         return view('admin.daftarpembuatsurat');
     });
     Route::get('/admindaftarpembuatsurat', [ControllerAdmin::class, 'searchSantriInSurat'])->name('admin.surat.santri.search');
-    Route::get('/adminpengaturan', function () {
-        return view('admin.pengaturan');
-    });
+    // Route::get('/adminpengaturan', function () {
+    //     return view('admin.pengaturan');
+    // });
+    Route::get('/adminpengaturan', [ControllerAdmin::class, 'pengaturan'])->name('admin.pengaturan');
+    Route::put('/adminpengaturan', [ControllerAdmin::class, 'updatePengaturan'])->name('admin.pengaturan.update');
 
     // Template management routes
     Route::post('/upload/template/surat', [ControllerAdmin::class, 'storeTemplate'])->name('upload.template.surat');
@@ -119,9 +121,11 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/pengasuh/surat/{id}', [PengasuhController::class, 'detailpengasuhSurat'])->name('pengasuh.surat.detail');
     Route::put('/pengasuh/surat/{id}', [PengasuhController::class, 'updatepengasuhSurat'])->name('pengasuh.surat.update');
 
-    Route::get('/pengasuhpengaturan', function () {
-        return view('pengasuh.pengaturan');
-    });
+    // Route::get('/pengasuhpengaturan', function () {
+    //     return view('pengasuh.pengaturan');
+    // });
+    Route::get('/pengasuhpengaturan', [ControllerAdmin::class, 'pengaturan'])->name('pengasuh.pengaturan');
+    Route::put('/pengasuhpengaturan', [ControllerAdmin::class, 'updatePengaturan'])->name('pengasuh.pengaturan.update');
 });
 
 // Sekolah routes
@@ -140,10 +144,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sekolahdatasurat', [SekolahController::class, 'searchSantriInSurat'])->name('sekolah.surat.santri.search');
     Route::get('/sekolah/surat/{id}', [SekolahController::class, 'detailsekolahSurat'])->name('sekolah.surat.detail');
 
-    Route::get('/sekolahpengaturan', function () {
-        return view('sekolah.pengaturan');
-    });
+    // Route::get('/sekolahpengaturan', function () {
+    //     return view('sekolah.pengaturan');
+    // });
 
+    Route::get('/sekolahpengaturan', [ControllerAdmin::class, 'pengaturan'])->name('sekolah.pengaturan');
+    Route::put('/sekolahpengaturan', [ControllerAdmin::class, 'updatePengaturan'])->name('sekolah.pengaturan.update');
 
 });
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Santri;
 use App\Models\Surat;
+use App\Models\User;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -127,6 +128,29 @@ class PengasuhController extends Controller
             'success' => false,
             'message' => 'Santri tidak ditemukan'
         ]);
+    }
+
+    public function updatePengaturan(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $user = Auth::user();
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // return response()->json(['message' => 'Profil berhasil diperbarui.']);
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    public function pengaturan()
+    {
+        return view('pengasuh.pengaturan');
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Santri;
 use App\Models\Surat;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
@@ -68,7 +69,7 @@ class SekolahController extends Controller
             'search' => $query
         ]);
     }
-    
+
     public function updatesekolahSurat(Request $request, $id)
     {
         $surat = \App\Models\surat::findOrFail($id);
@@ -98,5 +99,27 @@ class SekolahController extends Controller
     {
         $surat = \App\Models\surat::with('santri')->findOrFail($id);
         return view('sekolah.editSurat', compact('surat'));
+    }
+    public function updatePengaturan(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $user = Auth::user();
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // return response()->json(['message' => 'Profil berhasil diperbarui.']);
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    public function pengaturan()
+    {
+        return view('sekolah.pengaturan');
     }
 }

@@ -35,8 +35,8 @@
                 </button> --}}
             </div>
             <!-- Tab Content -->
-            <div id="content-profile" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8">
-                {{-- <h2 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-user mr-2 text-blue-500"></i> Pengaturan Profil</h2> --}}
+            {{-- <div id="content-profile" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8">
+                <h2 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-user mr-2 text-blue-500"></i> Pengaturan Profil</h2>
                 <form class="space-y-5">
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
@@ -46,13 +46,35 @@
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
                         <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('email', Auth::user()->email) }}">
                     </div>
-                    {{-- <div>
+                    <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Foto Profil</label>
                         <input type="file" class="w-full px-3 py-2 border border-gray-300 rounded-md">
                     </div>
                     <div class="flex justify-end">
                         <button type="submit" class="form-submit-btn px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Simpan</button>
-                    </div> --}}
+                    </div>
+                </form>
+            </div> --}}
+            <div id="content-profile" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8">
+                <form id="form-profile" class="space-y-5" method="POST" action="{{ route('pengasuh.pengaturan.update') }}">
+                    @csrf
+                    @method('PUT')
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                        <input type="text" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('name', Auth::user()->name) }}">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                        <input type="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('email', Auth::user()->email) }}" readonly>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button type="submit" class="form-submit-btn px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                            Simpan
+                        </button>
+                    </div>
                 </form>
             </div>
             <div id="content-password" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8 hidden">
@@ -120,6 +142,38 @@
         }
         // Default tab
         showTab('profile');
+        
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('profile-form');
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+
+                const formData = new FormData(form);
+                formData.append('_method', 'PUT');
+
+                try {
+                    const response = await fetch("{{ route('admin.pengaturan.update') }}", {
+                        method: 'POST', // tetap POST karena Laravel butuh _method=PUT
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    });
+
+                    if (response.ok) {
+                        const result = await response.json();
+                        alert('Sukses: ' + result.message);
+                    } else {
+                        const error = await response.json();
+                        alert('Gagal: ' + (error.message || 'Terjadi kesalahan.'));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('Gagal menyimpan');
+                }
+            });
+        });
     </script>
 </body>
 </html>

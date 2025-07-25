@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Santri;
 use App\Models\surat;
 use App\Models\template_surat;
@@ -17,6 +19,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use App\Exports\SuratExport;
 use App\Exports\SantriExport;
 use Maatwebsite\Excel\Facades\Excel;
+
 
 class ControllerAdmin extends Controller
 {
@@ -885,5 +888,30 @@ class ControllerAdmin extends Controller
     {
         return Excel::download(new SantriExport, 'data-santri.xlsx');
     }
+
+
+    public function updatePengaturan(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+        ]);
+
+        $user = Auth::user();
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+        ]);
+
+        // return response()->json(['message' => 'Profil berhasil diperbarui.']);
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui.');
+    }
+
+    public function pengaturan()
+    {
+        return view('admin.pengaturan');
+    }
+
 
 }

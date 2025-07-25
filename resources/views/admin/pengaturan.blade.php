@@ -54,25 +54,28 @@
             </div>
             <!-- Tab Content -->
             <div id="content-profile" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8">
-                {{-- <h2 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-user mr-2 text-blue-500"></i> Pengaturan Profil</h2> --}}
-                <form class="space-y-5">
+                <form id="form-profile" class="space-y-5" method="POST" action="{{ route('admin.pengaturan.update') }}">
+                    @csrf
+                    @method('PUT')
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
-                        <input type="text" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('name', Auth::user()->name) }}">
+                        <input type="text" name="name" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('name', Auth::user()->name) }}">
                     </div>
+
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                        <input type="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('email', Auth::user()->email) }}">
+                        <input type="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('email', Auth::user()->email) }}" readonly>
                     </div>
-                    {{-- <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Foto Profil</label>
-                        <input type="file" class="w-full px-3 py-2 border border-gray-300 rounded-md">
-                    </div>
+
                     <div class="flex justify-end">
-                        <button type="submit" class="form-submit-btn px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">Simpan</button>
-                    </div> --}}
+                        <button type="submit" class="form-submit-btn px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                            Simpan
+                        </button>
+                    </div>
                 </form>
             </div>
+
             <div id="content-password" class="w-full max-w-lg bg-white rounded-xl shadow p-8 mb-8 hidden">
                 <h2 class="text-xl font-bold mb-6 flex items-center"><i class="fas fa-lock mr-2 text-blue-500"></i> Ganti Password</h2>
                 <form class="space-y-5">
@@ -391,71 +394,36 @@
             }, 3000);
         }
 
-        // Handle form submissions
-        document.addEventListener('DOMContentLoaded', function() {
-            // Profile form submission
-            const profileForm = document.querySelector('#content-profile form');
-            if (profileForm) {
-                profileForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('profile-form');
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
 
-                    // Add loading effect to submit button
-                    const submitBtn = this.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
-                    submitBtn.disabled = true;
+                const formData = new FormData(form);
+                formData.append('_method', 'PUT');
 
-                    showNotification('Menyimpan pengaturan profil...', 'info');
-                    setTimeout(() => {
-                        showNotification('Pengaturan profil berhasil disimpan!', 'success');
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }, 600);
-                });
-            }
+                try {
+                    const response = await fetch("{{ route('admin.pengaturan.update') }}", {
+                        method: 'POST', // tetap POST karena Laravel butuh _method=PUT
+                        headers: {
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                            'Accept': 'application/json',
+                        },
+                        body: formData
+                    });
 
-            // Password form submission
-            const passwordForm = document.querySelector('#content-password form');
-            if (passwordForm) {
-                passwordForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Add loading effect to submit button
-                    const submitBtn = this.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mengubah...';
-                    submitBtn.disabled = true;
-
-                    showNotification('Mengubah password...', 'info');
-                    setTimeout(() => {
-                        showNotification('Password berhasil diubah!', 'success');
-                        passwordForm.reset();
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }, 600);
-                });
-            }
-
-            // Notification form submission
-            const notifForm = document.querySelector('#content-notif form');
-            if (notifForm) {
-                notifForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-
-                    // Add loading effect to submit button
-                    const submitBtn = this.querySelector('button[type="submit"]');
-                    const originalText = submitBtn.innerHTML;
-                    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Menyimpan...';
-                    submitBtn.disabled = true;
-
-                    showNotification('Menyimpan pengaturan notifikasi...', 'info');
-                    setTimeout(() => {
-                        showNotification('Pengaturan notifikasi berhasil disimpan!', 'success');
-                        submitBtn.innerHTML = originalText;
-                        submitBtn.disabled = false;
-                    }, 600);
-                });
-            }
+                    if (response.ok) {
+                        const result = await response.json();
+                        alert('Sukses: ' + result.message);
+                    } else {
+                        const error = await response.json();
+                        alert('Gagal: ' + (error.message || 'Terjadi kesalahan.'));
+                    }
+                } catch (err) {
+                    console.error(err);
+                    alert('Gagal menyimpan');
+                }
+            });
         });
 
         // Go to settings function
