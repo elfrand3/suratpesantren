@@ -33,15 +33,15 @@
 
             <!-- Buttons -->
             <div class="space-y-3">
-                <button 
+                <button
                     onclick="loginAgain()"
                     class="logout-btn w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors font-medium"
                 >
                     <i class="fas fa-sign-in-alt mr-2"></i>
                     Login Kembali
                 </button>
-                
-                <button 
+
+                <button
                     onclick="clearAllData()"
                     class="logout-btn w-full bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors text-sm"
                 >
@@ -62,12 +62,12 @@
     <script>
         // Set logout time
         document.getElementById('logoutTime').textContent = new Date().toLocaleString('id-ID');
-        
+
         // Get user role from URL parameter or localStorage before clearing
         let userRole = 'admin'; // default
         const urlParams = new URLSearchParams(window.location.search);
         const roleParam = urlParams.get('role');
-        
+
         if (roleParam) {
             userRole = roleParam;
         } else {
@@ -81,29 +81,29 @@
                 console.log('Could not get role from storage');
             }
         }
-        
+
         // Hide "Hapus Semua Data" button for pengasuh
         if (userRole === 'pengasuh') {
             const clearDataButton = document.querySelector('button[onclick="clearAllData()"]');
             if (clearDataButton) {
                 clearDataButton.style.display = 'none';
             }
-            
+
             // Update icon and color for pengasuh
             const logoutIcon = document.getElementById('logoutIcon');
             if (logoutIcon) {
                 logoutIcon.className = 'logout-icon mx-auto w-20 h-20 mb-4 bg-green-600 rounded-full flex items-center justify-center';
                 logoutIcon.innerHTML = '<i class="fas fa-user-tie text-white text-3xl"></i>';
             }
-            
+
             // Update message for pengasuh
             const logoutMessage = document.getElementById('logoutMessage');
             const roleInfo = document.getElementById('roleInfo');
-            
+
             if (logoutMessage) {
                 logoutMessage.textContent = 'Terima kasih telah menggunakan Sistem Surat Pondok Pesantren sebagai Pengasuh';
             }
-            
+
             if (roleInfo) {
                 roleInfo.textContent = 'Role: Pengasuh';
                 roleInfo.className = 'role-info mt-1 text-green-600 font-medium';
@@ -115,50 +115,75 @@
                 logoutIcon.className = 'logout-icon mx-auto w-20 h-20 mb-4 bg-blue-600 rounded-full flex items-center justify-center';
                 logoutIcon.innerHTML = '<i class="fas fa-user-shield text-white text-3xl"></i>';
             }
-            
+
             // Update message for admin
             const logoutMessage = document.getElementById('logoutMessage');
             const roleInfo = document.getElementById('roleInfo');
-            
+
             if (logoutMessage) {
                 logoutMessage.textContent = 'Terima kasih telah menggunakan Sistem Surat Pondok Pesantren sebagai Administrator';
             }
-            
+
             if (roleInfo) {
                 roleInfo.textContent = 'Role: Administrator';
                 roleInfo.className = 'role-info mt-1 text-blue-600 font-medium';
             }
         }
-        
+
         // Clear login data
         localStorage.removeItem('loginData');
         sessionStorage.removeItem('loginData');
-        
+
         // Login again function
         function loginAgain() {
             window.location.href = '/login';
         }
-        
+
         // Clear all data function (only for admin)
         function clearAllData() {
             if (userRole === 'pengasuh') {
                 return; // Prevent pengasuh from clearing data
             }
-            
+
             if (confirm('Apakah Anda yakin ingin menghapus semua data? Ini akan menghapus semua data surat dan santri yang tersimpan.')) {
                 // Clear all localStorage data
                 localStorage.clear();
                 sessionStorage.clear();
-                
+
                 alert('Semua data berhasil dihapus!');
                 window.location.href = '/login';
             }
         }
-        
+
         // Auto redirect after 10 seconds
         setTimeout(() => {
             window.location.href = '/login';
         }, 10000);
     </script>
+    @if (session('success'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil',
+                text: '{{ session('success') }}',
+                confirmButtonColor: '#3085d6',
+            });
+        });
+    </script>
+    @endif
+    @if (session('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Gagal',
+                text: '{{ session('error') }}',
+                confirmButtonColor: '#d33',
+            });
+        });
+    </script>
+    @endif
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
-</html> 
+</html>

@@ -15,9 +15,6 @@ Route::get('/', function () {
 });
 Route::post('/login', [SesiController::class, 'loginAkun'])->name('login');
 
-Route::get('/login', function () {
-    return view('login');
-});
 
 // Route AJAX untuk ambil template berdasarkan jenis surat
 Route::get('/get-template/{jenis}', function ($jenis) {
