@@ -94,7 +94,7 @@
     @include('components.sidebar')
 
     <!-- Main Content -->
-    <div class="ml-72 pt-16">
+    <div id="mainContent" class="pt-16 transition-all duration-300">
         @include('components.navbar', ['title' => 'Daftar Pembuat Surat'])
 
         <!-- Table Daftar Surat -->

@@ -1,8 +1,21 @@
 <!-- Top Navigation -->
-<header class="fixed top-0 left-72 right-0 w-[calc(100%-18rem)] bg-white shadow-sm border-b border-gray-200 z-50">
+<header id="mainHeader" class="fixed top-0 z-50 bg-white shadow-sm border-b border-gray-200 transition-all duration-300
+    w-full left-0">
     <div class="flex items-center justify-between h-16 px-6">
-        <div class="flex items-center">
-            <h2 class="text-xl font-semibold text-gray-800">{{ $title ?? 'Dashboard' }}</h2>
+        <div class="flex items-center space-x-4">
+            <!-- Tombol toggle untuk mobile -->
+            <button id="toggleSidebar" class="text-gray-600 focus:outline-none md:hidden">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <!-- Judul Halaman -->
+            <h2 class="text-xl font-semibold text-gray-800 whitespace-nowrap">
+                {{ $title ?? 'Dashboard' }}
+            </h2>
         </div>
         <div class="flex items-center space-x-4">
             <div class="flex items-center space-x-3">
@@ -186,3 +199,44 @@
         document.getElementById('logoutForm').submit();
     }
 </script>
+
+
+<script>
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const mainHeader = document.getElementById('mainHeader');
+    const mainContent = document.getElementById('mainContent');
+
+    // Fungsi toggle sidebar dan geser konten
+    function toggleSidebar() {
+        sidebar.classList.toggle('hidden');
+        mainHeader.classList.toggle('ml-72');
+        mainHeader.classList.toggle('w-[calc(100%-18rem)]');
+        mainContent.classList.toggle('ml-72');
+    }
+
+    // Tombol toggle
+    toggleBtn.addEventListener('click', toggleSidebar);
+
+    // Fungsi reset jika window dikecilkan (mode mobile)
+    function handleResize() {
+        if (window.innerWidth < 768) {
+            sidebar.classList.add('hidden');
+            mainHeader.classList.remove('ml-72', 'w-[calc(100%-18rem)]');
+            mainContent.classList.remove('ml-72');
+        } else {
+            // Jika ingin sidebar selalu tampil saat >md, tambahkan ini:
+            sidebar.classList.remove('hidden');
+            mainHeader.classList.add('ml-72', 'w-[calc(100%-18rem)]');
+            mainContent.classList.add('ml-72');
+        }
+    }
+
+    // Jalankan saat pertama kali halaman dimuat
+    window.addEventListener('load', handleResize);
+    // Jalankan saat window di-resize
+    window.addEventListener('resize', handleResize);
+</script>
+
+
+

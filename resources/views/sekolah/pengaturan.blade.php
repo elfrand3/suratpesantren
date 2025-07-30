@@ -11,7 +11,7 @@
 </head>
 <body class="bg-gray-50">
     @include('components.sidebar')
-    <div class="ml-72 pt-16">
+    <div id="mainContent" class="pt-16 transition-all duration-300">
         @include('components.navbar', ['title' => 'Pengaturan'])
         <main class="flex-1 w-full flex flex-col items-center justify-start p-8">
             <!-- Profil User -->

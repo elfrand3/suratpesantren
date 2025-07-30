@@ -2,8 +2,9 @@
 
 <!-- Sidebar Admin -->
 @if (Auth::check() && Auth::user()->role === 'Admin')
-<div class=" md:block hidden fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-blue-700 via-blue-600 to-blue-800 shadow-2xl">
-    <!-- Header -->
+<div id="sidebar" class="hidden md:block fixed inset-y-0 left-0 z-50 w-72 h-screen overflow-y-auto
+    bg-gradient-to-b from-blue-700 via-blue-600 to-blue-800 shadow-2xl transition-transform duration-300">
+    <!-- Header Sidebar -->
     <div class="flex items-center justify-between h-20 px-6 border-b border-blue-500/30 bg-blue-800/50 backdrop-blur-sm">
         <div class="flex items-center">
             <div class="flex items-center justify-center w-10 h-10 bg-white/20 rounded-xl mr-4 backdrop-blur-sm">
@@ -77,7 +78,7 @@
     </nav>
 
     <!-- Footer -->
-    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-500/30">
+    {{-- <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-500/30">
         <div class="flex items-center justify-center">
             <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center mr-3">
                 <i class="fas fa-shield-alt text-blue-200 text-sm"></i>
@@ -87,13 +88,14 @@
                 <p class="text-xs text-blue-300">Secure & Reliable</p>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endif
 
 <!-- Sidebar pengasuh -->
 @if (Auth::check() && Auth::user()->role === 'Pengasuh')
-<div class="fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-blue-700 via-blue-600 to-blue-800 shadow-2xl">
+<div id="sidebar" class="hidden md:block fixed inset-y-0 left-0 z-50 w-72 h-screen overflow-y-auto
+    bg-gradient-to-b from-blue-700 via-blue-600 to-blue-800 shadow-2xl transition-transform duration-300">
     <!-- Header -->
     <div class="flex items-center justify-between h-20 px-6 border-b border-blue-500/30 bg-blue-800/50 backdrop-blur-sm">
         <div class="flex items-center">
@@ -161,7 +163,7 @@
     </nav>
 
     <!-- Footer -->
-    <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-500/30">
+    {{-- <div class="absolute bottom-0 left-0 right-0 p-4 border-t border-blue-500/30">
         <div class="flex items-center justify-center">
             <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center mr-3">
                 <i class="fas fa-shield-alt text-blue-200 text-sm"></i>
@@ -171,13 +173,14 @@
                 <p class="text-xs text-blue-300">Secure & Reliable</p>
             </div>
         </div>
-    </div>
+    </div> --}}
 </div>
 @endif
 
 <!-- Sidebar sekolah -->
 @if (Auth::check() && Auth::user()->role === 'Sekolah')
-<div class="fixed inset-y-0 left-0 z-50 w-72 bg-gradient-to-b from-blue-700 via-blue-600 to-blue-800 shadow-2xl">
+<div id="sidebar" class="hidden md:block fixed inset-y-0 left-0 z-50 w-72 h-screen overflow-y-auto
+    bg-gradient-to-b from-blue-700 via-blue-600 to-blue-800 shadow-2xl transition-transform duration-300">
     <!-- Header -->
     <div class="flex items-center justify-between h-20 px-6 border-b border-blue-500/30 bg-blue-800/50 backdrop-blur-sm">
         <div class="flex items-center">

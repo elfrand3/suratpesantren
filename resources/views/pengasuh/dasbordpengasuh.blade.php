@@ -10,7 +10,7 @@
 </head>
 <body class="bg-gray-50">
     @include('components.sidebar')
-    <div class="ml-72 pt-16">
+    <div id="mainContent" class="pt-16 transition-all duration-300">
         @include('components.navbar', ['title' => 'Dashboard Pengasuh', 'userName' => 'Pengasuh', 'notificationCount' => 3])
         <main class="p-6">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
